@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Coupons & Deals — {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-4 space-y-4">
+  <div class="border-b border-gray-200 pb-3">
+    <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Active Coupons & Promo Deals</h1>
+    <p class="text-xs text-gray-500">Apply these codes at checkout for instant discounts.</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for coupon in coupons %}
+    <div class="bg-white rounded-2xl p-5 border border-dashed border-[#E53935] shadow-xs flex items-center justify-between gap-3">
+      <div class="space-y-1">
+        <span class="inline-block bg-red-50 text-[#E53935] text-[10px] font-black uppercase px-2 py-0.5 rounded-full">
+          {{ coupon.get_discount_type_display }}
+        </span>
+        <h3 class="font-black text-lg text-[#111111]">{{ coupon.code }}</h3>
+        <p class="text-xs text-gray-500">{{ coupon.description }}</p>
+        {% if coupon.min_order_value > 0 %}
+          <span class="text-[10px] text-gray-400 font-semibold block">Min order: ₦{{ coupon.min_order_value|floatformat:2 }}</span>
+        {% endif %}
+      </div>
+
+      <button onclick="navigator.clipboard.writeText('{{ coupon.code }}'); showToast('Coupon code copied to clipboard!');"
+              class="btn-primary text-xs font-bold px-4 py-2 rounded-full flex-shrink-0">
+        Copy Code
+      </button>
+    </div>
+    {% empty %}
+    <p class="text-xs text-gray-400 py-6">No promotional coupons currently active.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

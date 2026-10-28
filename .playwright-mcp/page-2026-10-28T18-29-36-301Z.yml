@@ -1,0 +1,108 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - generic [ref=f8e3]:
+      - link "Previous Step" [ref=f8e4] [cursor=pointer]:
+        - /url: /cart/
+      - heading "Checkout" [level=1] [ref=f8e8]
+      - generic [ref=f8e9]: 🔒
+  - main [ref=f8e11]:
+    - generic [ref=f8e12]:
+      - navigation [ref=f8e13]:
+        - link "Home" [ref=f8e14] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f8e15]: ›
+        - link "Cart" [ref=f8e16] [cursor=pointer]:
+          - /url: /cart/
+        - generic [ref=f8e17]: ›
+        - generic [ref=f8e18]: Checkout
+      - generic [ref=f8e20]:
+        - generic [ref=f8e21]:
+          - generic [ref=f8e22]: ✓
+          - generic [ref=f8e23]: 1. Address
+        - generic [ref=f8e25]:
+          - generic [ref=f8e26]: ✓
+          - generic [ref=f8e27]: 2. Payment
+        - generic [ref=f8e29]:
+          - generic [ref=f8e30]: "3"
+          - generic [ref=f8e31]: 3. Confirm
+      - generic [ref=f8e32]:
+        - generic [ref=f8e33]:
+          - generic [ref=f8e34]:
+            - heading "1. Delivery Information" [level=2] [ref=f8e35]
+            - generic [ref=f8e36]: Nigeria Shipping
+          - generic [ref=f8e37]:
+            - generic [ref=f8e38]:
+              - generic [ref=f8e39]: Full Recipient Name *
+              - textbox [ref=f8e40]
+            - generic [ref=f8e41]:
+              - generic [ref=f8e42]: Phone Number *
+              - textbox "08012345678" [ref=f8e43]
+            - generic [ref=f8e44]:
+              - generic [ref=f8e45]: Email Address (for order receipts & tracking) *
+              - textbox [ref=f8e46]
+            - generic [ref=f8e47]:
+              - generic [ref=f8e48]: Street Address *
+              - textbox "e.g. 15 Ademola Adetokunbo Crescent" [ref=f8e49]
+            - generic [ref=f8e50]:
+              - generic [ref=f8e51]: City / Town *
+              - textbox "e.g. Wuse 2 / Ikeja" [ref=f8e52]: Abuja
+            - generic [ref=f8e53]:
+              - generic [ref=f8e54]: State *
+              - combobox [ref=f8e55]:
+                - option "FCT Abuja" [selected]
+                - option "Lagos"
+                - option "Rivers (Port Harcourt)"
+                - option "Kano"
+                - option "Oyo (Ibadan)"
+                - option "Delta"
+                - option "Kaduna"
+                - option "Enugu"
+                - option "Anambra"
+                - option "Edo"
+                - option "Ogun"
+                - option "Other Nigerian State"
+        - generic [ref=f8e56]:
+          - generic [ref=f8e57]:
+            - heading "2. Payment Method" [level=2] [ref=f8e58]
+            - generic [ref=f8e59]: Encrypted 256-bit SSL
+          - generic [ref=f8e60]:
+            - generic [ref=f8e61] [cursor=pointer]:
+              - generic [ref=f8e62]:
+                - radio "Pay with Paystack (Cards, Bank Transfer, USSD) Mastercard, Visa, Verve, Bank Transfer Paystack" [checked] [ref=f8e63]
+                - generic [ref=f8e64]:
+                  - generic [ref=f8e65]: Pay with Paystack (Cards, Bank Transfer, USSD)
+                  - text: Mastercard, Visa, Verve, Bank Transfer
+              - img "Paystack" [ref=f8e66]
+            - generic [ref=f8e67] [cursor=pointer]:
+              - generic [ref=f8e68]:
+                - radio "Instant Verification Sandbox (Development Mode) Simulate verified payment order completion without debit TEST" [ref=f8e69]
+                - generic [ref=f8e70]:
+                  - generic [ref=f8e71]: Instant Verification Sandbox (Development Mode)
+                  - text: Simulate verified payment order completion without debit
+              - generic [ref=f8e72]: TEST
+        - generic [ref=f8e73]:
+          - heading "3. Order Summary & Items" [level=2] [ref=f8e74]
+          - generic [ref=f8e76]:
+            - generic [ref=f8e77]:
+              - img "Product" [ref=f8e79]
+              - generic [ref=f8e80]:
+                - heading "Cube Pro 16 Ultra 5G Smartphone" [level=4] [ref=f8e81]
+                - generic [ref=f8e82]: Titanium Black / 256GB
+                - text: "Qty: 1"
+            - generic [ref=f8e83]: ₦850000.00
+          - generic [ref=f8e84]:
+            - generic [ref=f8e85]:
+              - generic [ref=f8e86]: Items Subtotal
+              - generic [ref=f8e87]: ₦850000.00
+            - generic [ref=f8e88]:
+              - generic [ref=f8e89]: Delivery Shipping Fee
+              - generic [ref=f8e90]: ₦0.00
+            - generic [ref=f8e91]:
+              - generic [ref=f8e92]:
+                - generic [ref=f8e93]: Final Payable Total
+                - text: All taxes & duties included
+              - generic [ref=f8e94]: ₦850000.00
+        - generic [ref=f8e95]:
+          - button "Place Order • ₦850000.00" [ref=f8e96] [cursor=pointer]
+          - paragraph [ref=f8e100]: By placing your order, you agree to Cube Tech Enterprises' Terms of Service and Privacy Policy.
+  - button "Customer Support" [ref=f8e101] [cursor=pointer]

@@ -1,0 +1,330 @@
+/**
+ * OHUAMI — Multi-Tenant African Commerce Platform
+ * Parent: Cube Tech Enterprises
+ * Brand Colors:
+ * - Brand Red: #E53935
+ * - Deep Black: #111111
+ * - Accent Yellow: #FFC928
+ * - Pure White: #FFFFFF
+ * - Neutral Grays: #F8F9FA, #F3F4F6, #E5E7EB, #9CA3AF, #6B7280, #374151
+ * - Verified Green: #10B981
+ */
+
+:root {
+  --ct-red: #E53935;
+  --ct-red-hover: #D32F2F;
+  --ct-red-light: #FFEBEE;
+  
+  --ct-black: #111111;
+  --ct-black-surface: #1A1A1A;
+  --ct-black-sidebar: #111111;
+  --ct-black-muted: #2A2A2A;
+
+  --ct-yellow: #FFC928;
+  --ct-yellow-hover: #F5B800;
+  --ct-yellow-light: #FFF9C4;
+
+  --ct-white: #FFFFFF;
+  
+  --ct-gray-50: #F9FAFB;
+  --ct-gray-100: #F3F4F6;
+  --ct-gray-200: #E5E7EB;
+  --ct-gray-300: #D1D5DB;
+  --ct-gray-400: #9CA3AF;
+  --ct-gray-500: #6B7280;
+  --ct-gray-600: #4B5563;
+  --ct-gray-700: #374151;
+  --ct-gray-800: #1F2937;
+  
+  --ct-green: #10B981;
+  --ct-green-light: #D1FAE5;
+
+  --ct-radius-sm: 8px;
+  --ct-radius-md: 14px;
+  --ct-radius-lg: 20px;
+  --ct-radius-full: 9999px;
+
+  --ct-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --ct-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --ct-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --ct-shadow-glow-yellow: 0 4px 14px 0 rgba(255, 201, 40, 0.4);
+
+  --font-family: 'Montserrat', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--ct-gray-100);
+  color: var(--ct-black);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Reference A: Card Styling */
+.product-card {
+  background: var(--ct-white);
+  border-radius: var(--ct-radius-md);
+  border: 1px solid rgba(229, 231, 235, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--ct-shadow-md);
+}
+
+/* Yellow Promo Banner in Reference A */
+.special-promo-card {
+  background-color: var(--ct-yellow);
+  border-radius: var(--ct-radius-lg);
+  color: var(--ct-black);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark Trending Banner in Reference A */
+.trending-banner {
+  background-color: var(--ct-black);
+  border-radius: var(--ct-radius-lg);
+  color: var(--ct-white);
+}
+
+/* Badges */
+.badge-flash {
+  background-color: var(--ct-red);
+  color: var(--ct-white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--ct-radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.badge-discount {
+  background-color: var(--ct-red);
+  color: var(--ct-white);
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+
+.badge-pill-category {
+  padding: 8px 16px;
+  border-radius: var(--ct-radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  background-color: var(--ct-white);
+  color: var(--ct-gray-700);
+  border: 1px solid var(--ct-gray-200);
+}
+
+.badge-pill-category.active {
+  background-color: var(--ct-red);
+  color: var(--ct-white);
+  border-color: var(--ct-red);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--ct-red);
+  color: var(--ct-white);
+  font-weight: 700;
+  border-radius: var(--ct-radius-full);
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  box-shadow: var(--ct-shadow-glow-red);
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--ct-red-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-black {
+  background-color: var(--ct-black);
+  color: var(--ct-white);
+  font-weight: 700;
+  border-radius: var(--ct-radius-full);
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn-black:hover {
+  opacity: 0.92;
+}
+
+/* Persistent Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--ct-white);
+  border-top: 1px solid var(--ct-gray-200);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 0;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 50;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.03);
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.70rem;
+  font-weight: 600;
+  color: var(--ct-gray-400);
+  text-decoration: none;
+  position: relative;
+  padding: 4px 12px;
+  border-radius: 8px;
+}
+
+.bottom-nav-item.active {
+  color: var(--ct-red);
+}
+
+.bottom-nav-item svg {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 2px;
+}
+
+/* Floating Customer Support Button */
+.support-widget-btn {
+  position: fixed;
+  bottom: 74px;
+  right: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--ct-black);
+  color: var(--ct-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  z-index: 45;
+  cursor: pointer;
+  border: 2px solid var(--ct-white);
+  transition: transform 0.2s ease;
+}
+
+.support-widget-btn:hover {
+  transform: scale(1.06);
+}
+
+/* Product Detail Variant Swatches */
+.variant-swatch {
+  border: 2px solid transparent;
+  border-radius: var(--ct-radius-md);
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.variant-swatch.active {
+  border-color: var(--ct-red);
+  box-shadow: 0 0 0 1px var(--ct-red);
+}
+
+.variant-pill {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--ct-gray-300);
+  background: var(--ct-white);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.variant-pill.active {
+  border-color: var(--ct-red);
+  background-color: var(--ct-red-light);
+  color: var(--ct-red);
+  font-weight: 700;
+}
+
+/* Tab indicator */
+.tab-btn {
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 0.90rem;
+  color: var(--ct-gray-500);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  color: var(--ct-red);
+  border-bottom-color: var(--ct-red);
+  font-weight: 700;
+}
+
+/* Checkout step dots */
+.step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.step-dot.active {
+  background-color: var(--ct-red);
+  color: var(--ct-white);
+}
+
+.step-dot.completed {
+  background-color: var(--ct-green);
+  color: var(--ct-white);
+}
+
+.step-dot.inactive {
+  background-color: var(--ct-gray-200);
+  color: var(--ct-gray-500);
+}

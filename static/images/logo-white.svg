@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50">
+  <defs>
+    <linearGradient id="cubeGradientW" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E53935" />
+      <stop offset="100%" stop-color="#C62828" />
+    </linearGradient>
+    <linearGradient id="yellowAccentW" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FFC928" />
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(4, 3)">
+    <polygon points="22,4 38,12 22,20 6,12" fill="url(#yellowAccentW)" />
+    <polygon points="6,12 22,20 22,38 6,30" fill="#2A2A2A" />
+    <polygon points="22,20 38,12 38,30 22,38" fill="url(#cubeGradientW)" />
+    <circle cx="22" cy="20" r="2.5" fill="#FFFFFF" />
+  </g>
+
+  <text x="52" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="19" fill="#FFFFFF" letter-spacing="-0.5">
+    CUBE<tspan fill="#E53935">TECH</tspan>
+  </text>
+  <text x="52" y="37" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="8.5" fill="#9CA3AF" letter-spacing="2.2">
+    ENTERPRISES
+  </text>
+</svg>

@@ -1,0 +1,65 @@
+- generic [active] [ref=f9e1]:
+  - banner [ref=f9e2]:
+    - generic [ref=f9e3]:
+      - link [ref=f9e4] [cursor=pointer]:
+        - /url: /
+        - img "Cube Tech Enterprises" [ref=f9e5]
+      - link "Cart" [ref=f9e7] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f9e10]:
+    - generic [ref=f9e11]:
+      - generic [ref=f9e12]:
+        - generic [ref=f9e13]: ✓
+        - generic [ref=f9e14]: Order Successfully Placed
+        - heading "Thank You for Shopping with Cube Tech!" [level=1] [ref=f9e15]
+        - paragraph [ref=f9e16]: Your order reference is CT-20261028-1ECDC2. We've sent full confirmation details and tracking updates to emeka.nnamdi@example.com.
+        - generic [ref=f9e17]:
+          - generic [ref=f9e18]: "● Payment: Paid"
+          - generic [ref=f9e19]: "● Status: Unfulfilled"
+      - generic [ref=f9e20]:
+        - heading "Delivery Details" [level=3] [ref=f9e21]
+        - generic [ref=f9e22]:
+          - generic [ref=f9e23]:
+            - generic [ref=f9e24]: Recipient
+            - paragraph [ref=f9e25]: Emeka Nnamdi
+            - paragraph [ref=f9e26]: "08031234567"
+          - generic [ref=f9e27]:
+            - generic [ref=f9e28]: Shipping Address
+            - paragraph [ref=f9e29]: Plot 1024, Shehu Shagari Way, Maitama, Abuja, FCT Abuja, Nigeria
+      - generic [ref=f9e30]:
+        - heading "Items Ordered (1)" [level=3] [ref=f9e31]
+        - generic [ref=f9e33]:
+          - generic [ref=f9e34]:
+            - heading "Cube Pro 16 Ultra 5G Smartphone" [level=4] [ref=f9e35]
+            - text: Titanium Black / 256GB
+            - generic [ref=f9e36]: "Qty: 1 × ₦850000.00"
+          - generic [ref=f9e37]: ₦850000.00
+        - generic [ref=f9e38]:
+          - generic [ref=f9e39]:
+            - generic [ref=f9e40]: Subtotal
+            - generic [ref=f9e41]: ₦850000.00
+          - generic [ref=f9e42]:
+            - generic [ref=f9e43]: Shipping Fee
+            - generic [ref=f9e44]: ₦0.00
+          - generic [ref=f9e45]:
+            - generic [ref=f9e46]: Total Amount
+            - generic [ref=f9e47]: ₦850000.00
+      - generic [ref=f9e48]:
+        - link "Continue Shopping" [ref=f9e49] [cursor=pointer]:
+          - /url: /
+        - link "View All Orders" [ref=f9e50] [cursor=pointer]:
+          - /url: /orders/history/
+  - button "Customer Support" [ref=f9e51] [cursor=pointer]
+  - navigation [ref=f9e54]:
+    - link "Home" [ref=f9e55] [cursor=pointer]:
+      - /url: /
+    - link "Categories" [ref=f9e59] [cursor=pointer]:
+      - /url: /catalog/
+    - link "Cart" [ref=f9e63] [cursor=pointer]:
+      - /url: /cart/
+    - link "0 Wishlist" [ref=f9e68] [cursor=pointer]:
+      - /url: /wishlist/
+      - generic [ref=f9e69]: "0"
+      - generic [ref=f9e73]: Wishlist
+    - link "Account" [ref=f9e74] [cursor=pointer]:
+      - /url: /accounts/profile/

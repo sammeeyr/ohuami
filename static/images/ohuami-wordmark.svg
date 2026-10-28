@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="280" height="60">
+  <!-- OHUAMI Wordmark (Black with Yellow 'A' accent) -->
+  <g fill="#111111" font-family="'Montserrat', 'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="46" letter-spacing="1">
+    <!-- O -->
+    <text x="6" y="46">O</text>
+    <!-- H -->
+    <text x="50" y="46">H</text>
+    <!-- U -->
+    <text x="96" y="46">U</text>
+    <!-- A -->
+    <text x="141" y="46">A</text>
+    <!-- M -->
+    <text x="187" y="46">M</text>
+    <!-- I -->
+    <text x="246" y="46">I</text>
+  </g>
+
+  <!-- Yellow Accent Triangle inside the letter 'A' -->
+  <polygon points="156.5,35 150,45 163,45" fill="#FFC928" />
+</svg>

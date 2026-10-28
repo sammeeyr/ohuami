@@ -1,0 +1,87 @@
+- generic [active] [ref=f9e1]:
+  - banner [ref=f9e2]:
+    - generic [ref=f9e3]:
+      - generic [ref=f9e4]:
+        - link [ref=f9e5] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f9e6]
+        - link "Sunshine Fashion ↗" [ref=f9e7] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+          - generic [ref=f9e8]: Sunshine Fashion
+          - generic [ref=f9e9]: ↗
+      - generic [ref=f9e10]:
+        - link "Search" [ref=f9e11] [cursor=pointer]:
+          - /url: /catalog/search/
+        - link "Log In" [ref=f9e14] [cursor=pointer]:
+          - /url: /accounts/login/
+        - link "3" [ref=f9e17] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f9e21]:
+    - generic [ref=f9e22]:
+      - navigation [ref=f9e23]:
+        - link "Home" [ref=f9e24] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+        - generic [ref=f9e25]: /
+        - link "Shop" [ref=f9e26] [cursor=pointer]:
+          - /url: /catalog/
+        - generic [ref=f9e27]: /
+        - generic [ref=f9e28]: Women
+      - generic [ref=f9e29]:
+        - generic [ref=f9e30]:
+          - generic [ref=f9e31]:
+            - button [ref=f9e32] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f9e33]
+            - button [ref=f9e34] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f9e35]
+            - button [ref=f9e36] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f9e37]
+            - button [ref=f9e38] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f9e39]
+          - generic [ref=f9e40]:
+            - generic [ref=f9e41]: "-20%"
+            - img "Elegant Midi Dress" [ref=f9e42]
+        - generic [ref=f9e43]:
+          - generic [ref=f9e44]:
+            - generic [ref=f9e45]:
+              - heading "Elegant Midi Dress" [level=1] [ref=f9e46]
+              - button "Wishlist" [ref=f9e47] [cursor=pointer]
+            - generic [ref=f9e50]:
+              - generic [ref=f9e51]: ★★★★★
+              - generic [ref=f9e52]: (24 reviews)
+          - generic [ref=f9e53]:
+            - generic [ref=f9e54]: ₦28,000
+            - generic [ref=f9e55]: ₦35,000
+          - paragraph [ref=f9e56]: A perfect blend of style and comfort. This elegant midi dress is designed for modern women who love simplicity with class. Made from high-grade stretch-crepe fabric that flatters every silhouette, suitable for formal events, dinners, or classy office wear.
+          - generic [ref=f9e57]:
+            - generic [ref=f9e58]: Color
+            - generic [ref=f9e59]:
+              - button "Burgundy" [ref=f9e60] [cursor=pointer]
+              - button "Black" [ref=f9e61] [cursor=pointer]
+              - button "Cream" [ref=f9e62] [cursor=pointer]
+          - generic [ref=f9e63]:
+            - generic [ref=f9e64]: Size
+            - generic [ref=f9e65]:
+              - button "S" [ref=f9e66] [cursor=pointer]
+              - button "M" [ref=f9e67] [cursor=pointer]
+              - button "L" [ref=f9e68] [cursor=pointer]
+              - button "XL" [ref=f9e69] [cursor=pointer]
+          - generic [ref=f9e70]:
+            - generic [ref=f9e71]:
+              - button "-" [ref=f9e72] [cursor=pointer]
+              - generic [ref=f9e73]: "1"
+              - button "+" [ref=f9e74] [cursor=pointer]
+            - generic [ref=f9e75]: "Available: 45"
+          - generic [ref=f9e76]:
+            - button "Add to Cart" [ref=f9e77] [cursor=pointer]
+            - button "Buy Now" [ref=f9e78] [cursor=pointer]
+          - generic [ref=f9e79]:
+            - generic [ref=f9e80]:
+              - generic [ref=f9e81]: 🚚
+              - generic [ref=f9e82]: Fast Delivery
+            - generic [ref=f9e83]:
+              - generic [ref=f9e84]: 🔒
+              - generic [ref=f9e85]: Secure Payments
+            - generic [ref=f9e86]:
+              - generic [ref=f9e87]: 🔄
+              - generic [ref=f9e88]: Easy Returns
+  - button "Customer Support" [ref=f9e89] [cursor=pointer]

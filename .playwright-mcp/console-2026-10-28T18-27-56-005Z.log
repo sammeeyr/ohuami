@@ -1,0 +1,3 @@
+[     201ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://cdn.tailwindcss.com/:63
+[    6243ms] [ERROR] Failed to load resource: the server responded with a status of 403 (Forbidden) @ http://127.0.0.1:8000/cart/api/add/:0
+[    6246ms] [ERROR] Add to cart error: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON @ http://127.0.0.1:8000/static/js/app.js:88

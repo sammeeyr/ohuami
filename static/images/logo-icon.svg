@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44">
+  <defs>
+    <linearGradient id="cubeGradientIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E53935" />
+      <stop offset="100%" stop-color="#C62828" />
+    </linearGradient>
+    <linearGradient id="yellowAccentIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FFC928" />
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(0, 2)">
+    <polygon points="22,4 38,12 22,20 6,12" fill="url(#yellowAccentIcon)" />
+    <polygon points="6,12 22,20 22,38 6,30" fill="#111111" />
+    <polygon points="22,20 38,12 38,30 22,38" fill="url(#cubeGradientIcon)" />
+    <circle cx="22" cy="20" r="2.5" fill="#FFFFFF" />
+  </g>
+</svg>

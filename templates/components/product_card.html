@@ -1,0 +1,81 @@
+{% load static %}
+<div class="product-card flex-shrink-0 w-44 sm:w-52 p-3 flex flex-col justify-between bg-white relative group">
+  <!-- Top Badges & Wishlist -->
+  <div class="relative w-full aspect-square bg-[#F8F9FA] rounded-xl overflow-hidden mb-2.5 flex items-center justify-center">
+    
+    <!-- Badges (Upper Left) -->
+    <div class="absolute top-2 left-2 flex flex-col gap-1 z-10">
+      {% if product.discount_percentage > 0 %}
+        <span class="badge-discount">-{{ product.discount_percentage }}%</span>
+      {% endif %}
+      {% if product.badge_text %}
+        <span class="badge-flash text-[9px]">{{ product.badge_text }}</span>
+      {% elif product.is_flash_sale %}
+        <span class="badge-flash text-[9px]">⚡ Flash</span>
+      {% endif %}
+    </div>
+
+    <!-- Wishlist Heart Button (Upper Right) -->
+    <button onclick="toggleWishlist({{ product.id }}, this)" 
+            class="absolute top-2 right-2 w-7 h-7 rounded-full bg-white/90 backdrop-blur-sm shadow-sm flex items-center justify-center text-gray-400 hover:text-[#E53935] transition z-10"
+            title="Add to Wishlist">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+      </svg>
+    </button>
+
+    <!-- Product Image -->
+    <a href="{{ product.get_absolute_url }}" class="w-full h-full flex items-center justify-center p-2">
+      {% if product.primary_image %}
+        <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300">
+      {% else %}
+        <!-- Fallback SVG product placeholder -->
+        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      {% endif %}
+    </a>
+  </div>
+
+  <!-- Title & Category -->
+  <div class="flex-1 flex flex-col justify-between">
+    <div>
+      <span class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">{{ product.category.name }}</span>
+      <h3 class="font-bold text-xs text-[#111111] line-clamp-2 leading-tight mt-0.5 hover:text-[#E53935] transition">
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+      </h3>
+    </div>
+
+    <!-- Rating Row -->
+    <div class="flex items-center gap-1.5 mt-1.5">
+      <div class="flex items-center text-[#FFC928] text-xs">
+        <span>★</span>
+      </div>
+      <span class="text-xs font-bold text-gray-800">{{ product.rating_average }}</span>
+      <span class="text-[10px] text-gray-400">({{ product.rating_count }})</span>
+    </div>
+
+    <!-- Pricing Row & Quick Add Button -->
+    <div class="mt-2.5 pt-2 border-t border-gray-100 flex items-center justify-between">
+      <div>
+        <div class="font-extrabold text-sm text-[#E53935]">
+          {{ currency_symbol }}{{ product.base_price|floatformat:2 }}
+        </div>
+        {% if product.comparison_price %}
+          <div class="text-[10px] text-gray-400 line-through">
+            {{ currency_symbol }}{{ product.comparison_price|floatformat:2 }}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Quick Add to Cart Button -->
+      <button onclick="addToCart({{ product.id }}, null, 1)" 
+              class="w-8 h-8 rounded-full bg-[#111111] text-white hover:bg-[#E53935] transition flex items-center justify-center flex-shrink-0"
+              title="Add to Cart">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e3]:
+    - generic [ref=f6e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f6e5]:
+      - generic [ref=f6e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f6e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f6e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f6e9]:
+    - generic [ref=f6e10]:
+      - link [ref=f6e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=f6e12]
+      - generic [ref=f6e13]:
+        - generic [ref=f6e14]: 🔒
+        - generic [ref=f6e15]: Secure Checkout
+  - main [ref=f6e16]:
+    - generic [ref=f6e19]:
+      - generic [ref=f6e20]:
+        - generic [ref=f6e21]:
+          - heading "1. Shipping Information" [level=2] [ref=f6e22]
+          - generic [ref=f6e23]:
+            - generic [ref=f6e24]:
+              - generic [ref=f6e25]: Full Name
+              - textbox [ref=f6e26]: Chinedu Okafor
+            - generic [ref=f6e27]:
+              - generic [ref=f6e28]: Phone Number
+              - textbox [ref=f6e29]: +234 801 234 5678
+            - generic [ref=f6e30]:
+              - generic [ref=f6e31]: Address
+              - textbox [ref=f6e32]: 128, Ganiyu Street, GRA
+            - generic [ref=f6e33]:
+              - generic [ref=f6e34]: City
+              - combobox [ref=f6e36]:
+                - option "Abuja" [selected]
+                - option "Lagos"
+                - option "Port Harcourt"
+                - option "Ibadan"
+                - option "Enugu"
+                - option "Kano"
+            - generic [ref=f6e37]:
+              - generic [ref=f6e38]: State
+              - combobox [ref=f6e40]:
+                - option "FCT" [selected]
+                - option "Lagos"
+                - option "Rivers"
+                - option "Oyo"
+                - option "Enugu"
+                - option "Kaduna"
+                - option "Kano"
+        - generic [ref=f6e41]:
+          - heading "2. Payment Method" [level=2] [ref=f6e42]
+          - generic [ref=f6e43]:
+            - generic [ref=f6e44] [cursor=pointer]:
+              - generic [ref=f6e45]:
+                - radio "Card (Visa, Mastercard, Verve) 💳 Paystack" [checked] [ref=f6e46]
+                - generic [ref=f6e47]: Card (Visa, Mastercard, Verve)
+              - generic [ref=f6e48]: 💳 Paystack
+            - generic [ref=f6e50] [cursor=pointer]:
+              - generic [ref=f6e51]:
+                - radio "Bank Transfer Instant NIBSS" [ref=f6e52]
+                - generic [ref=f6e53]: Bank Transfer
+              - generic [ref=f6e54]: Instant NIBSS
+            - generic [ref=f6e55] [cursor=pointer]:
+              - generic [ref=f6e56]:
+                - radio "USSD *737#, *901#, *894#" [ref=f6e57]
+                - generic [ref=f6e58]: USSD
+              - generic [ref=f6e59]: "*737#, *901#, *894#"
+            - generic [ref=f6e60] [cursor=pointer]:
+              - generic [ref=f6e61]:
+                - radio "Pay on Delivery Cash / POS on arrival" [ref=f6e62]
+                - generic [ref=f6e63]: Pay on Delivery
+              - generic [ref=f6e64]: Cash / POS on arrival
+      - generic [ref=f6e66]:
+        - heading "Order Summary" [level=2] [ref=f6e67]
+        - generic [ref=f6e68]:
+          - generic [ref=f6e69]:
+            - img "Elegant Midi Dress" [ref=f6e71]
+            - generic [ref=f6e72]:
+              - heading "Elegant Midi Dress" [level=4] [ref=f6e73]
+              - generic [ref=f6e74]: "Qty: 1"
+            - generic [ref=f6e75]: ₦28,000
+          - generic [ref=f6e76]:
+            - img "Classy Handbag" [ref=f6e78]
+            - generic [ref=f6e79]:
+              - heading "Classy Handbag" [level=4] [ref=f6e80]
+              - generic [ref=f6e81]: "Qty: 1"
+            - generic [ref=f6e82]: ₦18,500
+          - generic [ref=f6e83]:
+            - img "White Sneakers" [ref=f6e85]
+            - generic [ref=f6e86]:
+              - heading "White Sneakers" [level=4] [ref=f6e87]
+              - generic [ref=f6e88]: "Qty: 1"
+            - generic [ref=f6e89]: ₦22,000
+        - generic [ref=f6e90]:
+          - generic [ref=f6e91]:
+            - generic [ref=f6e92]: Subtotal
+            - generic [ref=f6e93]: ₦68,500
+          - generic [ref=f6e94]:
+            - generic [ref=f6e95]: Shipping
+            - generic [ref=f6e96]: ₦2,000
+          - generic [ref=f6e97]:
+            - generic [ref=f6e98]: Total
+            - generic [ref=f6e99]: ₦70,500
+        - generic [ref=f6e100]:
+          - button "Pay Now" [ref=f6e101] [cursor=pointer]
+          - paragraph [ref=f6e102]: You will be redirected to your bank or payment provider.
+  - button "Customer Support" [ref=f6e103] [cursor=pointer]

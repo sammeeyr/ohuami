@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 110" width="460" height="110">
+  <defs>
+    <linearGradient id="hAwningRed1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF5350" />
+      <stop offset="100%" stop-color="#E53935" />
+    </linearGradient>
+    <linearGradient id="hAwningRed2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E53935" />
+      <stop offset="100%" stop-color="#C62828" />
+    </linearGradient>
+    <linearGradient id="hYellowCurve" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F" />
+      <stop offset="100%" stop-color="#FFC928" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Symbol (Scaled to 90x90 in position) -->
+  <g transform="translate(10, 8) scale(0.68)">
+    <!-- Market Awning -->
+    <path d="M 28 58 C 30 40 40 32 48 30 L 52 56 C 52 61 46 64 40 64 C 33 64 28 61 28 58 Z" fill="url(#hAwningRed2)" />
+    <path d="M 50 30 C 58 28 66 28 72 28 L 74 58 C 74 64 68 66 62 66 C 56 66 51 63 50 58 Z" fill="url(#hAwningRed1)" />
+    <path d="M 74 28 C 82 28 92 29 98 32 L 96 58 C 96 64 90 66 84 66 C 78 66 74 63 74 58 Z" fill="url(#hAwningRed2)" />
+    <path d="M 100 32 C 108 34 118 42 120 58 C 120 62 115 64 108 64 C 102 64 98 60 97 56 Z" fill="url(#hAwningRed1)" />
+    <!-- Yellow Curve -->
+    <path d="M 28 76 C 28 108 52 130 84 130 C 110 130 126 112 126 96 C 126 92 120 90 114 93 C 110 106 98 116 84 116 C 60 116 42 98 42 76 C 42 70 36 68 31 71 C 29 72 28 74 28 76 Z" fill="url(#hYellowCurve)" />
+    <!-- Connected Nodes -->
+    <line x1="114" y1="94" x2="128" y2="86" stroke="#111111" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="124" y1="98" x2="140" y2="94" stroke="#111111" stroke-width="3.5" stroke-linecap="round" />
+    <line x1="120" y1="108" x2="134" y2="114" stroke="#111111" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="128" cy="86" r="6.5" fill="#111111" />
+    <circle cx="140" cy="94" r="5.5" fill="#111111" />
+    <circle cx="134" cy="114" r="6" fill="#111111" />
+    <circle cx="118" cy="106" r="5" fill="#111111" />
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(130, 20)">
+    <g fill="#111111" font-family="'Montserrat', 'Plus Jakarta Sans', system-ui, sans-serif" font-weight="900" font-size="52" letter-spacing="1">
+      <text x="0" y="44">O</text>
+      <text x="48" y="44">H</text>
+      <text x="98" y="44">U</text>
+      <text x="146" y="44">A</text>
+      <text x="196" y="44">M</text>
+      <text x="258" y="44">I</text>
+    </g>
+    <!-- Yellow Triangle Accent inside 'A' -->
+    <polygon points="163.5,31 156,43 171,43" fill="#FFC928" />
+
+    <!-- Tagline -->
+    <text x="3" y="68" fill="#111111" font-family="'Montserrat', 'Plus Jakarta Sans', system-ui, sans-serif" font-weight="600" font-size="14.5" letter-spacing="0.2">
+      Your market. Your business. Your growth.
+    </text>
+  </g>
+</svg>

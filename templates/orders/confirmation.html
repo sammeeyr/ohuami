@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Order Confirmed #{{ order.order_reference }} — {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Success Card -->
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-md text-center space-y-3">
+    <div class="w-16 h-16 bg-emerald-100 text-[#10B981] rounded-full flex items-center justify-center mx-auto text-2xl font-bold shadow-sm">
+      ✓
+    </div>
+    
+    <span class="text-xs uppercase font-extrabold tracking-wider text-emerald-600 block">
+      Order Successfully Placed
+    </span>
+    
+    <h1 class="text-xl sm:text-2xl font-black text-[#111111]">
+      Thank You for Shopping with Cube Tech!
+    </h1>
+    
+    <p class="text-xs sm:text-sm text-gray-500 max-w-md mx-auto">
+      Your order reference is <span class="font-extrabold text-gray-900">{{ order.order_reference }}</span>. We've sent full confirmation details and tracking updates to <span class="font-bold text-gray-800">{{ order.customer_email }}</span>.
+    </p>
+
+    <!-- Badges Row -->
+    <div class="flex items-center justify-center gap-3 pt-2">
+      <span class="text-xs px-3 py-1 rounded-full font-bold {% if order.payment_status == 'paid' %}bg-emerald-100 text-emerald-700{% else %}bg-amber-100 text-amber-800{% endif %}">
+        ● Payment: {{ order.get_payment_status_display }}
+      </span>
+      <span class="text-xs px-3 py-1 rounded-full font-bold bg-blue-50 text-blue-700">
+        ● Status: {{ order.get_fulfillment_status_display }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Order Details & Shipping Snapshot Card -->
+  <div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm space-y-4">
+    <h3 class="font-extrabold text-sm text-[#111111] pb-2 border-b border-gray-100">
+      Delivery Details
+    </h3>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+      <div>
+        <span class="font-bold text-gray-400 block mb-0.5">Recipient</span>
+        <p class="font-extrabold text-gray-900">{{ order.shipping_recipient_name }}</p>
+        <p class="text-gray-500 font-medium">{{ order.shipping_phone }}</p>
+      </div>
+
+      <div>
+        <span class="font-bold text-gray-400 block mb-0.5">Shipping Address</span>
+        <p class="font-semibold text-gray-800 leading-snug">{{ order.formatted_shipping_address }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ordered Items Card -->
+  <div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm space-y-4">
+    <h3 class="font-extrabold text-sm text-[#111111] pb-2 border-b border-gray-100">
+      Items Ordered ({{ order.total_items_count }})
+    </h3>
+
+    <div class="divide-y divide-gray-100">
+      {% for item in order.items.all %}
+      <div class="py-3 flex items-center justify-between gap-3 text-xs">
+        <div>
+          <h4 class="font-bold text-gray-900">{{ item.product_name }}</h4>
+          {% if item.variant_name %}
+            <span class="text-[11px] text-gray-400">{{ item.variant_name }}</span>
+          {% endif %}
+          <span class="text-[11px] text-gray-500 font-semibold block">Qty: {{ item.quantity }} × {{ currency_symbol }}{{ item.unit_price|floatformat:2 }}</span>
+        </div>
+        <div class="font-black text-sm text-gray-900">
+          {{ currency_symbol }}{{ item.line_total|floatformat:2 }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Financial Totals -->
+    <div class="pt-3 border-t border-gray-100 space-y-1.5 text-xs">
+      <div class="flex justify-between text-gray-600 font-medium">
+        <span>Subtotal</span>
+        <span class="font-bold text-gray-900">{{ currency_symbol }}{{ order.items_subtotal|floatformat:2 }}</span>
+      </div>
+      <div class="flex justify-between text-gray-600 font-medium">
+        <span>Shipping Fee</span>
+        <span class="font-bold text-gray-900">{{ currency_symbol }}{{ order.shipping_fee|floatformat:2 }}</span>
+      </div>
+      {% if order.discount_amount > 0 %}
+      <div class="flex justify-between text-[#10B981] font-bold">
+        <span>Discount</span>
+        <span>-{{ currency_symbol }}{{ order.discount_amount|floatformat:2 }}</span>
+      </div>
+      {% endif %}
+      <div class="pt-2 border-t border-gray-100 flex justify-between items-baseline">
+        <span class="font-black text-sm text-[#111111]">Total Amount</span>
+        <span class="font-black text-xl text-[#E53935]">{{ currency_symbol }}{{ order.total_amount|floatformat:2 }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="flex flex-col sm:flex-row gap-3 pt-2">
+    <a href="{% url 'core:home' %}" class="flex-1 btn-primary py-3 rounded-full text-center text-xs font-bold">
+      Continue Shopping
+    </a>
+    <a href="{% url 'orders:history' %}" class="flex-1 btn-black py-3 rounded-full text-center text-xs font-bold">
+      View All Orders
+    </a>
+  </div>
+
+</div>
+{% endblock %}

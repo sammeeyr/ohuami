@@ -1,0 +1,798 @@
+{% load static humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Super Admin Control Center — OHUAMI & Cube Tech Enterprises</title>
+  
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/ohuami-favicon.svg' %}">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              red: '#E53935',
+              black: '#111111',
+              yellow: '#FFC928',
+              'yellow-hover': '#F5B800',
+              green: '#10B981',
+            }
+          },
+          fontFamily: {
+            sans: ['"Montserrat"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+</head>
+<body class="bg-[#0F0F11] text-gray-100 font-sans antialiased min-h-screen flex flex-col selection:bg-[#FFC928] selection:text-[#111111]">
+
+  <!-- Top Platform Control Bar -->
+  <header class="bg-[#161619] border-b border-white/10 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand & Super Admin Badge -->
+      <div class="flex items-center gap-4">
+        <a href="{% url 'core:home' %}" class="flex items-center gap-2">
+          <img src="{% static 'images/ohuami-horizontal-dark.svg' %}" alt="OHUAMI" class="h-9 w-auto">
+        </a>
+        <div class="h-5 w-px bg-white/10 hidden sm:block"></div>
+        <span class="inline-flex items-center gap-1.5 bg-[#E53935] text-white text-[11px] font-black uppercase px-2.5 py-1 rounded-md tracking-wider">
+          Super Admin
+        </span>
+      </div>
+
+      <!-- Center Status Strip -->
+      <div class="hidden md:flex items-center gap-6 text-xs text-gray-400">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+          <span class="font-semibold text-gray-300">System Healthy</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-gray-500">Parent:</span>
+          <span class="text-white font-bold">{{ setting.parent_company }}</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-gray-500">Gateway:</span>
+          <span class="text-[#FFC928] font-bold">{% if setting.paystack_sandbox_mode %}Paystack Sandbox{% else %}Paystack Live{% endif %}</span>
+        </div>
+      </div>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center gap-3">
+        <a href="/admin/" class="text-xs font-bold text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 px-3.5 py-2 rounded-xl border border-white/10 transition">
+          Django Admin ↗
+        </a>
+        <a href="{% url 'catalog:storefront' store_slug='sunshine-fashion' %}" target="_blank" class="text-xs font-bold text-[#FFC928] hover:text-[#F5B800] bg-[#FFC928]/10 px-3.5 py-2 rounded-xl border border-[#FFC928]/30 transition">
+          View Live Store ↗
+        </a>
+        <div class="w-8 h-8 rounded-full bg-[#FFC928] text-[#111111] font-black flex items-center justify-center text-xs ml-1">
+          SA
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Super Admin Navigation Tabs -->
+  <div class="bg-[#141417] border-b border-white/5 sticky top-20 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex overflow-x-auto no-scrollbar gap-2 py-2.5 text-xs sm:text-sm font-bold">
+      
+      <button onclick="switchTab('pulse')" id="tab-pulse" class="admin-tab active px-4 py-2 rounded-xl text-white bg-white/10 flex items-center gap-2 transition">
+        <span>⚡ Platform Pulse</span>
+      </button>
+
+      <button onclick="switchTab('merchants')" id="tab-merchants" class="admin-tab px-4 py-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-2 transition">
+        <span>🏪 Merchants & Stores</span>
+        <span class="bg-[#FFC928] text-[#111111] text-[10px] px-1.5 py-0.5 rounded-full font-black">{{ total_stores }}</span>
+      </button>
+
+      <button onclick="switchTab('settings')" id="tab-settings" class="admin-tab px-4 py-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-2 transition">
+        <span>⚙️ Global Stores Settings</span>
+      </button>
+
+      <button onclick="switchTab('tiers')" id="tab-tiers" class="admin-tab px-4 py-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-2 transition">
+        <span>📐 Multi-Merchant Config</span>
+        <span class="bg-white/10 text-gray-300 text-[10px] px-1.5 py-0.5 rounded-full font-bold">{{ tiers.count }} Tiers</span>
+      </button>
+
+      <button onclick="switchTab('services')" id="tab-services" class="admin-tab px-4 py-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 flex items-center gap-2 transition">
+        <span>🧩 Features & Services</span>
+        <span class="bg-[#10B981] text-white text-[10px] px-1.5 py-0.5 rounded-full font-black">{{ active_services_count }}/{{ services.count }}</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="admin-toast-container" class="fixed top-24 right-6 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 space-y-8">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: PLATFORM PULSE (OVERVIEW)           -->
+    <!-- ========================================== -->
+    <div id="content-pulse" class="tab-pane space-y-8">
+      
+      <!-- Top Overview Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Platform Command Center</h1>
+          <p class="text-xs sm:text-sm text-gray-400 mt-1">Multi-store operations, tenant governance, and global commerce infrastructure.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs bg-white/5 text-gray-300 px-3.5 py-2 rounded-xl border border-white/10 font-semibold">
+            Last audited: Just now
+          </span>
+          <button onclick="window.location.reload()" class="bg-[#FFC928] hover:bg-[#F5B800] text-[#111111] font-bold text-xs px-4 py-2 rounded-xl transition">
+            Refresh Data
+          </button>
+        </div>
+      </div>
+
+      <!-- 5 Key KPI Metric Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Metric 1: Stores -->
+        <div class="bg-[#161619] rounded-2xl p-5 border border-white/5 shadow-sm space-y-2">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Total Stores</div>
+          <div class="text-2xl font-black text-white">{{ total_stores }}</div>
+          <div class="flex items-center gap-1.5 text-[11px] font-semibold text-[#10B981]">
+            <span>{{ active_stores }} Active</span>
+            <span class="text-gray-500">•</span>
+            <span class="text-yellow-400">{{ pending_stores }} Pending</span>
+          </div>
+        </div>
+
+        <!-- Metric 2: Merchants -->
+        <div class="bg-[#161619] rounded-2xl p-5 border border-white/5 shadow-sm space-y-2">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Merchants (KYC)</div>
+          <div class="text-2xl font-black text-white">{{ total_merchants }}</div>
+          <div class="text-[11px] font-semibold text-gray-400">
+            Across 3 active tiers
+          </div>
+        </div>
+
+        <!-- Metric 3: GMV -->
+        <div class="bg-[#161619] rounded-2xl p-5 border border-white/5 shadow-sm space-y-2">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Platform GMV</div>
+          <div class="text-2xl font-black text-[#FFC928]">₦{{ total_gmv|floatformat:0|intcomma }}</div>
+          <div class="text-[11px] font-semibold text-[#10B981]">
+            ↑ 22% this month
+          </div>
+        </div>
+
+        <!-- Metric 4: Platform Fee Revenue -->
+        <div class="bg-[#161619] rounded-2xl p-5 border border-white/5 shadow-sm space-y-2">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Platform Take ({{ setting.platform_commission_percent }}%)</div>
+          <div class="text-2xl font-black text-white">₦{{ est_commission|floatformat:0|intcomma }}</div>
+          <div class="text-[11px] font-semibold text-gray-400">
+            Net commission earned
+          </div>
+        </div>
+
+        <!-- Metric 5: Active Services -->
+        <div class="bg-[#161619] rounded-2xl p-5 border border-white/5 shadow-sm space-y-2">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Platform Services</div>
+          <div class="text-2xl font-black text-[#10B981]">{{ active_services_count }}/{{ services.count }}</div>
+          <div class="text-[11px] font-semibold text-gray-400">
+            Active modules
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Platform Governance Strip -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-white">Maintenance Mode</div>
+            <div class="text-[11px] text-gray-400">{% if setting.maintenance_mode %}Storefronts Locked{% else %}Storefronts Live{% endif %}</div>
+          </div>
+          <span class="w-3 h-3 rounded-full {% if setting.maintenance_mode %}bg-red-500{% else %}bg-[#10B981]{% endif %}"></span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-white">New Merchant Onboarding</div>
+            <div class="text-[11px] text-gray-400">{% if setting.allow_new_merchant_registration %}Open Registration{% else %}Closed{% endif %}</div>
+          </div>
+          <span class="w-3 h-3 rounded-full bg-[#10B981]"></span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-white">KYC & BVN Enforcement</div>
+            <div class="text-[11px] text-gray-400">{% if setting.require_kyc_verification %}Strict Bank KYC{% else %}Optional{% endif %}</div>
+          </div>
+          <span class="w-3 h-3 rounded-full bg-[#FFC928]"></span>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-bold text-white">Standard Delivery Fee</div>
+            <div class="text-[11px] text-gray-400">₦{{ setting.standard_shipping_fee|floatformat:0 }} nationwide</div>
+          </div>
+          <span class="text-xs font-bold text-gray-400">NGN</span>
+        </div>
+
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <div class="bg-[#161619] rounded-3xl p-6 sm:p-8 border border-white/5 space-y-4">
+        <h3 class="text-base font-bold text-white">Quick Control Shortcuts</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-bold">
+          <button onclick="switchTab('merchants')" class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 text-left space-y-1 transition border border-white/5">
+            <div class="text-lg">🏪</div>
+            <div class="text-white">Verify Pending Merchants</div>
+            <div class="text-[10px] text-gray-400 font-normal">{{ pending_stores }} store awaiting review</div>
+          </button>
+          
+          <button onclick="switchTab('settings')" class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 text-left space-y-1 transition border border-white/5">
+            <div class="text-lg">💰</div>
+            <div class="text-white">Adjust Commission Rate</div>
+            <div class="text-[10px] text-gray-400 font-normal">Currently {{ setting.platform_commission_percent }}%</div>
+          </button>
+
+          <button onclick="switchTab('services')" class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 text-left space-y-1 transition border border-white/5">
+            <div class="text-lg">⚡</div>
+            <div class="text-white">Toggle AI & WhatsApp</div>
+            <div class="text-[10px] text-gray-400 font-normal">Live platform features</div>
+          </button>
+
+          <a href="/admin/core/auditlog/" class="p-4 rounded-2xl bg-white/5 hover:bg-white/10 text-left space-y-1 transition border border-white/5 block">
+            <div class="text-lg">📜</div>
+            <div class="text-white">System Audit Trail</div>
+            <div class="text-[10px] text-gray-400 font-normal">Immutable activity logs</div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: MERCHANTS & MULTI-STORE MANAGEMENT -->
+    <!-- ========================================== -->
+    <div id="content-merchants" class="tab-pane hidden space-y-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-white">Merchants & Multi-Store Tenants</h2>
+          <p class="text-xs text-gray-400 mt-1">Manage merchant stores, verification states, custom domains, and commission overrides.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-400">Total Registered: <strong class="text-white">{{ stores.count }}</strong></span>
+        </div>
+      </div>
+
+      <!-- Merchant Stores Table -->
+      <div class="bg-[#161619] rounded-3xl border border-white/5 overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-white/5 text-gray-400 uppercase tracking-wider text-[10px] border-b border-white/5">
+              <tr>
+                <th class="py-4 px-6">Store & Subdomain</th>
+                <th class="py-4 px-6">Owner / Contact</th>
+                <th class="py-4 px-6">Assigned Tier</th>
+                <th class="py-4 px-6">Status</th>
+                <th class="py-4 px-6">Bank & BVN</th>
+                <th class="py-4 px-6">Live Link</th>
+                <th class="py-4 px-6 text-right">Quick Governance</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+              {% for store in stores %}
+              <tr class="hover:bg-white/5 transition" id="store-row-{{ store.id }}">
+                
+                <!-- Store Info -->
+                <td class="py-4 px-6">
+                  <div class="font-bold text-white text-sm">{{ store.name }}</div>
+                  <div class="text-[11px] text-gray-400">{{ store.slug }}.ohuami.com</div>
+                  {% if store.custom_domain %}
+                    <div class="text-[10px] text-[#FFC928] flex items-center gap-1 mt-0.5">
+                      <span>🌐 {{ store.custom_domain }}</span>
+                      {% if store.custom_domain_verified %}<span class="text-[#10B981] font-bold">✓ Verified</span>{% endif %}
+                    </div>
+                  {% endif %}
+                </td>
+
+                <!-- Owner -->
+                <td class="py-4 px-6">
+                  <div class="font-semibold text-gray-200">{{ store.owner.get_full_name|default:store.owner.email }}</div>
+                  <div class="text-[11px] text-gray-400">{{ store.owner.email }}</div>
+                  <div class="text-[10px] text-gray-500">{{ store.owner.phone }}</div>
+                </td>
+
+                <!-- Plan Tier -->
+                <td class="py-4 px-6">
+                  <select onchange="updateStoreTier({{ store.id }}, this.value)" class="bg-[#0F0F11] border border-white/10 rounded-lg px-2.5 py-1 text-xs text-white focus:outline-none focus:border-[#FFC928]">
+                    {% for tier in tiers %}
+                      <option value="{{ tier.id }}" {% if store.tier.id == tier.id %}selected{% endif %}>
+                        {{ tier.name }} ({{ tier.commission_rate }}%)
+                      </option>
+                    {% endfor %}
+                  </select>
+                  {% if store.commission_rate_override %}
+                    <div class="text-[10px] text-yellow-400 mt-1 font-bold">Override: {{ store.commission_rate_override }}%</div>
+                  {% endif %}
+                </td>
+
+                <!-- Status Badge -->
+                <td class="py-4 px-6" id="status-cell-{{ store.id }}">
+                  {% if store.status == 'active' %}
+                    <span class="inline-flex items-center gap-1 bg-[#10B981]/15 text-[#10B981] px-2.5 py-1 rounded-full font-bold text-[10px]">
+                      ● Active
+                    </span>
+                  {% elif store.status == 'pending' %}
+                    <span class="inline-flex items-center gap-1 bg-yellow-500/15 text-yellow-400 px-2.5 py-1 rounded-full font-bold text-[10px]">
+                      ⏳ Pending Review
+                    </span>
+                  {% elif store.status == 'suspended' %}
+                    <span class="inline-flex items-center gap-1 bg-red-500/15 text-red-400 px-2.5 py-1 rounded-full font-bold text-[10px]">
+                      ✕ Suspended
+                    </span>
+                  {% else %}
+                    <span class="text-gray-400 font-bold text-[10px]">{{ store.status }}</span>
+                  {% endif %}
+                </td>
+
+                <!-- Banking -->
+                <td class="py-4 px-6">
+                  <div class="text-gray-300 font-medium">{{ store.bank_name|default:"Not linked" }}</div>
+                  <div class="text-[10px] text-gray-500">{{ store.bank_account_number }}</div>
+                  {% if store.bvn_verified %}
+                    <span class="text-[10px] text-[#10B981] font-bold">✓ BVN Verified</span>
+                  {% else %}
+                    <span class="text-[10px] text-yellow-400 font-bold">⚠ BVN Pending</span>
+                  {% endif %}
+                </td>
+
+                <!-- Storefront link -->
+                <td class="py-4 px-6">
+                  <a href="{% url 'catalog:storefront' store_slug=store.slug %}" target="_blank" class="text-[#FFC928] hover:underline font-bold text-xs flex items-center gap-1">
+                    <span>Visit</span>
+                    <span>↗</span>
+                  </a>
+                </td>
+
+                <!-- Action Buttons -->
+                <td class="py-4 px-6 text-right space-x-1.5 whitespace-nowrap">
+                  {% if store.status != 'active' %}
+                  <button onclick="updateStoreStatus({{ store.id }}, 'active')" class="bg-[#10B981] hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-[11px] transition">
+                    Approve
+                  </button>
+                  {% endif %}
+                  {% if store.status != 'suspended' %}
+                  <button onclick="updateStoreStatus({{ store.id }}, 'suspended')" class="bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white font-bold px-3 py-1.5 rounded-lg text-[11px] transition">
+                    Suspend
+                  </button>
+                  {% endif %}
+                  <a href="/admin/catalog/store/{{ store.id }}/change/" target="_blank" class="bg-white/10 hover:bg-white/15 text-gray-200 font-bold px-3 py-1.5 rounded-lg text-[11px] transition">
+                    Edit
+                  </a>
+                </td>
+
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: GLOBAL STORES SETTINGS              -->
+    <!-- ========================================== -->
+    <div id="content-settings" class="tab-pane hidden space-y-6">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-black text-white">Global Stores Configuration</h2>
+          <p class="text-xs text-gray-400 mt-1">Platform-wide rules, financial policies, shipping rates, and system switches.</p>
+        </div>
+        <button onclick="saveGlobalSettings(event)" class="bg-[#FFC928] hover:bg-[#F5B800] text-[#111111] font-black text-xs sm:text-sm px-6 py-2.5 rounded-full shadow-lg transition">
+          Save All Changes
+        </button>
+      </div>
+
+      <form id="global-settings-form" class="space-y-6">
+        
+        <!-- Section 1: Platform Brand Identity -->
+        <div class="bg-[#161619] rounded-3xl p-6 sm:p-8 border border-white/5 space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-[#FFC928]">1. Platform Brand & Identity</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Platform Brand Name</label>
+              <input type="text" name="store_name" value="{{ setting.store_name }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+            </div>
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Parent Holding Company</label>
+              <input type="text" name="parent_company" value="{{ setting.parent_company }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-gray-400 font-bold mb-1">Master Tagline</label>
+              <input type="text" name="tagline" value="{{ setting.tagline }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Platform Financials & Commissions -->
+        <div class="bg-[#161619] rounded-3xl p-6 sm:p-8 border border-white/5 space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-[#FFC928]">2. Platform Commissions & Fees</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Default Commission (%)</label>
+              <input type="number" step="0.1" name="platform_commission_percent" value="{{ setting.platform_commission_percent }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+              <span class="text-[10px] text-gray-500 mt-1">Applied when merchant tier has no override</span>
+            </div>
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Fixed Transaction Fee (₦)</label>
+              <input type="number" step="10" name="platform_fixed_fee" value="{{ setting.platform_fixed_fee }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+              <span class="text-[10px] text-gray-500 mt-1">Charged per successful order payout</span>
+            </div>
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Minimum Payout Threshold (₦)</label>
+              <input type="number" step="1000" name="payout_threshold" value="{{ setting.payout_threshold }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+              <span class="text-[10px] text-gray-500 mt-1">Minimum balance to trigger bank settlement</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Delivery Defaults -->
+        <div class="bg-[#161619] rounded-3xl p-6 sm:p-8 border border-white/5 space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-[#FFC928]">3. Standard Delivery Defaults</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Standard Nationwide Shipping (₦)</label>
+              <input type="number" step="100" name="standard_shipping_fee" value="{{ setting.standard_shipping_fee }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+            </div>
+            <div>
+              <label class="block text-gray-400 font-bold mb-1">Free Delivery Threshold (₦)</label>
+              <input type="number" step="1000" name="free_shipping_threshold" value="{{ setting.free_shipping_threshold }}" class="w-full bg-[#0F0F11] border border-white/10 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-[#FFC928]">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: Platform Operational Switches -->
+        <div class="bg-[#161619] rounded-3xl p-6 sm:p-8 border border-white/5 space-y-5">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-[#FFC928]">4. Operational Controls & Safety</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs">
+            
+            <label class="flex items-start gap-3.5 p-4 rounded-2xl bg-white/5 border border-white/5 cursor-pointer">
+              <input type="checkbox" name="maintenance_mode" {% if setting.maintenance_mode %}checked{% endif %} class="mt-0.5 w-4 h-4 text-[#E53935] rounded">
+              <div>
+                <div class="font-bold text-white">Maintenance Mode</div>
+                <div class="text-[11px] text-gray-400 mt-0.5">Locks customer storefronts and displays maintenance notice while admins retain access.</div>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3.5 p-4 rounded-2xl bg-white/5 border border-white/5 cursor-pointer">
+              <input type="checkbox" name="allow_new_merchant_registration" {% if setting.allow_new_merchant_registration %}checked{% endif %} class="mt-0.5 w-4 h-4 text-[#10B981] rounded">
+              <div>
+                <div class="font-bold text-white">Open Merchant Registration</div>
+                <div class="text-[11px] text-gray-400 mt-0.5">Allow public vendor signup on the landing page.</div>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3.5 p-4 rounded-2xl bg-white/5 border border-white/5 cursor-pointer">
+              <input type="checkbox" name="require_kyc_verification" {% if setting.require_kyc_verification %}checked{% endif %} class="mt-0.5 w-4 h-4 text-[#FFC928] rounded">
+              <div>
+                <div class="font-bold text-white">Strict KYC Verification Required</div>
+                <div class="text-[11px] text-gray-400 mt-0.5">New stores require admin approval and BVN match before accepting payments.</div>
+              </div>
+            </label>
+
+            <label class="flex items-start gap-3.5 p-4 rounded-2xl bg-white/5 border border-white/5 cursor-pointer">
+              <input type="checkbox" name="paystack_sandbox_mode" {% if setting.paystack_sandbox_mode %}checked{% endif %} class="mt-0.5 w-4 h-4 text-blue-500 rounded">
+              <div>
+                <div class="font-bold text-white">Paystack Mock / Sandbox Mode</div>
+                <div class="text-[11px] text-gray-400 mt-0.5">Simulate payments safely without live bank charges.</div>
+              </div>
+            </label>
+
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button type="submit" class="bg-[#FFC928] hover:bg-[#F5B800] text-[#111111] font-black text-sm px-8 py-3.5 rounded-full shadow-lg transition">
+            Save All Changes
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: MULTI-MERCHANT CONFIG (TIERS)       -->
+    <!-- ========================================== -->
+    <div id="content-tiers" class="tab-pane hidden space-y-6">
+      
+      <div>
+        <h2 class="text-xl sm:text-2xl font-black text-white">Multi-Merchant Tiers & Quota Configurations</h2>
+        <p class="text-xs text-gray-400 mt-1">Set store plan limits, commission percentage rates, staff user seats, and custom domain access.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {% for tier in tiers %}
+        <div class="bg-[#161619] rounded-3xl p-6 border border-white/5 flex flex-col justify-between space-y-5">
+          
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-black uppercase tracking-wider text-[#FFC928]">{{ tier.name }}</span>
+              <span class="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded-full font-bold">{{ tier.stores_count }} stores</span>
+            </div>
+            
+            <div class="text-2xl font-black text-white">
+              ₦{{ tier.monthly_price|floatformat:0|intcomma }}<span class="text-xs font-normal text-gray-400">/mo</span>
+            </div>
+
+            <p class="text-xs text-gray-400 leading-relaxed">{{ tier.description }}</p>
+
+            <div class="space-y-2 pt-2 border-t border-white/5 text-xs text-gray-300">
+              <div class="flex justify-between">
+                <span class="text-gray-400">Commission Rate:</span>
+                <span class="font-bold text-[#FFC928]">{{ tier.commission_rate }}%</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Max Products:</span>
+                <span class="font-bold text-white">{{ tier.max_products }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Staff Seats:</span>
+                <span class="font-bold text-white">{{ tier.max_staff_accounts }}</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Storage Quota:</span>
+                <span class="font-bold text-white">{{ tier.storage_limit_mb }} MB</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Custom Domain:</span>
+                <span class="font-bold {% if tier.custom_domain_allowed %}text-[#10B981]{% else %}text-gray-500{% endif %}">
+                  {% if tier.custom_domain_allowed %}✓ Yes{% else %}✕ No{% endif %}
+                </span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Priority Support:</span>
+                <span class="font-bold {% if tier.priority_support %}text-[#10B981]{% else %}text-gray-500{% endif %}">
+                  {% if tier.priority_support %}✓ Yes{% else %}✕ No{% endif %}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <a href="/admin/catalog/merchanttier/{{ tier.id }}/change/" target="_blank" class="w-full text-center py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold text-xs border border-white/10 transition block">
+            Configure Tier In Django Admin ↗
+          </a>
+
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: FEATURES & SERVICES SWITCHBOARD     -->
+    <!-- ========================================== -->
+    <div id="content-services" class="tab-pane hidden space-y-6">
+      
+      <div>
+        <h2 class="text-xl sm:text-2xl font-black text-white">Features & Services Switchboard</h2>
+        <p class="text-xs text-gray-400 mt-1">Enable or disable specialized commerce modules, AI automation, WhatsApp commerce, and integrations.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for service in services %}
+        <div class="bg-[#161619] rounded-3xl p-6 border border-white/5 flex flex-col justify-between space-y-4" id="service-card-{{ service.id }}">
+          
+          <div class="space-y-3">
+            
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase tracking-wider text-gray-400 bg-white/5 px-2.5 py-1 rounded-md">
+                {{ service.get_category_display }}
+              </span>
+              
+              <!-- Live Toggle Switch -->
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" onchange="toggleService({{ service.id }}, this)" {% if service.is_global_enabled %}checked{% endif %} class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#10B981]"></div>
+              </label>
+            </div>
+
+            <div>
+              <h3 class="text-base font-bold text-white">{{ service.name }}</h3>
+              <div class="text-[11px] text-[#FFC928] font-mono mt-0.5">{{ service.code }}</div>
+            </div>
+
+            <p class="text-xs text-gray-400 leading-relaxed">{{ service.description }}</p>
+
+            <div class="pt-2 flex items-center justify-between text-[11px] border-t border-white/5">
+              <span class="text-gray-500">Min Tier:</span>
+              <span class="font-bold text-gray-300">{{ service.minimum_tier.name|default:"All Tiers (Free+)" }}</span>
+            </div>
+
+          </div>
+
+          <div class="pt-2 flex items-center justify-between text-[11px] text-gray-500">
+            <span>Status:</span>
+            <span class="font-bold {% if service.is_global_enabled %}text-[#10B981]{% else %}text-gray-500{% endif %}" id="service-status-text-{{ service.id }}">
+              {% if service.is_global_enabled %}Active Platform-wide{% else %}Disabled{% endif %}
+            </span>
+          </div>
+
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#0D0D0F] border-t border-white/5 py-8 text-xs text-gray-500 text-center">
+    <div>OHUAMI Platform Control Panel • Built for Cube Tech Enterprises</div>
+    <div class="mt-1">Django 6.1.2 Production Control Center • Secure Multi-Tenant Architecture</div>
+  </footer>
+
+  <!-- Interactive JavaScript Controller -->
+  <script>
+    function getCsrfToken() {
+      const match = document.cookie.match(/csrftoken=([^;]+)/);
+      return match ? match[1] : '';
+    }
+
+    function showAdminToast(message, type = 'success') {
+      const container = document.getElementById('admin-toast-container');
+      const toast = document.createElement('div');
+      const bg = type === 'success' ? 'bg-[#10B981]' : (type === 'error' ? 'bg-[#E53935]' : 'bg-[#FFC928] text-black');
+      toast.className = `${bg} text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center justify-between gap-3 transform translate-y-2 transition-all duration-300 pointer-events-auto`;
+      toast.innerHTML = `<span>${message}</span><button onclick="this.parentElement.remove()" class="opacity-70 hover:opacity-100">✕</button>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.admin-tab').forEach(el => {
+        el.classList.remove('active', 'bg-white/10', 'text-white');
+        el.classList.add('text-gray-400');
+      });
+
+      const pane = document.getElementById(`content-${tabId}`);
+      const tabBtn = document.getElementById(`tab-${tabId}`);
+      if (pane) pane.classList.remove('hidden');
+      if (tabBtn) {
+        tabBtn.classList.add('active', 'bg-white/10', 'text-white');
+        tabBtn.classList.remove('text-gray-400');
+      }
+    }
+
+    function updateStoreStatus(storeId, newStatus) {
+      fetch('/dashboard/control-panel/api/update-merchant-status/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({ store_id: storeId, status: newStatus })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          showAdminToast(data.message, 'success');
+          setTimeout(() => window.location.reload(), 800);
+        } else {
+          showAdminToast(data.error || 'Failed to update store status', 'error');
+        }
+      })
+      .catch(err => {
+        showAdminToast('Network error updating store', 'error');
+      });
+    }
+
+    function updateStoreTier(storeId, tierId) {
+      fetch('/dashboard/control-panel/api/update-merchant-status/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({ store_id: storeId, tier_id: tierId })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          showAdminToast(data.message, 'success');
+        } else {
+          showAdminToast(data.error || 'Failed to update tier', 'error');
+        }
+      });
+    }
+
+    function toggleService(serviceId, checkbox) {
+      fetch('/dashboard/control-panel/api/toggle-service/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify({ service_id: serviceId, is_enabled: checkbox.checked })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          showAdminToast(data.message, 'success');
+          const statusText = document.getElementById(`service-status-text-${serviceId}`);
+          if (statusText) {
+            statusText.innerText = data.is_global_enabled ? 'Active Platform-wide' : 'Disabled';
+            statusText.className = data.is_global_enabled ? 'font-bold text-[#10B981]' : 'font-bold text-gray-500';
+          }
+        } else {
+          checkbox.checked = !checkbox.checked;
+          showAdminToast(data.error || 'Failed to toggle service', 'error');
+        }
+      });
+    }
+
+    function saveGlobalSettings(e) {
+      if (e) e.preventDefault();
+      const form = document.getElementById('global-settings-form');
+      const formData = new FormData(form);
+      const payload = {
+        store_name: formData.get('store_name'),
+        parent_company: formData.get('parent_company'),
+        tagline: formData.get('tagline'),
+        platform_commission_percent: formData.get('platform_commission_percent'),
+        platform_fixed_fee: formData.get('platform_fixed_fee'),
+        payout_threshold: formData.get('payout_threshold'),
+        standard_shipping_fee: formData.get('standard_shipping_fee'),
+        free_shipping_threshold: formData.get('free_shipping_threshold'),
+        maintenance_mode: form.querySelector('input[name="maintenance_mode"]').checked,
+        allow_new_merchant_registration: form.querySelector('input[name="allow_new_merchant_registration"]').checked,
+        require_kyc_verification: form.querySelector('input[name="require_kyc_verification"]').checked,
+        paystack_sandbox_mode: form.querySelector('input[name="paystack_sandbox_mode"]').checked,
+      };
+
+      fetch('/dashboard/control-panel/api/update-global-settings/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCsrfToken()
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          showAdminToast(data.message, 'success');
+        } else {
+          showAdminToast(data.error || 'Failed to save settings', 'error');
+        }
+      })
+      .catch(err => {
+        showAdminToast('Network error saving settings', 'error');
+      });
+    }
+
+    document.getElementById('global-settings-form').addEventListener('submit', saveGlobalSettings);
+  </script>
+
+</body>
+</html>

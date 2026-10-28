@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Operations Dashboard — {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-200 pb-4">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-[#E53935]"></span>
+        <h1 class="text-2xl font-black text-[#111111]">Store Operations & Sales Dashboard</h1>
+      </div>
+      <p class="text-xs text-gray-500 mt-0.5">Real-time metrics, inventory alerts, and order management.</p>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="/admin/" class="btn-black text-xs font-bold px-4 py-2 rounded-full">
+        Full Django Admin
+      </a>
+      <a href="{% url 'core:home' %}" class="btn-primary text-xs font-bold px-4 py-2 rounded-full">
+        Storefront
+      </a>
+    </div>
+  </div>
+
+  <!-- Metric KPI Cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-white rounded-2xl p-4 border border-gray-200/80 shadow-sm space-y-1">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Revenue</span>
+      <div class="text-2xl font-black text-[#111111]">
+        {{ currency_symbol }}{{ total_revenue|floatformat:2 }}
+      </div>
+      <span class="text-[11px] text-[#10B981] font-semibold">From paid orders</span>
+    </div>
+
+    <div class="bg-white rounded-2xl p-4 border border-gray-200/80 shadow-sm space-y-1">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Orders</span>
+      <div class="text-2xl font-black text-[#111111]">{{ total_orders }}</div>
+      <span class="text-[11px] text-gray-500 font-semibold">{{ paid_orders_count }} paid, {{ pending_orders_count }} pending</span>
+    </div>
+
+    <div class="bg-white rounded-2xl p-4 border border-gray-200/80 shadow-sm space-y-1">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Active Products</span>
+      <div class="text-2xl font-black text-[#111111]">{{ active_products }}</div>
+      <span class="text-[11px] text-gray-500 font-semibold">Across {{ categories_count }} categories</span>
+    </div>
+
+    <div class="bg-white rounded-2xl p-4 border border-gray-200/80 shadow-sm space-y-1">
+      <span class="text-xs font-bold text-gray-400 uppercase tracking-wider">Inventory Health</span>
+      <div class="text-2xl font-black {% if low_stock_count > 0 %}text-[#E53935]{% else %}text-[#10B981]{% endif %}">
+        {{ low_stock_count }} Low Stock
+      </div>
+      <span class="text-[11px] text-gray-500 font-semibold">Units ≤ 5</span>
+    </div>
+  </div>
+
+  <!-- Recent Orders Table -->
+  <div class="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
+    <div class="p-4 sm:p-5 border-b border-gray-100 flex items-center justify-between">
+      <h3 class="font-extrabold text-sm sm:text-base text-[#111111]">Recent Orders & Payment Verification</h3>
+      <span class="text-xs text-gray-400 font-semibold">Latest {{ recent_orders.count }} orders</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead class="bg-gray-50 text-gray-500 uppercase font-bold border-b border-gray-100">
+          <tr>
+            <th class="p-3.5">Reference</th>
+            <th class="p-3.5">Customer</th>
+            <th class="p-3.5">Date</th>
+            <th class="p-3.5">Total</th>
+            <th class="p-3.5">Payment</th>
+            <th class="p-3.5">Fulfillment</th>
+            <th class="p-3.5 text-right">Action</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for order in recent_orders %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="p-3.5 font-extrabold text-gray-900">#{{ order.order_reference }}</td>
+            <td class="p-3.5">
+              <span class="font-bold text-gray-900 block">{{ order.customer_name }}</span>
+              <span class="text-gray-400 text-[10px]">{{ order.customer_email }}</span>
+            </td>
+            <td class="p-3.5 text-gray-500">{{ order.created_at|date:"M d, Y H:i" }}</td>
+            <td class="p-3.5 font-black text-gray-900">{{ currency_symbol }}{{ order.total_amount|floatformat:2 }}</td>
+            <td class="p-3.5">
+              <span class="font-bold text-[10px] px-2 py-0.5 rounded-full {% if order.payment_status == 'paid' %}bg-emerald-100 text-emerald-700{% else %}bg-amber-100 text-amber-800{% endif %}">
+                {{ order.get_payment_status_display }}
+              </span>
+            </td>
+            <td class="p-3.5">
+              <span class="font-bold text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700">
+                {{ order.get_fulfillment_status_display }}
+              </span>
+            </td>
+            <td class="p-3.5 text-right">
+              <a href="{% url 'orders:confirmation' order_ref=order.order_reference %}" class="text-[#E53935] font-bold hover:underline">
+                View
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="p-6 text-center text-gray-400">No orders recorded yet.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

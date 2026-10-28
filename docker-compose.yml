@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: cubetech_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: cubetech_commerce
+      POSTGRES_USER: cubetech_user
+      POSTGRES_PASSWORD: cubetech_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: cubetech_web
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=docker-local-dev-secret-key-cubetech
+      - DATABASE_URL=postgres://cubetech_user:cubetech_password@db:5432/cubetech_commerce
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

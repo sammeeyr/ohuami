@@ -1,0 +1,364 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static humanize %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static "admin/css/dashboard.css" %}">
+<style>
+  /* Super Admin Hero Panel */
+  .ohuami-admin-hero {
+    background: linear-gradient(135deg, #111111 0%, #1A1A22 60%, #201717 100%);
+    border: 1px solid #2D2D36;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  .ohuami-admin-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(229, 57, 53, 0.25), transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-titles h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin: 0 0 6px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-titles h1 span.pill {
+    background: #FFC928;
+    color: #111111;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-titles p {
+    color: #9CA3AF;
+    font-size: 0.88rem;
+    margin: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .launch-btn-primary {
+    background: #E53935;
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 14px rgba(229, 57, 53, 0.4);
+  }
+
+  .launch-btn-primary:hover {
+    background: #D32F2F;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(229, 57, 53, 0.6);
+  }
+
+  /* Stat Cards */
+  .hero-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-stat-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #FFC928;
+    transform: translateY(-2px);
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #FFFFFF;
+    margin: 8px 0 4px 0;
+  }
+
+  .stat-meta {
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-pending {
+    background: rgba(245, 158, 11, 0.2);
+    color: #FBBF24;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .badge-live {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10B981;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  /* Quick action shortcut pills */
+  .quick-shortcuts-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .shortcut-label {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  .shortcut-pill {
+    background: #1C1C22;
+    border: 1px solid #33333E;
+    color: #E5E7EB !important;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .shortcut-pill:hover {
+    background: #272730;
+    border-color: #FFC928;
+    color: #FFC928 !important;
+  }
+
+  /* Django standard module tweaks */
+  .module {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #E5E7EB;
+  }
+
+  .module caption, .module h2 {
+    background: #111111 !important;
+    color: #FFFFFF !important;
+    font-weight: 700;
+  }
+</style>
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+
+  <!-- OHUAMI Super Admin Hero & Pulse Section -->
+  <div class="ohuami-admin-hero">
+    <div class="hero-top-row">
+      <div class="hero-titles">
+        <h1>
+          OHUAMI Control Panel
+          <span class="pill">CUBE TECH ENTERPRISES</span>
+        </h1>
+        <p>Unified Multi-Merchant Governance, Global Settings, Store Tiers & Platform Feature Switchboard</p>
+      </div>
+      <div class="hero-actions">
+        <a href="{% url 'dashboard:super_admin_control_panel' %}" class="launch-btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          Open Super Admin Control Center
+        </a>
+      </div>
+    </div>
+
+    <!-- 4 KPI Metrics -->
+    <div class="hero-stats-grid">
+      <a href="{% url 'admin:catalog_store_changelist' %}" class="hero-stat-card">
+        <div>
+          <div class="stat-label">
+            <span>Stores & Merchants</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          </div>
+          <div class="stat-number">{{ superadmin_stats.total_stores|default:"3" }}</div>
+        </div>
+        <div class="stat-meta">
+          {% if superadmin_stats.pending_stores %}
+            <span class="badge-pending">{{ superadmin_stats.pending_stores }} Pending KYC</span>
+          {% else %}
+            <span class="badge-live">All Stores Verified</span>
+          {% endif %}
+        </div>
+      </a>
+
+      <a href="{% url 'admin:catalog_merchanttier_changelist' %}" class="hero-stat-card">
+        <div>
+          <div class="stat-label">
+            <span>Multi-Merchant Tiers</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+          </div>
+          <div class="stat-number">{{ superadmin_stats.total_tiers|default:"4" }}</div>
+        </div>
+        <div class="stat-meta">
+          <span style="color:#9CA3AF">Free, Starter, Pro, Enterprise</span>
+        </div>
+      </a>
+
+      <a href="{% url 'admin:core_platformservice_changelist' %}" class="hero-stat-card">
+        <div>
+          <div class="stat-label">
+            <span>Platform Services</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </div>
+          <div class="stat-number">{{ superadmin_stats.active_services|default:"9" }}/{{ superadmin_stats.total_services|default:"9" }}</div>
+        </div>
+        <div class="stat-meta">
+          <span class="badge-live">All Systems Operational</span>
+        </div>
+      </a>
+
+      <a href="{% url 'admin:core_storesetting_changelist' %}" class="hero-stat-card">
+        <div>
+          <div class="stat-label">
+            <span>Platform Commission</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div class="stat-number">{{ superadmin_stats.platform_commission|default:"5.0" }}%</div>
+        </div>
+        <div class="stat-meta">
+          {% if superadmin_stats.maintenance_mode %}
+            <span style="color:#EF4444; font-weight:700;">● Maintenance Mode ON</span>
+          {% else %}
+            <span class="badge-live">● Storefronts Live</span>
+          {% endif %}
+        </div>
+      </a>
+    </div>
+
+    <!-- Quick Governance Shortcuts -->
+    <div class="quick-shortcuts-row">
+      <span class="shortcut-label">Quick Actions:</span>
+      <a href="{% url 'admin:catalog_store_changelist' %}?status__exact=PENDING" class="shortcut-pill">
+        <span>🔍 Review KYC Submissions</span>
+      </a>
+      <a href="{% url 'admin:catalog_merchanttier_changelist' %}" class="shortcut-pill">
+        <span>⚡ Edit Tier Limits & Fees</span>
+      </a>
+      <a href="{% url 'admin:core_platformservice_changelist' %}" class="shortcut-pill">
+        <span>🧩 Toggle Feature Flags</span>
+      </a>
+      <a href="{% url 'admin:core_storesetting_changelist' %}" class="shortcut-pill">
+        <span>⚙️ Global Payout & Delivery</span>
+      </a>
+      <a href="{% url 'admin:core_auditlog_changelist' %}" class="shortcut-pill">
+        <span>📋 System Audit Trail</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Standard Django App & Model Listing -->
+  {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="content-related">
+    <div class="module" id="recent-actions-module">
+        <h2>{% translate 'Recent actions' %}</h2>
+        <h3>{% translate 'My actions' %}</h3>
+            {% load log %}
+            {% get_admin_log 10 as admin_log for_user user %}
+            {% if not admin_log %}
+            <p>{% translate 'None available' %}</p>
+            {% else %}
+            <ul class="actionlist">
+            {% for entry in admin_log %}
+            <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">
+                {% if entry.is_deletion or not entry.get_admin_url %}
+                    {{ entry.object_repr }}
+                {% else %}
+                    <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                {% endif %}
+                <br>
+                {% if entry.content_type %}
+                    <span class="mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                {% else %}
+                    <span class="mini quiet">{% translate 'Unknown content' %}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+    </div>
+</div>
+{% endblock %}

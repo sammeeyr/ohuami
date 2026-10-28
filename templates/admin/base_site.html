@@ -1,0 +1,192 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E53935;
+    --primary-hover: #D32F2F;
+    --accent: #FFC928;
+    --dark-bg: #111111;
+    --header-bg: #0F0F11;
+    --font-family-primary: 'Montserrat', system-ui, -apple-system, sans-serif;
+  }
+  
+  body {
+    font-family: var(--font-family-primary);
+  }
+
+  #header {
+    background: #0F0F11 !important;
+    border-bottom: 2px solid #24242A;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #branding {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ohuami-admin-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #FFFFFF !important;
+  }
+
+  .ohuami-admin-logo svg {
+    height: 32px;
+    width: auto;
+  }
+
+  .ohuami-admin-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ohuami-admin-title span.badge {
+    background: #FFC928;
+    color: #111111;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .superadmin-portal-btn {
+    background: #E53935;
+    color: #FFFFFF !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.35);
+  }
+
+  .superadmin-portal-btn:hover {
+    background: #D32F2F;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.45);
+  }
+
+  div.breadcrumbs {
+    background: #18181C !important;
+    color: #9CA3AF !important;
+    border-bottom: 1px solid #27272A;
+    font-size: 0.82rem;
+  }
+
+  div.breadcrumbs a {
+    color: #FFC928 !important;
+    font-weight: 600;
+  }
+
+  .button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: #E53935 !important;
+    border-color: #E53935 !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
+    font-weight: 700 !important;
+    text-transform: none !important;
+  }
+
+  .button:hover, input[type=submit]:hover, input[type=button]:hover, a.button:hover {
+    background: #D32F2F !important;
+  }
+
+  .button.default, input[type=submit].default, .submit-row input.default {
+    background: #111111 !important;
+    border: 1px solid #FFC928 !important;
+    color: #FFC928 !important;
+  }
+
+  .button.default:hover {
+    background: #FFC928 !important;
+    color: #111111 !important;
+  }
+
+  /* Tables and listings */
+  #changelist table thead th {
+    background: #1E1E24;
+    color: #F3F4F6;
+    font-weight: 700;
+  }
+
+  #changelist-filter h2 {
+    background: #111111;
+    color: #FFC928;
+    font-weight: 800;
+  }
+
+  /* User tools */
+  #user-tools {
+    font-size: 0.8rem;
+    color: #9CA3AF;
+  }
+
+  #user-tools a {
+    color: #F3F4F6;
+    font-weight: 600;
+  }
+</style>
+{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+  <div class="ohuami-admin-logo">
+    <svg viewBox="0 0 460 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 34px; width: auto;">
+      <!-- Store Awning Symbol -->
+      <path d="M18 42C18 36 22 30 28 28L72 14C76 12.8 80 12.8 84 14L128 28C134 30 138 36 138 42V48C138 56 132 62 124 62C116 62 110 56 110 48C110 56 104 62 96 62C88 62 82 56 82 48C82 56 76 62 68 62C60 62 54 56 54 48C54 56 48 62 40 62C32 62 26 56 26 48V42H18Z" fill="#E53935"/>
+      <path d="M38 30L44 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <path d="M66 22L70 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <path d="M94 22L90 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <path d="M122 30L116 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+      <!-- Connected commerce nodes & smile -->
+      <path d="M26 62C26 89.6 48.4 112 76 112C101.2 112 122 93.4 125.4 69.2" stroke="#FFC928" stroke-width="15" stroke-linecap="round"/>
+      <circle cx="126" cy="62" r="6" fill="#111111"/>
+      <circle cx="140" cy="74" r="5" fill="#111111"/>
+      <circle cx="132" cy="88" r="4" fill="#111111"/>
+      <!-- Wordmark OHUAMI -->
+      <text x="162" y="80" font-family="'Montserrat', sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" letter-spacing="-0.03em">OHU</text>
+      <text x="328" y="80" font-family="'Montserrat', sans-serif" font-weight="900" font-size="64" fill="#FFC928" letter-spacing="-0.03em">A</text>
+      <text x="382" y="80" font-family="'Montserrat', sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" letter-spacing="-0.03em">MI</text>
+    </svg>
+    <div class="ohuami-admin-title">
+      <span>Control Panel</span>
+      <span class="badge">Super Admin</span>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block userlinks %}
+  <a href="{% url 'dashboard:super_admin_control_panel' %}" class="superadmin-portal-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    Control Center
+  </a>
+  {{ block.super }}
+{% endblock %}

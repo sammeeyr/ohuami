@@ -1,0 +1,100 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - link "Back" [ref=f1e4] [cursor=pointer]:
+        - /url: javascript:history.back()
+      - heading "Product" [level=1] [ref=f1e8]
+      - link [ref=f1e9] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f1e12]:
+    - generic [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]:
+          - generic [ref=f1e16]:
+            - generic [ref=f1e17]: "-28% OFF"
+            - img "Cube Pro 16 Ultra 5G Smartphone" [ref=f1e18]
+          - img "Placeholder" [ref=f1e21]
+        - generic [ref=f1e22]:
+          - generic [ref=f1e23]:
+            - generic [ref=f1e24]:
+              - generic [ref=f1e25]: Cube Tech Official Store
+              - generic [ref=f1e27]:
+                - button "Save to Wishlist" [ref=f1e28] [cursor=pointer]
+                - button "Share Product" [ref=f1e31] [cursor=pointer]
+            - heading "Cube Pro 16 Ultra 5G Smartphone" [level=1] [ref=f1e34]
+            - generic [ref=f1e35]:
+              - generic [ref=f1e36]: ★★★★★
+              - generic [ref=f1e38]: "5.0"
+              - generic [ref=f1e39]: (2 verified reviews)
+              - generic [ref=f1e40]: In Stock
+          - generic [ref=f1e41]:
+            - generic [ref=f1e42]:
+              - generic [ref=f1e43]: ₦850000.00
+              - generic [ref=f1e44]: ₦1180000.00
+              - generic [ref=f1e45]: "-28%"
+            - paragraph [ref=f1e46]: You save ₦330000.00 today!
+          - generic [ref=f1e48]:
+            - generic [ref=f1e49]: Select Variant
+            - generic [ref=f1e50]:
+              - button "Titanium Black / 256GB ₦850000.00" [ref=f1e51] [cursor=pointer]:
+                - generic [ref=f1e52]: Titanium Black / 256GB
+                - generic [ref=f1e53]: ₦850000.00
+              - button "Natural Titanium / 512GB ₦980000.00" [ref=f1e54] [cursor=pointer]:
+                - generic [ref=f1e55]: Natural Titanium / 512GB
+                - generic [ref=f1e56]: ₦980000.00
+          - generic [ref=f1e57]:
+            - generic [ref=f1e58]: "SKU: CT-P16U-BLK"
+            - generic [ref=f1e59]: 25 units available
+          - generic [ref=f1e62]:
+            - generic [ref=f1e63]: Quantity
+            - generic [ref=f1e64]:
+              - button "-" [ref=f1e65] [cursor=pointer]
+              - generic [ref=f1e66]: "1"
+              - button "+" [ref=f1e67] [cursor=pointer]
+      - generic [ref=f1e68]:
+        - generic [ref=f1e69]:
+          - button "Description" [ref=f1e70] [cursor=pointer]
+          - button "Specifications" [ref=f1e71] [cursor=pointer]
+          - button "Customer Reviews (2)" [ref=f1e72] [cursor=pointer]
+        - generic [ref=f1e73]:
+          - paragraph
+          - paragraph [ref=f1e74]: The pinnacle of mobile performance. Powered by the next-gen 3nm octa-core AI neural processor, ultra-bright 120Hz ProMotion AMOLED display, and quad studio-grade camera system with 5x optical telephoto zoom. Engineered for power users, creators, and professionals who demand speed, unmatched battery efficiency, and seamless multitasking.
+          - paragraph
+      - generic [ref=f1e75]:
+        - generic [ref=f1e76]:
+          - generic [ref=f1e77]: ✓
+          - generic [ref=f1e78]:
+            - heading "Verified Seller" [level=4] [ref=f1e79]
+            - text: Official Store
+        - generic [ref=f1e80]:
+          - generic [ref=f1e81]: 🛡
+          - generic [ref=f1e82]:
+            - heading "Quality Checked" [level=4] [ref=f1e83]
+            - text: 100% Genuine
+        - generic [ref=f1e84]:
+          - generic [ref=f1e85]: ⚡
+          - generic [ref=f1e86]:
+            - heading "Fast Dispatch" [level=4] [ref=f1e87]
+            - text: Within 24 Hours
+        - generic [ref=f1e88]:
+          - generic [ref=f1e89]: 🔒
+          - generic [ref=f1e90]:
+            - heading "Protected Pay" [level=4] [ref=f1e91]
+            - text: Paystack Verified
+    - generic [ref=f1e93]:
+      - button "Add to Cart" [ref=f1e94] [cursor=pointer]
+      - button "Buy Now" [ref=f1e98] [cursor=pointer]
+  - button "Customer Support" [ref=f1e102] [cursor=pointer]
+  - navigation [ref=f1e105]:
+    - link "Home" [ref=f1e106] [cursor=pointer]:
+      - /url: /
+    - link "Categories" [ref=f1e110] [cursor=pointer]:
+      - /url: /catalog/
+    - link "Cart" [ref=f1e114] [cursor=pointer]:
+      - /url: /cart/
+    - link "0 Wishlist" [ref=f1e119] [cursor=pointer]:
+      - /url: /wishlist/
+      - generic [ref=f1e120]: "0"
+      - generic [ref=f1e124]: Wishlist
+    - link "Account" [ref=f1e125] [cursor=pointer]:
+      - /url: /accounts/profile/

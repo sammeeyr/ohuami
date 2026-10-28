@@ -1,0 +1,90 @@
+- generic [ref=f5e1]:
+  - banner [ref=f5e2]:
+    - generic [ref=f5e3]:
+      - link "Back" [ref=f5e4] [cursor=pointer]:
+        - /url: javascript:history.back()
+      - heading "Product" [level=1] [ref=f5e8]
+      - link [ref=f5e9] [cursor=pointer]:
+        - /url: /cart/
+  - main [ref=f5e12]:
+    - generic [ref=f5e13]:
+      - generic [ref=f5e14]:
+        - generic [ref=f5e15]:
+          - generic [ref=f5e16]:
+            - generic [ref=f5e17]: "-28% OFF"
+            - img "Cube Pro 16 Ultra 5G Smartphone" [ref=f5e18]
+          - img "Placeholder" [ref=f5e21]
+        - generic [ref=f5e22]:
+          - generic [ref=f5e23]:
+            - generic [ref=f5e24]:
+              - generic [ref=f5e25]: Cube Tech Official Store
+              - generic [ref=f5e27]:
+                - button "Save to Wishlist" [ref=f5e28] [cursor=pointer]
+                - button "Share Product" [ref=f5e31] [cursor=pointer]
+            - heading "Cube Pro 16 Ultra 5G Smartphone" [level=1] [ref=f5e34]
+            - generic [ref=f5e35]:
+              - generic [ref=f5e36]: ★★★★★
+              - generic [ref=f5e38]: "5.0"
+              - generic [ref=f5e39]: (2 verified reviews)
+              - generic [ref=f5e40]: In Stock
+          - generic [ref=f5e41]:
+            - generic [ref=f5e42]:
+              - generic [ref=f5e43]: ₦850000.00
+              - generic [ref=f5e44]: ₦1180000.00
+              - generic [ref=f5e45]: "-28%"
+            - paragraph [ref=f5e46]: You save ₦330000.00 today!
+          - generic [ref=f5e48]:
+            - generic [ref=f5e49]: Select Variant
+            - generic [ref=f5e50]:
+              - button "Titanium Black / 256GB ₦850000.00" [ref=f5e51] [cursor=pointer]:
+                - generic [ref=f5e52]: Titanium Black / 256GB
+                - generic [ref=f5e53]: ₦850000.00
+              - button "Natural Titanium / 512GB ₦980000.00" [ref=f5e54] [cursor=pointer]:
+                - generic [ref=f5e55]: Natural Titanium / 512GB
+                - generic [ref=f5e56]: ₦980000.00
+          - generic [ref=f5e57]:
+            - generic [ref=f5e58]: "SKU: CT-P16U-BLK"
+            - generic [ref=f5e59]: 25 units available
+          - generic [ref=f5e62]:
+            - generic [ref=f5e63]: Quantity
+            - generic [ref=f5e64]:
+              - button "-" [ref=f5e65] [cursor=pointer]
+              - generic [ref=f5e66]: "1"
+              - button "+" [ref=f5e67] [cursor=pointer]
+      - generic [ref=f5e68]:
+        - generic [ref=f5e69]:
+          - button "Description" [ref=f5e70] [cursor=pointer]
+          - button "Specifications" [ref=f5e71] [cursor=pointer]
+          - button "Customer Reviews (2)" [ref=f5e72] [cursor=pointer]
+        - generic [ref=f5e73]:
+          - paragraph
+          - paragraph [ref=f5e74]: The pinnacle of mobile performance. Powered by the next-gen 3nm octa-core AI neural processor, ultra-bright 120Hz ProMotion AMOLED display, and quad studio-grade camera system with 5x optical telephoto zoom. Engineered for power users, creators, and professionals who demand speed, unmatched battery efficiency, and seamless multitasking.
+          - paragraph
+      - generic [ref=f5e75]:
+        - generic [ref=f5e76]:
+          - generic [ref=f5e77]: ✓
+          - generic [ref=f5e78]:
+            - heading "Verified Seller" [level=4] [ref=f5e79]
+            - text: Official Store
+        - generic [ref=f5e80]:
+          - generic [ref=f5e81]: 🛡
+          - generic [ref=f5e82]:
+            - heading "Quality Checked" [level=4] [ref=f5e83]
+            - text: 100% Genuine
+        - generic [ref=f5e84]:
+          - generic [ref=f5e85]: ⚡
+          - generic [ref=f5e86]:
+            - heading "Fast Dispatch" [level=4] [ref=f5e87]
+            - text: Within 24 Hours
+        - generic [ref=f5e88]:
+          - generic [ref=f5e89]: 🔒
+          - generic [ref=f5e90]:
+            - heading "Protected Pay" [level=4] [ref=f5e91]
+            - text: Paystack Verified
+    - generic [ref=f5e93]:
+      - button "Add to Cart" [ref=f5e94] [cursor=pointer]
+      - button "Buy Now" [active] [ref=f5e98] [cursor=pointer]
+  - button "Customer Support" [ref=f5e102] [cursor=pointer]
+  - generic [ref=f5e105]:
+    - generic [ref=f5e106]: Network error, please try again.
+    - button "✕" [ref=f5e109] [cursor=pointer]

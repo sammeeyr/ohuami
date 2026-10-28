@@ -1,0 +1,324 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}{{ product.name }} — {{ product.store.name|default:"Sunshine Fashion" }} | OHUAMI{% endblock %}
+
+{% block bottom_nav %}{% endblock %}
+
+{% block main_nav %}
+<!-- Screen 4 Storefront Header -->
+<header class="bg-white sticky top-0 z-40 border-b border-gray-100 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
+    
+    <!-- Left: OHUAMI Logo + Store Pill -->
+    <div class="flex items-center gap-3 sm:gap-5 flex-shrink-0">
+      <a href="{% url 'core:home' %}" class="flex items-center">
+        <img src="{% static 'images/ohuami-horizontal.svg' %}" alt="OHUAMI" class="h-8 sm:h-9 w-auto">
+      </a>
+      
+      <div class="h-5 w-px bg-gray-200 hidden sm:block"></div>
+
+      <a href="{% url 'catalog:storefront' store_slug=product.store.slug|default:'sunshine-fashion' %}" class="text-xs sm:text-sm font-bold text-[#111111] hover:text-[#E53935] flex items-center gap-1.5 transition">
+        <span>{{ product.store.name|default:"Sunshine Fashion" }}</span>
+        <span class="text-gray-400 text-xs">↗</span>
+      </a>
+    </div>
+
+    <!-- Center: Links -->
+    <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-gray-700">
+      <a href="{% url 'catalog:storefront' store_slug=product.store.slug|default:'sunshine-fashion' %}" class="hover:text-[#111111] transition">Home</a>
+      <a href="{% url 'catalog:list' %}" class="hover:text-[#111111] transition flex items-center gap-1">
+        <span>Shop</span>
+        <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+      </a>
+      <a href="{% url 'catalog:storefront' store_slug=product.store.slug|default:'sunshine-fashion' %}#categories-section" class="hover:text-[#111111] transition">Categories</a>
+      <a href="{% url 'catalog:storefront' store_slug=product.store.slug|default:'sunshine-fashion' %}#about-store" class="hover:text-[#111111] transition">About</a>
+    </nav>
+
+    <!-- Right: Utility Icons -->
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href="{% url 'catalog:search' %}" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-700 transition" title="Search">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+      </a>
+
+      {% if request.user.is_authenticated %}
+      <a href="{% url 'accounts:profile' %}" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-700 transition" title="Profile">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+      </a>
+      {% else %}
+      <a href="{% url 'accounts:login' %}" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-700 transition" title="Log In">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+        </svg>
+      </a>
+      {% endif %}
+
+      <a href="{% url 'cart:detail' %}" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-800 relative transition" title="Cart">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <span class="cart-badge-count absolute -top-0.5 -right-0.5 bg-[#E53935] text-white text-[10px] font-extrabold rounded-full h-4 w-4 flex items-center justify-center">
+          {{ cart_count|default:"3" }}
+        </span>
+      </a>
+    </div>
+
+  </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8">
+
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-xs text-gray-400 font-medium">
+    <a href="{% url 'catalog:storefront' store_slug=product.store.slug|default:'sunshine-fashion' %}" class="hover:text-gray-800">Home</a>
+    <span>/</span>
+    <a href="{% url 'catalog:list' %}" class="hover:text-gray-800">Shop</a>
+    <span>/</span>
+    <span class="text-gray-800 font-bold">{{ product.category.name|default:"Women" }}</span>
+  </nav>
+
+  <!-- Main 2-Column Product Detail Layout (Screen 4 Master Visual Match) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+    
+    <!-- Left Column: Vertical Thumbnails + Large Main Image (lg:col-span-6) -->
+    <div class="lg:col-span-6 flex gap-4">
+      
+      <!-- 4 Vertical Thumbnails on Left Side -->
+      <div class="flex flex-col gap-3 flex-shrink-0">
+        {% for img in product.images.all %}
+          <button type="button" 
+                  onclick="selectImage('{{ img.image.url }}', this)" 
+                  class="gallery-thumb w-14 sm:w-16 h-18 sm:h-20 rounded-xl overflow-hidden border-2 {% if forloop.first %}border-[#111111]{% else %}border-gray-200{% endif %} hover:border-gray-400 transition bg-white p-0.5">
+            <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover object-top">
+          </button>
+        {% empty %}
+          <button class="gallery-thumb w-16 h-20 rounded-xl overflow-hidden border-2 border-[#111111] bg-white p-0.5">
+            <img src="{% static 'images/demo/dress-large.png' %}" class="w-full h-full object-cover">
+          </button>
+        {% endfor %}
+      </div>
+
+      <!-- Main Large Product Image with -20% Badge at Top-Right -->
+      <div class="relative flex-1 aspect-[3/4] rounded-2xl overflow-hidden bg-[#F8F9FA] border border-gray-200 shadow-sm flex items-center justify-center">
+        <!-- Red Sale Badge Top Right -->
+        {% if product.badge_text %}
+        <div class="absolute top-4 right-4 z-10 bg-[#E53935] text-white text-xs font-black px-2.5 py-1 rounded-md shadow-md">
+          {{ product.badge_text }}
+        </div>
+        {% elif product.discount_percentage > 0 %}
+        <div class="absolute top-4 right-4 z-10 bg-[#E53935] text-white text-xs font-black px-2.5 py-1 rounded-md shadow-md">
+          -{{ product.discount_percentage }}%
+        </div>
+        {% endif %}
+
+        <img id="main-product-image" 
+             src="{% if product.primary_image %}{{ product.primary_image.image.url }}{% else %}{% static 'images/demo/dress-large.png' %}{% endif %}" 
+             alt="{{ product.name }}" 
+             class="w-full h-full object-cover object-top transition duration-300">
+      </div>
+
+    </div>
+
+    <!-- Right Column: Product Configuration & Details (lg:col-span-6) -->
+    <div class="lg:col-span-6 space-y-6">
+      
+      <!-- Title & Wishlist Button -->
+      <div>
+        <div class="flex items-start justify-between gap-4">
+          <h1 class="text-2xl sm:text-3xl font-black text-[#111111] tracking-tight leading-snug">
+            {{ product.name }}
+          </h1>
+          <button onclick="toggleWishlist({{ product.id }}, this)" class="w-10 h-10 rounded-full border border-gray-200 hover:border-gray-400 flex items-center justify-center text-gray-500 hover:text-[#E53935] transition flex-shrink-0" title="Wishlist">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 5-Star Rating Row -->
+        <div class="flex items-center gap-2 mt-2">
+          <div class="text-[#FFC928] text-sm tracking-tighter">
+            ★★★★★
+          </div>
+          <span class="text-xs font-semibold text-gray-500">(24 reviews)</span>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="flex items-baseline gap-3">
+        <span id="display-price" class="text-2xl sm:text-3xl font-black text-[#111111] tracking-tight">
+          ₦{{ product.base_price|floatformat:0|intcomma }}
+        </span>
+        {% if product.comparison_price %}
+        <span id="display-comparison-price" class="text-base sm:text-lg font-semibold text-gray-400 line-through">
+          ₦{{ product.comparison_price|floatformat:0|intcomma }}
+        </span>
+        {% endif %}
+      </div>
+
+      <!-- Product Description -->
+      <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">
+        {{ product.description }}
+      </p>
+
+      <!-- Color Selector Swatches -->
+      <div class="space-y-2 pt-2">
+        <label class="block text-xs font-bold text-gray-700">Color</label>
+        <div class="flex items-center gap-3" id="color-swatches-container">
+          <!-- Burgundy (#8B1E3F) -->
+          <button type="button" onclick="selectColor(this, 'Burgundy')" 
+                  class="color-swatch active w-8 h-8 rounded-full border-2 border-white ring-2 ring-[#111111] shadow-sm transition" 
+                  style="background-color: #8B1E3F;" title="Burgundy"></button>
+          
+          <!-- Black (#111111) -->
+          <button type="button" onclick="selectColor(this, 'Black')" 
+                  class="color-swatch w-8 h-8 rounded-full border-2 border-white ring-1 ring-gray-300 hover:ring-gray-600 shadow-sm transition" 
+                  style="background-color: #111111;" title="Black"></button>
+
+          <!-- Cream (#EFE8DC) -->
+          <button type="button" onclick="selectColor(this, 'Cream')" 
+                  class="color-swatch w-8 h-8 rounded-full border-2 border-white ring-1 ring-gray-300 hover:ring-gray-600 shadow-sm transition" 
+                  style="background-color: #EFE8DC;" title="Cream"></button>
+        </div>
+      </div>
+
+      <!-- Size Selector Pills -->
+      <div class="space-y-2 pt-2">
+        <label class="block text-xs font-bold text-gray-700">Size</label>
+        <div class="flex items-center gap-2.5" id="size-pills-container">
+          <button type="button" onclick="selectSize(this, 'S')" class="size-pill w-12 h-10 rounded-xl border border-gray-300 text-xs font-bold text-gray-700 hover:border-gray-800 transition">S</button>
+          <button type="button" onclick="selectSize(this, 'M')" class="size-pill active w-12 h-10 rounded-xl bg-[#111111] text-white text-xs font-bold transition">M</button>
+          <button type="button" onclick="selectSize(this, 'L')" class="size-pill w-12 h-10 rounded-xl border border-gray-300 text-xs font-bold text-gray-700 hover:border-gray-800 transition">L</button>
+          <button type="button" onclick="selectSize(this, 'XL')" class="size-pill w-12 h-10 rounded-xl border border-gray-300 text-xs font-bold text-gray-700 hover:border-gray-800 transition">XL</button>
+        </div>
+      </div>
+
+      <!-- Quantity Stepper -->
+      <div class="flex items-center gap-4 pt-2">
+        <div class="flex items-center border border-gray-300 rounded-xl overflow-hidden bg-white">
+          <button type="button" onclick="adjustQty(-1)" class="w-10 h-10 flex items-center justify-center font-bold text-gray-600 hover:bg-gray-100 transition">-</button>
+          <span id="purchase-qty" class="w-10 text-center font-bold text-sm text-[#111111]">1</span>
+          <button type="button" onclick="adjustQty(1)" class="w-10 h-10 flex items-center justify-center font-bold text-gray-600 hover:bg-gray-100 transition">+</button>
+        </div>
+        <span class="text-xs text-gray-400">Available: <span class="font-bold text-gray-700">{{ product.available_stock }}</span></span>
+      </div>
+
+      <!-- Action Buttons Row (Screen 4 Master Visual Match) -->
+      <div class="grid grid-cols-2 gap-4 pt-4">
+        <!-- Add to Cart: White with dark border -->
+        <button type="button" onclick="handleAddToCart(false)" 
+                class="w-full py-3.5 px-6 rounded-full border-2 border-[#111111] text-[#111111] font-bold text-sm hover:bg-gray-50 transition text-center">
+          Add to Cart
+        </button>
+
+        <!-- Buy Now: Yellow #FFC928 CTA -->
+        <button type="button" onclick="handleAddToCart(true)" 
+                class="w-full py-3.5 px-6 rounded-full bg-[#FFC928] hover:bg-[#F5B800] text-[#111111] font-black text-sm shadow-md transition text-center">
+          Buy Now
+        </button>
+      </div>
+
+      <!-- Trust Reassurance Row (Screen 4 Master Visual Match) -->
+      <div class="grid grid-cols-3 gap-2 pt-6 border-t border-gray-100 text-center text-[11px] text-gray-600 font-semibold">
+        <div class="flex items-center justify-center gap-1.5">
+          <span>🚚</span>
+          <span>Fast Delivery</span>
+        </div>
+        <div class="flex items-center justify-center gap-1.5">
+          <span>🔒</span>
+          <span>Secure Payments</span>
+        </div>
+        <div class="flex items-center justify-center gap-1.5">
+          <span>🔄</span>
+          <span>Easy Returns</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+let productId = {{ product.id }};
+let variantId = {% if product.variants.exists %}{{ product.variants.first.id }}{% else %}null{% endif %};
+let currentQty = 1;
+
+function adjustQty(delta) {
+  const newQty = currentQty + delta;
+  if (newQty >= 1 && newQty <= 20) {
+    currentQty = newQty;
+    document.getElementById('purchase-qty').innerText = currentQty;
+  }
+}
+
+function selectImage(url, btn) {
+  document.getElementById('main-product-image').src = url;
+  document.querySelectorAll('.gallery-thumb').forEach(el => {
+    el.classList.remove('border-[#111111]');
+    el.classList.add('border-gray-200');
+  });
+  btn.classList.remove('border-gray-200');
+  btn.classList.add('border-[#111111]');
+}
+
+function selectColor(btn, colorName) {
+  document.querySelectorAll('.color-swatch').forEach(el => {
+    el.classList.remove('active', 'ring-2', 'ring-[#111111]');
+    el.classList.add('ring-1', 'ring-gray-300');
+  });
+  btn.classList.add('active', 'ring-2', 'ring-[#111111]');
+  btn.classList.remove('ring-gray-300');
+  if (window.showToast) showToast('Selected color: ' + colorName);
+}
+
+function selectSize(btn, sizeName) {
+  document.querySelectorAll('.size-pill').forEach(el => {
+    el.classList.remove('active', 'bg-[#111111]', 'text-white');
+    el.classList.add('border', 'border-gray-300', 'text-gray-700');
+  });
+  btn.classList.add('active', 'bg-[#111111]', 'text-white');
+  btn.classList.remove('border', 'border-gray-300', 'text-gray-700');
+  if (window.showToast) showToast('Selected size: ' + sizeName);
+}
+
+function handleAddToCart(buyNow) {
+  fetch('/cart/api/add/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCsrfToken()
+    },
+    body: JSON.stringify({
+      product_id: productId,
+      variant_id: variantId,
+      quantity: currentQty
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      if (buyNow) {
+        window.location.href = "{% url 'checkout:index' %}";
+      } else {
+        if (window.showToast) showToast('Added to cart!');
+        document.querySelectorAll('.cart-badge-count').forEach(el => {
+          el.innerText = data.cart_count;
+          el.classList.remove('hidden');
+        });
+      }
+    } else {
+      if (window.showToast) showToast(data.error || 'Could not add to cart', 'error');
+    }
+  })
+  .catch(err => console.error(err));
+}
+</script>
+{% endblock %}

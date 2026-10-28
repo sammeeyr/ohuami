@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Wishlist — {{ brand_name }}{% endblock %}
+
+{% block nav_wishlist_active %}active{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-4 space-y-4">
+  <div class="border-b border-gray-200 pb-3">
+    <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Saved Wishlist Items</h1>
+    <p class="text-xs text-gray-500">Products you've saved for later.</p>
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+    {% for item in wishlist_items %}
+      <div class="w-full">
+        {% include 'components/product_card.html' with product=item.product %}
+      </div>
+    {% empty %}
+      <div class="col-span-full bg-white rounded-3xl p-10 text-center border border-gray-200 shadow-sm space-y-3">
+        <div class="w-16 h-16 rounded-full bg-red-50 text-[#E53935] flex items-center justify-center mx-auto text-2xl font-bold">
+          ♥
+        </div>
+        <h3 class="text-base font-extrabold text-[#111111]">Your wishlist is currently empty</h3>
+        <p class="text-xs text-gray-500">Tap the heart icon on any product to save it here for later.</p>
+        <div>
+          <a href="{% url 'catalog:list' %}" class="btn-primary text-xs font-bold px-6 py-2.5 rounded-full inline-flex">
+            Discover Products
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

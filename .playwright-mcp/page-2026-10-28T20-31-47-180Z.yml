@@ -1,0 +1,211 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - generic [ref=f8e3]:
+      - generic [ref=f8e4]:
+        - link [ref=f8e5] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f8e6]
+        - generic [ref=f8e7]:
+          - generic [ref=f8e8]: Sunshine Fashion
+          - button "+ Follow" [ref=f8e9] [cursor=pointer]:
+            - generic [ref=f8e10]: +
+            - text: Follow
+      - generic [ref=f8e11]:
+        - link "Search" [ref=f8e12] [cursor=pointer]:
+          - /url: /catalog/search/
+        - link "Log In" [ref=f8e15] [cursor=pointer]:
+          - /url: /accounts/login/
+        - link "3" [ref=f8e18] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f8e22]:
+    - generic [ref=f8e23]:
+      - generic [ref=f8e24]:
+        - img "Style That Speaks You" [ref=f8e26]
+        - generic [ref=f8e28]:
+          - generic [ref=f8e29]: Trendy. Classy. Affordable.
+          - heading "Style that speaks you." [level=1] [ref=f8e30]: Style thatspeaks you.
+          - paragraph [ref=f8e31]: Discover the latest fashion, accessories and lifestyle essentials — all in one place.
+          - link "Shop Now" [ref=f8e33] [cursor=pointer]:
+            - /url: "#featured-products"
+      - generic [ref=f8e35]:
+        - link "Women Women" [ref=f8e36] [cursor=pointer]:
+          - /url: /catalog/category/women/
+          - img "Women" [ref=f8e38]
+          - generic [ref=f8e39]: Women
+        - link "Men Men" [ref=f8e40] [cursor=pointer]:
+          - /url: /catalog/category/men/
+          - img "Men" [ref=f8e42]
+          - generic [ref=f8e43]: Men
+        - link "Bags Bags" [ref=f8e44] [cursor=pointer]:
+          - /url: /catalog/category/bags/
+          - img "Bags" [ref=f8e46]
+          - generic [ref=f8e47]: Bags
+        - link "Shoes Shoes" [ref=f8e48] [cursor=pointer]:
+          - /url: /catalog/category/shoes/
+          - img "Shoes" [ref=f8e50]
+          - generic [ref=f8e51]: Shoes
+        - link "Accessories Accessories" [ref=f8e52] [cursor=pointer]:
+          - /url: /catalog/category/accessories/
+          - img "Accessories" [ref=f8e54]
+          - generic [ref=f8e55]: Accessories
+        - link "Beauty Beauty" [ref=f8e56] [cursor=pointer]:
+          - /url: /catalog/category/beauty/
+          - img "Beauty" [ref=f8e58]
+          - generic [ref=f8e59]: Beauty
+      - generic [ref=f8e60]:
+        - generic [ref=f8e61]:
+          - heading "Featured Products" [level=2] [ref=f8e62]
+          - link "View all →" [ref=f8e63] [cursor=pointer]:
+            - /url: /catalog/
+            - generic [ref=f8e64]: View all
+            - generic [ref=f8e65]: →
+        - generic [ref=f8e66]:
+          - generic [ref=f8e67]:
+            - generic [ref=f8e68]:
+              - link [ref=f8e69] [cursor=pointer]:
+                - /url: /catalog/product/classy-handbag/
+                - img "Classy Handbag" [ref=f8e70]
+              - generic [ref=f8e71]: Hot
+              - button [ref=f8e72] [cursor=pointer]
+            - generic [ref=f8e75]:
+              - generic [ref=f8e76]:
+                - generic [ref=f8e77]: Bags
+                - link "Classy Handbag" [ref=f8e78] [cursor=pointer]:
+                  - /url: /catalog/product/classy-handbag/
+                - generic [ref=f8e79]:
+                  - generic [ref=f8e80]: ★★★★★
+                  - generic [ref=f8e81]: (24)
+              - generic [ref=f8e82]:
+                - generic [ref=f8e83]:
+                  - generic [ref=f8e84]: ₦18500
+                  - generic [ref=f8e85]: ₦24000
+                - button "Add to Cart" [ref=f8e86] [cursor=pointer]
+          - generic [ref=f8e89]:
+            - generic [ref=f8e90]:
+              - link [ref=f8e91] [cursor=pointer]:
+                - /url: /catalog/product/elegant-midi-dress/
+                - img "Elegant Midi Dress" [ref=f8e92]
+              - generic [ref=f8e93]: "-20%"
+              - button [ref=f8e94] [cursor=pointer]
+            - generic [ref=f8e97]:
+              - generic [ref=f8e98]:
+                - generic [ref=f8e99]: Women
+                - link "Elegant Midi Dress" [ref=f8e100] [cursor=pointer]:
+                  - /url: /catalog/product/elegant-midi-dress/
+                - generic [ref=f8e101]:
+                  - generic [ref=f8e102]: ★★★★★
+                  - generic [ref=f8e103]: (24)
+              - generic [ref=f8e104]:
+                - generic [ref=f8e105]:
+                  - generic [ref=f8e106]: ₦28000
+                  - generic [ref=f8e107]: ₦35000
+                - button "Add to Cart" [ref=f8e108] [cursor=pointer]
+          - generic [ref=f8e111]:
+            - generic [ref=f8e112]:
+              - link [ref=f8e113] [cursor=pointer]:
+                - /url: /catalog/product/glow-radiance-serum/
+                - img "Glow Radiance Vitamin C Serum" [ref=f8e114]
+              - button [ref=f8e115] [cursor=pointer]
+            - generic [ref=f8e118]:
+              - generic [ref=f8e119]:
+                - generic [ref=f8e120]: Beauty
+                - link "Glow Radiance Vitamin C Serum" [ref=f8e121] [cursor=pointer]:
+                  - /url: /catalog/product/glow-radiance-serum/
+                - generic [ref=f8e122]:
+                  - generic [ref=f8e123]: ★★★★★
+                  - generic [ref=f8e124]: (24)
+              - generic [ref=f8e125]:
+                - generic [ref=f8e126]:
+                  - generic [ref=f8e127]: ₦12500
+                  - generic [ref=f8e128]: ₦15000
+                - button "Add to Cart" [ref=f8e129] [cursor=pointer]
+          - generic [ref=f8e132]:
+            - generic [ref=f8e133]:
+              - link [ref=f8e134] [cursor=pointer]:
+                - /url: /catalog/product/retro-aviator-sunglasses/
+                - img "Retro Aviator Sunglasses" [ref=f8e135]
+              - button [ref=f8e136] [cursor=pointer]
+            - generic [ref=f8e139]:
+              - generic [ref=f8e140]:
+                - generic [ref=f8e141]: Accessories
+                - link "Retro Aviator Sunglasses" [ref=f8e142] [cursor=pointer]:
+                  - /url: /catalog/product/retro-aviator-sunglasses/
+                - generic [ref=f8e143]:
+                  - generic [ref=f8e144]: ★★★★★
+                  - generic [ref=f8e145]: (24)
+              - generic [ref=f8e146]:
+                - generic [ref=f8e147]:
+                  - generic [ref=f8e148]: ₦9500
+                  - generic [ref=f8e149]: ₦12000
+                - button "Add to Cart" [ref=f8e150] [cursor=pointer]
+          - generic [ref=f8e153]:
+            - generic [ref=f8e154]:
+              - link [ref=f8e155] [cursor=pointer]:
+                - /url: /catalog/product/casual-linen-shirt/
+                - img "Casual Linen Shirt" [ref=f8e156]
+              - button [ref=f8e157] [cursor=pointer]
+            - generic [ref=f8e160]:
+              - generic [ref=f8e161]:
+                - generic [ref=f8e162]: Men
+                - link "Casual Linen Shirt" [ref=f8e163] [cursor=pointer]:
+                  - /url: /catalog/product/casual-linen-shirt/
+                - generic [ref=f8e164]:
+                  - generic [ref=f8e165]: ★★★★★
+                  - generic [ref=f8e166]: (24)
+              - generic [ref=f8e167]:
+                - generic [ref=f8e168]:
+                  - generic [ref=f8e169]: ₦16000
+                  - generic [ref=f8e170]: ₦20000
+                - button "Add to Cart" [ref=f8e171] [cursor=pointer]
+          - generic [ref=f8e174]:
+            - generic [ref=f8e175]:
+              - link [ref=f8e176] [cursor=pointer]:
+                - /url: /catalog/product/white-sneakers/
+                - img "White Sneakers" [ref=f8e177]
+              - generic [ref=f8e178]: Popular
+              - button [ref=f8e179] [cursor=pointer]
+            - generic [ref=f8e182]:
+              - generic [ref=f8e183]:
+                - generic [ref=f8e184]: Shoes
+                - link "White Sneakers" [ref=f8e185] [cursor=pointer]:
+                  - /url: /catalog/product/white-sneakers/
+                - generic [ref=f8e186]:
+                  - generic [ref=f8e187]: ★★★★★
+                  - generic [ref=f8e188]: (24)
+              - generic [ref=f8e189]:
+                - generic [ref=f8e190]:
+                  - generic [ref=f8e191]: ₦22000
+                  - generic [ref=f8e192]: ₦28000
+                - button "Add to Cart" [ref=f8e193] [cursor=pointer]
+      - generic [ref=f8e197]:
+        - generic [ref=f8e198]:
+          - generic [ref=f8e199]: 🚚
+          - generic [ref=f8e200]:
+            - heading "Nationwide Fast Delivery" [level=4] [ref=f8e201]
+            - paragraph [ref=f8e202]: Prompt, insured dispatch to your doorstep anywhere in Nigeria.
+        - generic [ref=f8e203]:
+          - generic [ref=f8e204]: 🔒
+          - generic [ref=f8e205]:
+            - heading "Verified Secure Payments" [level=4] [ref=f8e206]
+            - paragraph [ref=f8e207]: Pay via Paystack using Card, Bank Transfer, USSD or Cash on Delivery.
+        - generic [ref=f8e208]:
+          - generic [ref=f8e209]: ✨
+          - generic [ref=f8e210]:
+            - heading "Authentic Quality Guaranteed" [level=4] [ref=f8e211]
+            - paragraph [ref=f8e212]: Every garment and accessory is vetted for premium stitching and durability.
+  - button "Customer Support" [ref=f8e213] [cursor=pointer]
+  - navigation [ref=f8e216]:
+    - link "Home" [ref=f8e217] [cursor=pointer]:
+      - /url: /
+    - link "Categories" [ref=f8e221] [cursor=pointer]:
+      - /url: /catalog/
+    - link "3 Cart" [ref=f8e225] [cursor=pointer]:
+      - /url: /cart/
+      - generic [ref=f8e226]: "3"
+      - generic [ref=f8e230]: Cart
+    - link "0 Wishlist" [ref=f8e231] [cursor=pointer]:
+      - /url: /wishlist/
+      - generic [ref=f8e232]: "0"
+      - generic [ref=f8e236]: Wishlist
+    - link "Account" [ref=f8e237] [cursor=pointer]:
+      - /url: /accounts/profile/
