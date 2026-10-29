@@ -5,6 +5,7 @@ from apps.accounts.models import User, Address
 from apps.catalog.models import Store, MerchantTier, Category, Brand, Product, ProductImage, ProductAttribute, ProductAttributeValue, ProductVariant
 from apps.orders.models import Order, OrderItem
 from apps.promotions.models import Campaign, Coupon
+from apps.dashboard.models import StoreAgent, DispatchCarrier, DispatchShipment, StoreCustomer
 from apps.reviews.models import Review
 from apps.core.models import StoreSetting, PlatformService
 
@@ -791,5 +792,101 @@ class Command(BaseCommand):
                 "is_active": True,
             }
         )
+
+        # 11. Agents & Staff for Sunshine Fashion
+        StoreAgent.objects.get_or_create(
+            store=store_sunshine,
+            email="amaka.support@sunshinefashion.ng",
+            defaults={
+                "name": "Amaka Obi",
+                "phone": "+234 802 345 6789",
+                "role": StoreAgent.Role.MANAGER,
+                "can_manage_products": True,
+                "can_manage_orders": True,
+                "can_manage_dispatch": True,
+                "can_manage_customers": True,
+                "is_active": True,
+            }
+        )
+        StoreAgent.objects.get_or_create(
+            store=store_sunshine,
+            email="emeka.support@sunshinefashion.ng",
+            defaults={
+                "name": "Emeka Nnamdi",
+                "phone": "+234 803 456 7890",
+                "role": StoreAgent.Role.SUPPORT,
+                "can_manage_products": False,
+                "can_manage_orders": True,
+                "can_manage_dispatch": True,
+                "can_manage_customers": True,
+                "is_active": True,
+            }
+        )
+
+        # 12. Dispatch Carriers & Riders for Sunshine Fashion
+        carrier_gig, _ = DispatchCarrier.objects.get_or_create(
+            store=store_sunshine,
+            name="GIG Logistics Express",
+            defaults={
+                "carrier_type": DispatchCarrier.CarrierType.THIRD_PARTY,
+                "contact_person": "Fleet Operations",
+                "phone": "+234 813 456 7890",
+                "email": "dispatch@giglogistics.ng",
+                "vehicle_type": DispatchCarrier.VehicleType.VAN,
+                "vehicle_number": "LAG-782-AA",
+                "service_areas": "Lagos, Abuja, Port Harcourt, Ibadan",
+                "is_active": True,
+            }
+        )
+        carrier_ibrahim, _ = DispatchCarrier.objects.get_or_create(
+            store=store_sunshine,
+            name="Ibrahim Sule (In-House Rider)",
+            defaults={
+                "carrier_type": DispatchCarrier.CarrierType.IN_HOUSE,
+                "contact_person": "Ibrahim Sule",
+                "phone": "+234 809 123 4567",
+                "vehicle_type": DispatchCarrier.VehicleType.MOTORCYCLE,
+                "vehicle_number": "ABJ-432-XY",
+                "service_areas": "Abuja Central, Wuse, Garki, Maitama",
+                "is_active": True,
+            }
+        )
+
+        # 13. Customer CRM Profiles for Sunshine Fashion
+        StoreCustomer.objects.get_or_create(
+            store=store_sunshine,
+            email="customer@example.com",
+            defaults={
+                "name": "Chinedu Okafor",
+                "phone": "+234 801 234 5678",
+                "customer_tag": StoreCustomer.CustomerTag.VIP,
+                "notes": "VIP client. Prefers express morning delivery and elegant midi dresses.",
+            }
+        )
+        StoreCustomer.objects.get_or_create(
+            store=store_sunshine,
+            email="fatima@example.com",
+            defaults={
+                "name": "Fatima Yusuf",
+                "phone": "+234 805 987 6543",
+                "customer_tag": StoreCustomer.CustomerTag.REGULAR,
+                "notes": "Frequent buyer of handbags and footwear accessories.",
+            }
+        )
+
+        # 14. Dispatch Shipments for Sunshine Fashion Orders
+        first_sunshine_order = Order.objects.filter(store=store_sunshine).first()
+        if first_sunshine_order and not hasattr(first_sunshine_order, 'shipment'):
+            DispatchShipment.objects.create(
+                store=store_sunshine,
+                order=first_sunshine_order,
+                carrier=carrier_gig,
+                status=DispatchShipment.Status.IN_TRANSIT,
+                recipient_name=first_sunshine_order.customer_name,
+                recipient_phone=first_sunshine_order.customer_phone,
+                delivery_address=first_sunshine_order.formatted_shipping_address,
+                dispatch_notes="Handle with care. Silk and leather garments.",
+                dispatched_at=timezone.now(),
+            )
 
         self.stdout.write(self.style.SUCCESS("OHUAMI multi-tenant catalog and Sunshine Fashion store successfully seeded!"))

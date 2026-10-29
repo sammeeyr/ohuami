@@ -1,0 +1,223 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=e9]:
+    - generic [ref=e10]:
+      - link [ref=e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=e12]
+      - generic [ref=e14]:
+        - textbox "Search laptops, phones, electronics, gadgets..." [ref=e15]
+        - button "Search" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - link "0" [ref=e21] [cursor=pointer]:
+          - /url: /wishlist/
+        - link "Cart" [ref=e25] [cursor=pointer]:
+          - /url: /cart/
+        - link "Sign In" [ref=e28] [cursor=pointer]:
+          - /url: /accounts/login/
+  - main [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - link "Dashboard" [ref=e32] [cursor=pointer]:
+          - /url: /dashboard/
+        - link "Products" [ref=e33] [cursor=pointer]:
+          - /url: /dashboard/products/
+        - link "Orders" [ref=e34] [cursor=pointer]:
+          - /url: /dashboard/orders/
+        - link "Logistics & Dispatch" [ref=e35] [cursor=pointer]:
+          - /url: /dashboard/logistics/
+        - link "Customers" [ref=e36] [cursor=pointer]:
+          - /url: /dashboard/customers/
+        - link "Agents & Staff" [ref=e37] [cursor=pointer]:
+          - /url: /dashboard/agents/
+        - link "Discounts" [ref=e38] [cursor=pointer]:
+          - /url: /dashboard/discounts/
+        - link "API & CORS" [ref=e39] [cursor=pointer]:
+          - /url: /dashboard/api-cors/
+        - link "Settings" [ref=e40] [cursor=pointer]:
+          - /url: /dashboard/settings/
+      - generic [ref=e41]:
+        - generic [ref=e42]:
+          - heading "Logistics & Dispatch Control" [level=1] [ref=e43]
+          - paragraph [ref=e44]: Manage last-mile deliveries, tracking numbers, partner couriers, and in-house delivery riders for Sunshine Fashion.
+        - generic [ref=e45]:
+          - link "+ Register Courier / Rider" [ref=e46] [cursor=pointer]:
+            - /url: /dashboard/logistics/carriers/new/
+            - generic [ref=e47]: +
+            - text: Register Courier / Rider
+          - link "+ Dispatch an Order" [ref=e48] [cursor=pointer]:
+            - /url: /dashboard/logistics/dispatch/new/
+            - generic [ref=e49]: +
+            - text: Dispatch an Order
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: Active Shipments
+          - generic [ref=e53]: "1"
+          - generic [ref=e54]: Pending or in route
+        - generic [ref=e55]:
+          - generic [ref=e56]: In Transit
+          - generic [ref=e57]: "1"
+          - generic [ref=e58]: Currently with couriers
+        - generic [ref=e59]:
+          - generic [ref=e60]: Delivered Shipments
+          - generic [ref=e61]: "0"
+          - generic [ref=e62]: Confirmed safe deliveries
+        - generic [ref=e63]:
+          - generic [ref=e64]: Active Carriers / Riders
+          - generic [ref=e65]: "2"
+          - generic [ref=e66]: Fleet & external partners
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - heading "Active Deliveries & Tracking" [level=3] [ref=e69]
+          - generic [ref=e70]: 1 total shipment
+        - table [ref=e72]:
+          - rowgroup [ref=e73]:
+            - row [ref=e74]:
+              - columnheader "Tracking Number" [ref=e75]
+              - columnheader "Order" [ref=e76]
+              - columnheader "Carrier / Rider" [ref=e77]
+              - columnheader "Recipient & Address" [ref=e78]
+              - columnheader "Status" [ref=e79]
+              - columnheader "Update Milestone" [ref=e80]
+          - rowgroup [ref=e81]:
+            - row [ref=e82]:
+              - cell "OHU-TRK-20261028-A7A47F" [ref=e83]
+              - cell [ref=e84]:
+                - link "#OHU1247" [ref=e85] [cursor=pointer]:
+                  - /url: /dashboard/orders/6/
+              - cell "GIG Logistics Express Delivery Van • +234 813 456 7890" [ref=e86]:
+                - generic [ref=e87]: GIG Logistics Express
+                - text: Delivery Van • +234 813 456 7890
+              - cell "Chinedu Okafor 128, Ganiyu Street, GRA, Abuja, FCT, Nigeria" [ref=e88]:
+                - generic [ref=e89]: Chinedu Okafor
+                - generic [ref=e90]: 128, Ganiyu Street, GRA, Abuja, FCT, Nigeria
+              - cell "In Transit" [ref=e91]
+              - cell [ref=e92]:
+                - generic [ref=e93]:
+                  - combobox [ref=e94]:
+                    - option "Pending Pickup"
+                    - option "Picked Up"
+                    - option "In Transit" [selected]
+                    - option "Out for Delivery"
+                    - option "Delivered"
+                  - button "Set" [ref=e95] [cursor=pointer]
+      - generic [ref=e96]:
+        - generic [ref=e97]:
+          - heading "Registered Couriers & In-House Riders" [level=3] [ref=e98]
+          - link "+ Register New Carrier" [ref=e99] [cursor=pointer]:
+            - /url: /dashboard/logistics/carriers/new/
+        - table [ref=e101]:
+          - rowgroup [ref=e102]:
+            - row [ref=e103]:
+              - columnheader "Courier / Rider Name" [ref=e104]
+              - columnheader "Type" [ref=e105]
+              - columnheader "Vehicle" [ref=e106]
+              - columnheader "Phone" [ref=e107]
+              - columnheader "Coverage Areas" [ref=e108]
+              - columnheader "Status" [ref=e109]
+              - columnheader "Actions" [ref=e110]
+          - rowgroup [ref=e111]:
+            - row [ref=e112]:
+              - 'cell "Ibrahim Sule (In-House Rider) Lead: Ibrahim Sule" [ref=e113]':
+                - text: Ibrahim Sule (In-House Rider)
+                - generic [ref=e114]: "Lead: Ibrahim Sule"
+              - cell "In-House Rider" [ref=e115]
+              - cell "Motorcycle / Bike ABJ-432-XY" [ref=e116]:
+                - text: Motorcycle / Bike
+                - generic [ref=e117]: ABJ-432-XY
+              - cell "+234 809 123 4567" [ref=e118]
+              - cell "Abuja Central, Wuse, Garki, Maitama" [ref=e119]
+              - cell "Active" [ref=e120]
+              - cell [ref=e121]:
+                - link "Edit" [ref=e122] [cursor=pointer]:
+                  - /url: /dashboard/logistics/carriers/2/edit/
+                - text: "|"
+                - button "Delete" [ref=e124] [cursor=pointer]
+            - row [ref=e125]:
+              - 'cell "GIG Logistics Express Lead: Fleet Operations" [ref=e126]':
+                - text: GIG Logistics Express
+                - generic [ref=e127]: "Lead: Fleet Operations"
+              - cell "Third-Party Courier (e.g. GIG, DHL, Fez)" [ref=e128]
+              - cell "Delivery Van LAG-782-AA" [ref=e129]:
+                - text: Delivery Van
+                - generic [ref=e130]: LAG-782-AA
+              - cell "+234 813 456 7890" [ref=e131]
+              - cell "Lagos, Abuja, Port Harcourt, Ibadan" [ref=e132]
+              - cell "Active" [ref=e133]
+              - cell [ref=e134]:
+                - link "Edit" [ref=e135] [cursor=pointer]:
+                  - /url: /dashboard/logistics/carriers/1/edit/
+                - text: "|"
+                - button "Delete" [ref=e137] [cursor=pointer]
+  - contentinfo [ref=e138]:
+    - generic [ref=e139]:
+      - generic [ref=e140]:
+        - link [ref=e141] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=e142]
+        - paragraph [ref=e143]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=e144]:
+          - text: "Parent Company:"
+          - strong [ref=e145]: Cube Tech Enterprises
+      - generic [ref=e146]:
+        - heading "Shop & Discover" [level=4] [ref=e147]
+        - list [ref=e148]:
+          - listitem [ref=e149]:
+            - link "All Products & Gadgets" [ref=e150] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=e151]:
+            - link "⚡ Flash Sale Deals" [ref=e152] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=e153]:
+            - link "🎟 Active Promo Coupons" [ref=e154] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=e155]:
+            - link "Sunshine Fashion Flagship" [ref=e156] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=e157]:
+        - heading "Customer Care" [level=4] [ref=e158]
+        - list [ref=e159]:
+          - listitem [ref=e160]:
+            - link "Contact Us & Support Tickets" [ref=e161] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=e162]:
+            - link "Order Tracking & Receipts" [ref=e163] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=e164]:
+            - link "My Account & Addresses" [ref=e165] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=e166]:
+            - 'link "Tel: +234 800 2823 8324" [ref=e167] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=e168]:
+        - heading "Sell on OHUAMI" [level=4] [ref=e169]
+        - list [ref=e170]:
+          - listitem [ref=e171]:
+            - link "Merchant Dashboard" [ref=e172] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=e173]:
+            - link "Product Management" [ref=e174] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=e175]:
+            - link "Order Fulfillment" [ref=e176] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=e177]:
+            - link "Platform Control Center" [ref=e178] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=e179]:
+      - generic [ref=e180]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=e181]:
+        - generic [ref=e182]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=e183]: •
+        - generic [ref=e184]: Paystack Verified
+        - generic [ref=e185]: •
+        - generic [ref=e186]: Nationwide Express Logistics
+  - button "Customer Support" [ref=e187] [cursor=pointer]

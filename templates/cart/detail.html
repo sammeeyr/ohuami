@@ -156,6 +156,28 @@
             <span class="font-extrabold text-[#111111]" id="cart-shipping">₦{{ cart.shipping_fee|floatformat:0|intcomma }}</span>
           </div>
 
+          {% if cart.coupon %}
+          <div class="flex justify-between text-emerald-600 font-bold bg-emerald-50 px-3 py-2 rounded-xl">
+            <div class="flex items-center gap-1.5">
+              <span>🎟 {{ cart.coupon.code }}</span>
+              <button onclick="removeCoupon()" class="text-xs text-red-500 hover:underline" title="Remove coupon">✕</button>
+            </div>
+            <span>-₦{{ cart.discount_amount|floatformat:0|intcomma }}</span>
+          </div>
+          {% else %}
+          <!-- Promo Code Input -->
+          <div class="pt-2">
+            <div class="flex gap-2">
+              <input id="cart-coupon-input" type="text" placeholder="Promo code (e.g. OHUAMI10)" uppercase
+                     class="flex-1 uppercase font-bold text-xs px-3 py-2 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:border-[#E53935] focus:bg-white">
+              <button onclick="applyCartCoupon()" type="button"
+                      class="bg-[#111111] hover:bg-black text-[#FFC928] text-xs font-black px-4 py-2 rounded-xl transition shadow-xs">
+                Apply
+              </button>
+            </div>
+          </div>
+          {% endif %}
+
           <div class="pt-3 border-t border-gray-200 flex justify-between items-baseline">
             <span class="text-sm sm:text-base font-bold text-[#111111]">Total</span>
             <span class="text-xl sm:text-2xl font-black text-[#111111]" id="cart-total">₦{{ cart.total_with_shipping|floatformat:0|intcomma }}</span>
@@ -210,6 +232,47 @@ function removeCartItem(itemId) {
       'X-CSRFToken': getCsrfToken()
     },
     body: JSON.stringify({ item_id: itemId })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      window.location.reload();
+    }
+  });
+}
+
+function applyCartCoupon() {
+  const code = (document.getElementById('cart-coupon-input').value || '').trim();
+  if (!code) {
+    if (window.showToast) showToast('Please enter a coupon code', 'error');
+    return;
+  }
+  fetch('/cart/api/apply-coupon/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCsrfToken()
+    },
+    body: JSON.stringify({ code: code })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      if (window.showToast) showToast(data.message);
+      window.location.reload();
+    } else {
+      if (window.showToast) showToast(data.error || 'Invalid coupon', 'error');
+    }
+  });
+}
+
+function removeCoupon() {
+  fetch('/cart/api/remove-coupon/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCsrfToken()
+    }
   })
   .then(res => res.json())
   .then(data => {

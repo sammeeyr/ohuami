@@ -1,0 +1,216 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e3]:
+    - generic [ref=f4e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f4e5]:
+      - generic [ref=f4e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f4e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f4e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f4e9]:
+    - generic [ref=f4e10]:
+      - link [ref=f4e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=f4e12]
+      - generic [ref=f4e14]:
+        - textbox "Search laptops, phones, electronics, gadgets..." [ref=f4e15]
+        - button "Search" [ref=f4e19] [cursor=pointer]
+      - generic [ref=f4e20]:
+        - link "0" [ref=f4e21] [cursor=pointer]:
+          - /url: /wishlist/
+        - link "Cart" [ref=f4e25] [cursor=pointer]:
+          - /url: /cart/
+        - link "Sign In" [ref=f4e28] [cursor=pointer]:
+          - /url: /accounts/login/
+  - main [ref=f4e29]:
+    - generic [ref=f4e30]:
+      - generic [ref=f4e31]:
+        - link "Dashboard" [ref=f4e32] [cursor=pointer]:
+          - /url: /dashboard/
+        - link "Products" [ref=f4e33] [cursor=pointer]:
+          - /url: /dashboard/products/
+        - link "Orders" [ref=f4e34] [cursor=pointer]:
+          - /url: /dashboard/orders/
+        - link "Logistics & Dispatch" [ref=f4e35] [cursor=pointer]:
+          - /url: /dashboard/logistics/
+        - link "Customers" [ref=f4e36] [cursor=pointer]:
+          - /url: /dashboard/customers/
+        - link "Agents & Staff" [ref=f4e37] [cursor=pointer]:
+          - /url: /dashboard/agents/
+        - link "Discounts" [ref=f4e38] [cursor=pointer]:
+          - /url: /dashboard/discounts/
+        - link "API & CORS" [ref=f4e39] [cursor=pointer]:
+          - /url: /dashboard/api-cors/
+        - link "Settings" [ref=f4e40] [cursor=pointer]:
+          - /url: /dashboard/settings/
+      - generic [ref=f4e41]:
+        - generic [ref=f4e42]:
+          - heading "Store Orders & Fulfillment" [level=1] [ref=f4e43]
+          - paragraph [ref=f4e44]: Manage customer orders, view receipts, and assign dispatch riders for Sunshine Fashion.
+        - link "+ Create Manual Order" [ref=f4e46] [cursor=pointer]:
+          - /url: /dashboard/orders/new/
+          - generic [ref=f4e47]: +
+          - text: Create Manual Order
+      - generic [ref=f4e48]:
+        - generic [ref=f4e49]:
+          - textbox "Search by reference, customer name, email, or phone..." [ref=f4e50]
+          - button "Search" [ref=f4e51] [cursor=pointer]
+        - generic [ref=f4e52]:
+          - link "All" [ref=f4e53] [cursor=pointer]:
+            - /url: /dashboard/orders/?status=ALL
+          - link "Unfulfilled" [ref=f4e54] [cursor=pointer]:
+            - /url: /dashboard/orders/?status=UNFULFILLED
+          - link "Processing" [ref=f4e55] [cursor=pointer]:
+            - /url: /dashboard/orders/?status=PROCESSING
+          - link "Shipped" [ref=f4e56] [cursor=pointer]:
+            - /url: /dashboard/orders/?status=SHIPPED
+          - link "Delivered" [ref=f4e57] [cursor=pointer]:
+            - /url: /dashboard/orders/?status=DELIVERED
+      - table [ref=f4e60]:
+        - rowgroup [ref=f4e61]:
+          - row [ref=f4e62]:
+            - columnheader "Order Ref" [ref=f4e63]
+            - columnheader "Customer" [ref=f4e64]
+            - columnheader "Date" [ref=f4e65]
+            - columnheader "Items" [ref=f4e66]
+            - columnheader "Total" [ref=f4e67]
+            - columnheader "Payment" [ref=f4e68]
+            - columnheader "Fulfillment" [ref=f4e69]
+            - columnheader "Dispatch Tracking" [ref=f4e70]
+            - columnheader "Actions" [ref=f4e71]
+        - rowgroup [ref=f4e72]:
+          - row [ref=f4e73]:
+            - cell [ref=f4e74]:
+              - link "#OHU1247" [ref=f4e75] [cursor=pointer]:
+                - /url: /dashboard/orders/6/
+            - cell "Chinedu Okafor chinedu@example.com" [ref=f4e76]:
+              - generic [ref=f4e77]: Chinedu Okafor
+              - text: chinedu@example.com
+            - cell "Oct 28, 2026" [ref=f4e78]
+            - cell "1 item" [ref=f4e79]
+            - cell "₦12,800" [ref=f4e80]
+            - cell "Paid" [ref=f4e81]
+            - cell "Delivered" [ref=f4e82]
+            - cell "OHU-TRK-20261028-A7A47F" [ref=f4e83]
+            - cell [ref=f4e84]:
+              - link "Manage ↗" [ref=f4e85] [cursor=pointer]:
+                - /url: /dashboard/orders/6/
+          - row [ref=f4e86]:
+            - cell [ref=f4e87]:
+              - link "#OHU1248" [ref=f4e88] [cursor=pointer]:
+                - /url: /dashboard/orders/5/
+            - cell "Chinedu Okafor chinedu@example.com" [ref=f4e89]:
+              - generic [ref=f4e90]: Chinedu Okafor
+              - text: chinedu@example.com
+            - cell "Oct 28, 2026" [ref=f4e91]
+            - cell "1 item" [ref=f4e92]
+            - cell "₦42,000" [ref=f4e93]
+            - cell "Pending" [ref=f4e94]
+            - cell "Processing" [ref=f4e95]
+            - cell [ref=f4e96]:
+              - link "+ Assign Dispatch" [ref=f4e97] [cursor=pointer]:
+                - /url: /dashboard/logistics/dispatch/new/?order_id=5
+            - cell [ref=f4e98]:
+              - link "Manage ↗" [ref=f4e99] [cursor=pointer]:
+                - /url: /dashboard/orders/5/
+          - row [ref=f4e100]:
+            - cell [ref=f4e101]:
+              - link "#OHU1249" [ref=f4e102] [cursor=pointer]:
+                - /url: /dashboard/orders/4/
+            - cell "Chinedu Okafor chinedu@example.com" [ref=f4e103]:
+              - generic [ref=f4e104]: Chinedu Okafor
+              - text: chinedu@example.com
+            - cell "Oct 28, 2026" [ref=f4e105]
+            - cell "1 item" [ref=f4e106]
+            - cell "₦15,500" [ref=f4e107]
+            - cell "Paid" [ref=f4e108]
+            - cell "Delivered" [ref=f4e109]
+            - cell [ref=f4e110]:
+              - link "+ Assign Dispatch" [ref=f4e111] [cursor=pointer]:
+                - /url: /dashboard/logistics/dispatch/new/?order_id=4
+            - cell [ref=f4e112]:
+              - link "Manage ↗" [ref=f4e113] [cursor=pointer]:
+                - /url: /dashboard/orders/4/
+          - row [ref=f4e114]:
+            - cell [ref=f4e115]:
+              - link "#OHU1250" [ref=f4e116] [cursor=pointer]:
+                - /url: /dashboard/orders/3/
+            - cell "Chinedu Okafor chinedu@example.com" [ref=f4e117]:
+              - generic [ref=f4e118]: Chinedu Okafor
+              - text: chinedu@example.com
+            - cell "Oct 28, 2026" [ref=f4e119]
+            - cell "1 item" [ref=f4e120]
+            - cell "₦28,000" [ref=f4e121]
+            - cell "Paid" [ref=f4e122]
+            - cell "Delivered" [ref=f4e123]
+            - cell [ref=f4e124]:
+              - link "+ Assign Dispatch" [ref=f4e125] [cursor=pointer]:
+                - /url: /dashboard/logistics/dispatch/new/?order_id=3
+            - cell [ref=f4e126]:
+              - link "Manage ↗" [ref=f4e127] [cursor=pointer]:
+                - /url: /dashboard/orders/3/
+  - contentinfo [ref=f4e128]:
+    - generic [ref=f4e129]:
+      - generic [ref=f4e130]:
+        - link [ref=f4e131] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f4e132]
+        - paragraph [ref=f4e133]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=f4e134]:
+          - text: "Parent Company:"
+          - strong [ref=f4e135]: Cube Tech Enterprises
+      - generic [ref=f4e136]:
+        - heading "Shop & Discover" [level=4] [ref=f4e137]
+        - list [ref=f4e138]:
+          - listitem [ref=f4e139]:
+            - link "All Products & Gadgets" [ref=f4e140] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=f4e141]:
+            - link "⚡ Flash Sale Deals" [ref=f4e142] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=f4e143]:
+            - link "🎟 Active Promo Coupons" [ref=f4e144] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=f4e145]:
+            - link "Sunshine Fashion Flagship" [ref=f4e146] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=f4e147]:
+        - heading "Customer Care" [level=4] [ref=f4e148]
+        - list [ref=f4e149]:
+          - listitem [ref=f4e150]:
+            - link "Contact Us & Support Tickets" [ref=f4e151] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=f4e152]:
+            - link "Order Tracking & Receipts" [ref=f4e153] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=f4e154]:
+            - link "My Account & Addresses" [ref=f4e155] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=f4e156]:
+            - 'link "Tel: +234 800 2823 8324" [ref=f4e157] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=f4e158]:
+        - heading "Sell on OHUAMI" [level=4] [ref=f4e159]
+        - list [ref=f4e160]:
+          - listitem [ref=f4e161]:
+            - link "Merchant Dashboard" [ref=f4e162] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=f4e163]:
+            - link "Product Management" [ref=f4e164] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=f4e165]:
+            - link "Order Fulfillment" [ref=f4e166] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=f4e167]:
+            - link "Platform Control Center" [ref=f4e168] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=f4e169]:
+      - generic [ref=f4e170]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=f4e171]:
+        - generic [ref=f4e172]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=f4e173]: •
+        - generic [ref=f4e174]: Paystack Verified
+        - generic [ref=f4e175]: •
+        - generic [ref=f4e176]: Nationwide Express Logistics
+  - button "Customer Support" [ref=f4e177] [cursor=pointer]

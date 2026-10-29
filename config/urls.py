@@ -17,6 +17,7 @@ urlpatterns = [
     path('promotions/', include('apps.promotions.urls', namespace='promotions')),
     path('accounts/', include('apps.accounts.urls', namespace='accounts')),
     path('wishlist/', include('apps.wishlist.urls', namespace='wishlist')),
+    path('reviews/', include('apps.reviews.urls', namespace='reviews')),
     path('support/', include('apps.support.urls', namespace='support')),
     path('dashboard/', include('apps.dashboard.urls', namespace='dashboard')),
 ]

@@ -1,0 +1,245 @@
+- generic [ref=f3e1]:
+  - generic [ref=f3e3]:
+    - generic [ref=f3e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f3e5]:
+      - generic [ref=f3e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f3e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f3e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f3e9]:
+    - generic [ref=f3e10]:
+      - link [ref=f3e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=f3e12]
+      - generic [ref=f3e14]:
+        - textbox "Search laptops, phones, electronics, gadgets..." [ref=f3e15]
+        - button "Search" [ref=f3e19] [cursor=pointer]
+      - generic [ref=f3e20]:
+        - link "0" [ref=f3e21] [cursor=pointer]:
+          - /url: /wishlist/
+        - link "Cart" [ref=f3e25] [cursor=pointer]:
+          - /url: /cart/
+        - link "C Account" [ref=f3e28] [cursor=pointer]:
+          - /url: /accounts/profile/
+          - generic [ref=f3e29]: C
+          - generic [ref=f3e30]: Account
+  - main [ref=f3e31]:
+    - generic [ref=f3e32]:
+      - generic [ref=f3e33]:
+        - generic [ref=f3e34]:
+          - generic [ref=f3e35]: C
+          - generic [ref=f3e36]:
+            - heading "Chinedu Okafor Merchant" [level=1] [ref=f3e37]:
+              - text: Chinedu Okafor
+              - generic [ref=f3e38]: Merchant
+            - paragraph [ref=f3e39]: chinedu@example.com • +234 801 234 5678
+            - generic [ref=f3e40]: Verified Customer Account
+        - generic [ref=f3e42]:
+          - link "Super Admin Panel" [ref=f3e43] [cursor=pointer]:
+            - /url: /dashboard/control-panel/
+          - link "Merchant Dashboard" [ref=f3e44] [cursor=pointer]:
+            - /url: /dashboard/
+          - link "Sign Out" [ref=f3e45] [cursor=pointer]:
+            - /url: /accounts/logout/
+      - generic [ref=f3e46]:
+        - link "📦 Order History 4 orders placed" [ref=f3e47] [cursor=pointer]:
+          - /url: /orders/history/
+          - generic [ref=f3e48]: 📦
+          - generic [ref=f3e49]:
+            - heading "Order History" [level=4] [ref=f3e50]
+            - paragraph [ref=f3e51]: 4 orders placed
+        - link "♥ Saved Wishlist 0 products saved" [ref=f3e52] [cursor=pointer]:
+          - /url: /wishlist/
+          - generic [ref=f3e53]: ♥
+          - generic [ref=f3e54]:
+            - heading "Saved Wishlist" [level=4] [ref=f3e55]
+            - paragraph [ref=f3e56]: 0 products saved
+        - link "🛍 Shopping Cart 0 items pending" [ref=f3e57] [cursor=pointer]:
+          - /url: /cart/
+          - generic [ref=f3e58]: 🛍
+          - generic [ref=f3e59]:
+            - heading "Shopping Cart" [level=4] [ref=f3e60]
+            - paragraph [ref=f3e61]: 0 items pending
+      - generic [ref=f3e62]:
+        - generic [ref=f3e63]:
+          - generic [ref=f3e64]:
+            - generic [ref=f3e65]:
+              - generic [ref=f3e66]:
+                - heading "Personal Profile Details" [level=3] [ref=f3e67]
+                - paragraph [ref=f3e68]: Update your name and primary phone number
+              - generic [ref=f3e69]: 👤
+            - generic [ref=f3e70]:
+              - generic [ref=f3e71]:
+                - generic [ref=f3e72]:
+                  - generic [ref=f3e73]: First Name
+                  - textbox "First Name" [ref=f3e74]: Chinedu
+                - generic [ref=f3e75]:
+                  - generic [ref=f3e76]: Last Name
+                  - textbox "Last Name" [ref=f3e77]: Okafor
+              - generic [ref=f3e78]:
+                - generic [ref=f3e79]: Phone Number
+                - textbox "+234 800 000 0000" [ref=f3e80]: +234 801 234 5678
+              - generic [ref=f3e81]:
+                - generic [ref=f3e82]: Email Address (Read Only)
+                - textbox [disabled] [ref=f3e83]: chinedu@example.com
+              - button "Save Profile Changes" [ref=f3e85] [cursor=pointer]
+          - generic [ref=f3e86]:
+            - generic [ref=f3e87]:
+              - generic [ref=f3e88]:
+                - heading "Change Account Password" [level=3] [ref=f3e89]
+                - paragraph [ref=f3e90]: Ensure your account is protected with a secure password
+              - generic [ref=f3e91]: 🔒
+            - generic [ref=f3e92]:
+              - generic [ref=f3e93]:
+                - generic [ref=f3e94]: Current Password
+                - textbox [active] [ref=f3e95]
+              - generic [ref=f3e96]:
+                - generic [ref=f3e97]:
+                  - generic [ref=f3e98]: New Password
+                  - textbox [ref=f3e99]
+                - generic [ref=f3e100]:
+                  - generic [ref=f3e101]: Confirm New Password
+                  - textbox [ref=f3e102]
+              - button "Update Password" [ref=f3e104] [cursor=pointer]
+        - generic [ref=f3e106]:
+          - generic [ref=f3e107]:
+            - generic [ref=f3e108]:
+              - heading "Saved Delivery Addresses" [level=3] [ref=f3e109]
+              - paragraph [ref=f3e110]: Manage your shipping and billing locations
+            - generic [ref=f3e111]: 📍
+          - generic [ref=f3e113]:
+            - generic [ref=f3e114]:
+              - generic [ref=f3e115]:
+                - text: Chinedu Okafor
+                - generic [ref=f3e116]: Default Shipping
+              - generic [ref=f3e117]: +234 801 234 5678
+            - paragraph [ref=f3e118]: 128, Ganiyu Street, GRA Abuja, FCT
+            - button "Delete" [ref=f3e121] [cursor=pointer]
+          - group [ref=f3e122]:
+            - generic "+ Add a New Delivery Address +" [ref=f3e123] [cursor=pointer]:
+              - generic [ref=f3e124]: + Add a New Delivery Address
+              - generic [ref=f3e125]: +
+      - generic [ref=f3e126]:
+        - generic [ref=f3e127]:
+          - generic [ref=f3e128]:
+            - heading "Your Recent Orders" [level=3] [ref=f3e129]
+            - paragraph [ref=f3e130]: Live order fulfillment status and official receipts
+          - link "Full History" [ref=f3e131] [cursor=pointer]:
+            - /url: /orders/history/
+        - table [ref=f3e133]:
+          - rowgroup [ref=f3e134]:
+            - row [ref=f3e135]:
+              - columnheader "Order Ref" [ref=f3e136]
+              - columnheader "Date" [ref=f3e137]
+              - columnheader "Items" [ref=f3e138]
+              - columnheader "Total Amount" [ref=f3e139]
+              - columnheader "Payment" [ref=f3e140]
+              - columnheader "Fulfillment" [ref=f3e141]
+              - columnheader "Action" [ref=f3e142]
+          - rowgroup [ref=f3e143]:
+            - row [ref=f3e144]:
+              - cell "#OHU1247" [ref=f3e145]
+              - cell "Oct 28, 2026" [ref=f3e146]
+              - cell "1 item" [ref=f3e147]
+              - cell "₦12,800" [ref=f3e148]
+              - cell "Paid" [ref=f3e149]
+              - cell "Delivered" [ref=f3e150]
+              - cell [ref=f3e151]:
+                - link "View →" [ref=f3e152] [cursor=pointer]:
+                  - /url: /orders/OHU1247/
+            - row [ref=f3e153]:
+              - cell "#OHU1248" [ref=f3e154]
+              - cell "Oct 28, 2026" [ref=f3e155]
+              - cell "1 item" [ref=f3e156]
+              - cell "₦42,000" [ref=f3e157]
+              - cell "Pending" [ref=f3e158]
+              - cell "Shipped" [ref=f3e159]
+              - cell [ref=f3e160]:
+                - link "View →" [ref=f3e161] [cursor=pointer]:
+                  - /url: /orders/OHU1248/
+            - row [ref=f3e162]:
+              - cell "#OHU1249" [ref=f3e163]
+              - cell "Oct 28, 2026" [ref=f3e164]
+              - cell "1 item" [ref=f3e165]
+              - cell "₦15,500" [ref=f3e166]
+              - cell "Paid" [ref=f3e167]
+              - cell "Delivered" [ref=f3e168]
+              - cell [ref=f3e169]:
+                - link "View →" [ref=f3e170] [cursor=pointer]:
+                  - /url: /orders/OHU1249/
+            - row [ref=f3e171]:
+              - cell "#OHU1250" [ref=f3e172]
+              - cell "Oct 28, 2026" [ref=f3e173]
+              - cell "1 item" [ref=f3e174]
+              - cell "₦28,000" [ref=f3e175]
+              - cell "Paid" [ref=f3e176]
+              - cell "Delivered" [ref=f3e177]
+              - cell [ref=f3e178]:
+                - link "View →" [ref=f3e179] [cursor=pointer]:
+                  - /url: /orders/OHU1250/
+  - contentinfo [ref=f3e180]:
+    - generic [ref=f3e181]:
+      - generic [ref=f3e182]:
+        - link [ref=f3e183] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f3e184]
+        - paragraph [ref=f3e185]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=f3e186]:
+          - text: "Parent Company:"
+          - strong [ref=f3e187]: Cube Tech Enterprises
+      - generic [ref=f3e188]:
+        - heading "Shop & Discover" [level=4] [ref=f3e189]
+        - list [ref=f3e190]:
+          - listitem [ref=f3e191]:
+            - link "All Products & Gadgets" [ref=f3e192] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=f3e193]:
+            - link "⚡ Flash Sale Deals" [ref=f3e194] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=f3e195]:
+            - link "🎟 Active Promo Coupons" [ref=f3e196] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=f3e197]:
+            - link "Sunshine Fashion Flagship" [ref=f3e198] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=f3e199]:
+        - heading "Customer Care" [level=4] [ref=f3e200]
+        - list [ref=f3e201]:
+          - listitem [ref=f3e202]:
+            - link "Contact Us & Support Tickets" [ref=f3e203] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=f3e204]:
+            - link "Order Tracking & Receipts" [ref=f3e205] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=f3e206]:
+            - link "My Account & Addresses" [ref=f3e207] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=f3e208]:
+            - 'link "Tel: +234 800 2823 8324" [ref=f3e209] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=f3e210]:
+        - heading "Sell on OHUAMI" [level=4] [ref=f3e211]
+        - list [ref=f3e212]:
+          - listitem [ref=f3e213]:
+            - link "Merchant Dashboard" [ref=f3e214] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=f3e215]:
+            - link "Product Management" [ref=f3e216] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=f3e217]:
+            - link "Order Fulfillment" [ref=f3e218] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=f3e219]:
+            - link "Platform Control Center" [ref=f3e220] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=f3e221]:
+      - generic [ref=f3e222]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=f3e223]:
+        - generic [ref=f3e224]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=f3e225]: •
+        - generic [ref=f3e226]: Paystack Verified
+        - generic [ref=f3e227]: •
+        - generic [ref=f3e228]: Nationwide Express Logistics
+  - button "Customer Support" [ref=f3e229] [cursor=pointer]

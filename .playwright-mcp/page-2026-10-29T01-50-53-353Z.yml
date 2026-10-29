@@ -1,0 +1,264 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e3]:
+    - generic [ref=f4e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f4e5]:
+      - generic [ref=f4e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f4e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f4e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f4e9]:
+    - generic [ref=f4e10]:
+      - link [ref=f4e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=f4e12]
+      - generic [ref=f4e14]:
+        - textbox "Search laptops, phones, electronics, gadgets..." [ref=f4e15]
+        - button "Search" [ref=f4e19] [cursor=pointer]
+      - generic [ref=f4e20]:
+        - link "0" [ref=f4e21] [cursor=pointer]:
+          - /url: /wishlist/
+        - link "Cart" [ref=f4e25] [cursor=pointer]:
+          - /url: /cart/
+        - link "C Account" [ref=f4e28] [cursor=pointer]:
+          - /url: /accounts/profile/
+          - generic [ref=f4e29]: C
+          - generic [ref=f4e30]: Account
+  - main [ref=f4e31]:
+    - generic [ref=f4e32]:
+      - generic [ref=f4e33]:
+        - link "Dashboard" [ref=f4e34] [cursor=pointer]:
+          - /url: /dashboard/
+        - link "Products" [ref=f4e35] [cursor=pointer]:
+          - /url: /dashboard/products/
+        - link "Orders" [ref=f4e36] [cursor=pointer]:
+          - /url: /dashboard/orders/
+        - link "Logistics & Dispatch" [ref=f4e37] [cursor=pointer]:
+          - /url: /dashboard/logistics/
+        - link "Customers" [ref=f4e38] [cursor=pointer]:
+          - /url: /dashboard/customers/
+        - link "Agents & Staff" [ref=f4e39] [cursor=pointer]:
+          - /url: /dashboard/agents/
+        - link "Discounts" [ref=f4e40] [cursor=pointer]:
+          - /url: /dashboard/discounts/
+        - link "API & CORS" [ref=f4e41] [cursor=pointer]:
+          - /url: /dashboard/api-cors/
+        - link "Settings" [ref=f4e42] [cursor=pointer]:
+          - /url: /dashboard/settings/
+      - generic [ref=f4e44]:
+        - navigation [ref=f4e45]:
+          - link "Dashboard" [ref=f4e46] [cursor=pointer]:
+            - /url: /dashboard/
+          - generic [ref=f4e47]: ›
+          - link "Products" [ref=f4e48] [cursor=pointer]:
+            - /url: /dashboard/products/
+          - generic [ref=f4e49]: ›
+          - generic [ref=f4e50]: New Product
+        - heading "Create New Catalog Product" [level=1] [ref=f4e51]
+        - paragraph [ref=f4e52]: Upload gallery photos, configure variants, and preview your live product page in real time.
+      - generic [ref=f4e53]:
+        - generic [ref=f4e56]:
+          - generic [ref=f4e57]:
+            - heading "General Information" [level=3] [ref=f4e58]
+            - generic [ref=f4e59]:
+              - generic [ref=f4e60]: Product Title *
+              - textbox "Product Title (e.g. Silk Evening Dress or Wireless Earbuds)" [ref=f4e61]
+            - generic [ref=f4e62]:
+              - generic [ref=f4e63]:
+                - generic [ref=f4e64]: Category *
+                - combobox [ref=f4e65]:
+                  - option "- Select an option -" [selected]
+                  - option "Smartphones & Tablets"
+                  - option "Women"
+                  - option "Laptops & Workstations"
+                  - option "Men"
+                  - option "Audio & Headphones"
+                  - option "Bags"
+                  - option "Shoes"
+                  - option "Smart Wearables"
+                  - option "Accessories"
+                  - option "Power & Accessories"
+                  - option "Beauty"
+              - generic [ref=f4e66]:
+                - generic [ref=f4e67]: Brand
+                - combobox [ref=f4e68]:
+                  - option "- Select an option -" [selected]
+                  - option "Apple"
+                  - option "Cube Tech Pro"
+                  - option "Samsung"
+                  - option "Sony"
+                  - option "Sunshine Collection"
+          - generic [ref=f4e69]:
+            - generic [ref=f4e70]:
+              - heading "Product Photos & Media" [level=3] [ref=f4e71]
+              - generic [ref=f4e72]: PNG, JPG, WEBP up to 5MB
+            - generic [ref=f4e73]:
+              - generic [ref=f4e74]: Primary Cover Image *
+              - generic [ref=f4e76]:
+                - generic [ref=f4e77]: IMG
+                - generic [ref=f4e79]:
+                  - button "Choose File" [ref=f4e80] [cursor=pointer]
+                  - generic [ref=f4e81]: This image will appear on catalog cards and the top of the storefront gallery.
+            - generic [ref=f4e82]:
+              - generic [ref=f4e83]: Additional Gallery Photos (Multiple)
+              - generic [ref=f4e84]:
+                - button "Choose File" [ref=f4e85] [cursor=pointer]
+                - generic [ref=f4e86]: Upload extra angles, lifestyle shots, or fabric close-ups.
+          - generic [ref=f4e87]:
+            - heading "Pricing & Inventory" [level=3] [ref=f4e88]
+            - generic [ref=f4e89]:
+              - generic [ref=f4e90]:
+                - generic [ref=f4e91]: Base Price (₦) *
+                - spinbutton "28000.00" [ref=f4e92]
+              - generic [ref=f4e93]:
+                - generic [ref=f4e94]: Crossed-out Price (₦)
+                - spinbutton "35000.00" [ref=f4e95]
+              - generic [ref=f4e96]:
+                - generic [ref=f4e97]: Stock Quantity *
+                - spinbutton "50" [ref=f4e98]: "10"
+            - generic [ref=f4e99]:
+              - generic [ref=f4e100]:
+                - generic [ref=f4e101]: SKU Code *
+                - textbox "SF-DRS-001" [ref=f4e102]
+              - generic [ref=f4e103]:
+                - generic [ref=f4e104]: Badge Text (e.g. -20% or Hot Deal)
+                - textbox "e.g. -20% or Hot or Bestseller" [ref=f4e105]
+          - generic [ref=f4e106]:
+            - heading "Product Description" [level=3] [ref=f4e107]
+            - generic [ref=f4e108]:
+              - generic [ref=f4e109]: Full Description *
+              - textbox "Detailed product description, fabric, dimensions, specifications..." [ref=f4e110]
+          - generic [ref=f4e111]:
+            - generic [ref=f4e112] [cursor=pointer]:
+              - checkbox "Is Active" [checked] [ref=f4e113]
+              - generic [ref=f4e114]: Is Active
+            - generic [ref=f4e115] [cursor=pointer]:
+              - checkbox "Flash Sale" [ref=f4e116]
+              - generic [ref=f4e117]: Flash Sale
+            - generic [ref=f4e118] [cursor=pointer]:
+              - checkbox "Featured" [ref=f4e119]
+              - generic [ref=f4e120]: Featured
+            - generic [ref=f4e121] [cursor=pointer]:
+              - checkbox "Trending" [ref=f4e122]
+              - generic [ref=f4e123]: Trending
+          - generic [ref=f4e124]:
+            - link "← Cancel" [ref=f4e125] [cursor=pointer]:
+              - /url: /dashboard/products/
+            - button "Publish Product to Store" [ref=f4e126] [cursor=pointer]
+        - generic [ref=f4e127]:
+          - generic [ref=f4e128]:
+            - generic [ref=f4e129]: Storefront Live Preview
+            - generic [ref=f4e132]:
+              - button "💻 Desktop" [ref=f4e133] [cursor=pointer]
+              - button "📱 Mobile" [ref=f4e134] [cursor=pointer]
+          - generic [ref=f4e135]:
+            - generic [ref=f4e136]:
+              - generic [ref=f4e137]:
+                - img "OHUAMI" [ref=f4e138]
+                - generic [ref=f4e139]: Sunshine Fashion
+              - generic [ref=f4e140]: Storefront Preview
+            - generic [ref=f4e141]:
+              - generic [ref=f4e142]:
+                - generic [ref=f4e143]:
+                  - generic [ref=f4e144]: "1"
+                  - generic [ref=f4e146]: "2"
+                  - generic [ref=f4e147]: "3"
+                - generic [ref=f4e148]:
+                  - generic [ref=f4e149]:
+                    - generic [ref=f4e150]: 👗
+                    - generic [ref=f4e151]: Upload cover image to preview
+                  - generic [ref=f4e152]: HOT
+              - generic [ref=f4e153]:
+                - generic [ref=f4e154]:
+                  - text: "- Select an option -"
+                  - heading "Product Title" [level=2] [ref=f4e155]
+                - generic [ref=f4e156]:
+                  - generic [ref=f4e157]: ★★★★★
+                  - generic [ref=f4e158]: (24 reviews)
+                - generic [ref=f4e159]: ₦0
+                - paragraph [ref=f4e161]: Product description will appear here...
+                - generic [ref=f4e162]:
+                  - text: Color Options
+                  - generic [ref=f4e163]:
+                    - button [ref=f4e164]
+                    - button [ref=f4e165]
+                    - button [ref=f4e166]
+                - generic [ref=f4e167]:
+                  - text: Select Size
+                  - generic [ref=f4e168]:
+                    - generic [ref=f4e169]: S
+                    - generic [ref=f4e170]: M
+                    - generic [ref=f4e171]: L
+                    - generic [ref=f4e172]: XL
+                - generic [ref=f4e173]:
+                  - button "Add to Cart" [ref=f4e174] [cursor=pointer]
+                  - button "Buy Now" [ref=f4e175] [cursor=pointer]
+                - generic [ref=f4e176]:
+                  - generic [ref=f4e177]: 🚚 Fast Delivery
+                  - generic [ref=f4e178]: 🔒 Secure Payments
+                  - generic [ref=f4e179]: 🔄 Easy Returns
+  - contentinfo [ref=f4e180]:
+    - generic [ref=f4e181]:
+      - generic [ref=f4e182]:
+        - link [ref=f4e183] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f4e184]
+        - paragraph [ref=f4e185]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=f4e186]:
+          - text: "Parent Company:"
+          - strong [ref=f4e187]: Cube Tech Enterprises
+      - generic [ref=f4e188]:
+        - heading "Shop & Discover" [level=4] [ref=f4e189]
+        - list [ref=f4e190]:
+          - listitem [ref=f4e191]:
+            - link "All Products & Gadgets" [ref=f4e192] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=f4e193]:
+            - link "⚡ Flash Sale Deals" [ref=f4e194] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=f4e195]:
+            - link "🎟 Active Promo Coupons" [ref=f4e196] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=f4e197]:
+            - link "Sunshine Fashion Flagship" [ref=f4e198] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=f4e199]:
+        - heading "Customer Care" [level=4] [ref=f4e200]
+        - list [ref=f4e201]:
+          - listitem [ref=f4e202]:
+            - link "Contact Us & Support Tickets" [ref=f4e203] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=f4e204]:
+            - link "Order Tracking & Receipts" [ref=f4e205] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=f4e206]:
+            - link "My Account & Addresses" [ref=f4e207] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=f4e208]:
+            - 'link "Tel: +234 800 2823 8324" [ref=f4e209] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=f4e210]:
+        - heading "Sell on OHUAMI" [level=4] [ref=f4e211]
+        - list [ref=f4e212]:
+          - listitem [ref=f4e213]:
+            - link "Merchant Dashboard" [ref=f4e214] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=f4e215]:
+            - link "Product Management" [ref=f4e216] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=f4e217]:
+            - link "Order Fulfillment" [ref=f4e218] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=f4e219]:
+            - link "Platform Control Center" [ref=f4e220] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=f4e221]:
+      - generic [ref=f4e222]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=f4e223]:
+        - generic [ref=f4e224]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=f4e225]: •
+        - generic [ref=f4e226]: Paystack Verified
+        - generic [ref=f4e227]: •
+        - generic [ref=f4e228]: Nationwide Express Logistics
+  - button "Customer Support" [ref=f4e229] [cursor=pointer]

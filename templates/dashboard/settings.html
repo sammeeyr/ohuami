@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Store Settings — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="border-b border-gray-200 pb-5">
+    <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold mb-1">
+      <a href="{% url 'dashboard:index' %}" class="hover:text-gray-700">Dashboard</a>
+      <span>›</span>
+      <span class="text-[#E53935] font-bold">Store Settings</span>
+    </nav>
+    <h1 class="text-xl sm:text-2xl font-black text-[#111111]">{{ store.name }} Profile & Configuration</h1>
+    <p class="text-xs text-gray-500 mt-0.5">Manage brand messaging, custom domains, banking details, and payout frequencies.</p>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Settings Form Card -->
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+    <form method="POST" action="{% url 'dashboard:settings' %}" class="space-y-6">
+      {% csrf_token %}
+
+      <!-- Store Identity -->
+      <div class="space-y-4">
+        <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider pb-2 border-b border-gray-100">
+          Storefront Branding
+        </h3>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Store Name <span class="text-[#E53935]">*</span></label>
+          {{ form.name }}
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Tagline</label>
+          {{ form.tagline }}
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">About Store Description</label>
+          {{ form.description }}
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Custom Domain (White-Label)</label>
+          {{ form.custom_domain }}
+          <span class="text-[10px] text-gray-400 mt-0.5 block">Subdomain: <strong>{{ store.subdomain }}.ohuami.com</strong></span>
+        </div>
+      </div>
+
+      <!-- Banking & Settlement -->
+      <div class="space-y-4 pt-4 border-t border-gray-100">
+        <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider pb-2 border-b border-gray-100">
+          Settlement Banking & Payouts
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Bank Name</label>
+            {{ form.bank_name }}
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Account Number (NUBAN)</label>
+            {{ form.bank_account_number }}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Account Name</label>
+            {{ form.bank_account_name }}
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Payout Schedule</label>
+            {{ form.payout_schedule }}
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-between text-xs">
+          <div>
+            <span class="font-extrabold text-[#111111]">KYC & BVN Status</span>
+            <p class="text-[11px] text-gray-500">Government ID & Bank Verification</p>
+          </div>
+          <div>
+            {% if store.bvn_verified %}
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-emerald-100 text-emerald-800">
+                ✓ BVN Verified
+              </span>
+            {% else %}
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-amber-100 text-amber-800">
+                KYC Verification Pending
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-4 flex items-center justify-end">
+        <button type="submit" class="bg-[#111111] hover:bg-black text-[#FFC928] text-xs font-black px-8 py-3 rounded-full transition shadow-md">
+          Save Store Settings
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+{% endblock %}

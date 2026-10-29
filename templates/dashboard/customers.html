@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Manage Customers — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111] flex items-center gap-3">
+        Customer Directory & CRM
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-800">
+          {{ customers_count }} Customer{{ customers_count|pluralize }}
+        </span>
+      </h1>
+      <p class="text-xs text-gray-500 mt-0.5">Track customer lifetime value, repeat buyer tags, and notes for {{ store.name }}.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="{% url 'dashboard:customer_create' %}" class="bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-black px-5 py-2.5 rounded-full shadow-md transition inline-flex items-center gap-1.5">
+        <span>+</span> Add Customer Record
+      </a>
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Filters & Search Bar -->
+  <div class="bg-white rounded-2xl p-4 border border-gray-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <form method="get" class="flex-1 flex items-center gap-2">
+      <input type="text" name="q" value="{{ query }}" placeholder="Search customers by name, email, or phone..." class="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#E53935]">
+      <select name="tag" class="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold focus:outline-none focus:border-[#E53935]">
+        <option value="all" {% if tag_filter == 'all' %}selected{% endif %}>All Customer Tags</option>
+        <option value="vip" {% if tag_filter == 'vip' %}selected{% endif %}>VIP Buyers</option>
+        <option value="regular" {% if tag_filter == 'regular' %}selected{% endif %}>Regular</option>
+        <option value="wholesale" {% if tag_filter == 'wholesale' %}selected{% endif %}>Wholesale</option>
+        <option value="new" {% if tag_filter == 'new' %}selected{% endif %}>New</option>
+      </select>
+      <button type="submit" class="bg-[#111111] hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-xl">
+        Filter
+      </button>
+      {% if query or tag_filter != 'all' %}
+        <a href="{% url 'dashboard:customers' %}" class="text-xs text-gray-500 hover:text-red-600 font-semibold px-2 py-2">Clear</a>
+      {% endif %}
+    </form>
+  </div>
+
+  <!-- Customers Table Card -->
+  <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm overflow-hidden space-y-4">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Customer</th>
+            <th class="pb-3">Tag</th>
+            <th class="pb-3">Contact</th>
+            <th class="pb-3">Orders</th>
+            <th class="pb-3">Total Spend</th>
+            <th class="pb-3">Last Order</th>
+            <th class="pb-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for customer in customers %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="py-3 font-bold text-[#111111]">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-[#111111] text-[#FFC928] font-black flex items-center justify-center text-xs flex-shrink-0">
+                  {{ customer.name|slice:":2"|upper }}
+                </div>
+                <div>
+                  <a href="{% url 'dashboard:customer_detail' customer_id=customer.id %}" class="font-extrabold text-sm text-[#111111] hover:text-[#E53935] hover:underline">
+                    {{ customer.name }}
+                  </a>
+                  <span class="text-[10px] text-gray-400 block">Registered {{ customer.created_at|date:"M d, Y" }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-3">
+              <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full {% if customer.customer_tag == 'vip' %}bg-amber-100 text-amber-800 border border-amber-300{% elif customer.customer_tag == 'wholesale' %}bg-purple-100 text-purple-800{% elif customer.customer_tag == 'regular' %}bg-blue-100 text-blue-800{% else %}bg-gray-100 text-gray-700{% endif %}">
+                {{ customer.get_customer_tag_display }}
+              </span>
+            </td>
+            <td class="py-3">
+              <a href="mailto:{{ customer.email }}" class="font-medium text-blue-600 hover:underline block">{{ customer.email }}</a>
+              {% if customer.phone %}<span class="text-[10px] text-gray-400">{{ customer.phone }}</span>{% endif %}
+            </td>
+            <td class="py-3 font-bold text-gray-800">{{ customer.total_orders }}</td>
+            <td class="py-3 font-black text-[#111111]">₦{{ customer.total_spend|floatformat:0|intcomma }}</td>
+            <td class="py-3 text-gray-500">
+              {% if customer.last_order %}
+                {{ customer.last_order.created_at|date:"M d, Y" }}
+              {% else %}
+                <span class="text-gray-300">—</span>
+              {% endif %}
+            </td>
+            <td class="py-3 text-right space-x-2">
+              <a href="{% url 'dashboard:customer_detail' customer_id=customer.id %}" class="text-xs font-bold text-blue-600 hover:underline">
+                View Profile ↗
+              </a>
+              <span class="text-gray-300">|</span>
+              <form method="post" action="{% url 'dashboard:customer_delete' customer_id=customer.id %}" class="inline" onsubmit="return confirm('Remove customer record \'{{ customer.name }}\'?');">
+                {% csrf_token %}
+                <button type="submit" class="text-xs font-bold text-[#E53935] hover:underline">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="py-8 text-center text-gray-400">
+              No customer records found. As customers place orders, or when you click <a href="{% url 'dashboard:customer_create' %}" class="text-[#E53935] font-bold underline">Add Customer</a>, records will appear here.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

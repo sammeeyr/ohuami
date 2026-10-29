@@ -89,6 +89,8 @@ def api_update_merchant_status(request):
         tier_id = data.get('tier_id')
         commission_override = data.get('commission_override')
         custom_domain = data.get('custom_domain')
+        bvn_verified = data.get('bvn_verified')
+        verification_notes = data.get('verification_notes')
 
         store = get_object_or_404(Store, id=store_id)
 
@@ -115,6 +117,12 @@ def api_update_merchant_status(request):
             store.custom_domain = custom_domain.strip()
             if store.custom_domain:
                 store.custom_domain_verified = True
+
+        if bvn_verified is not None:
+            store.bvn_verified = bool(bvn_verified)
+
+        if verification_notes is not None:
+            store.verification_notes = str(verification_notes).strip()
 
         store.save()
 

@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Order #{{ order.order_reference }} Details — {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Breadcrumbs & Nav -->
+  <div class="flex items-center justify-between">
+    <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold">
+      <a href="{% url 'accounts:profile' %}" class="hover:text-gray-700">Account</a>
+      <span>›</span>
+      <a href="{% url 'orders:history' %}" class="hover:text-gray-700">Orders</a>
+      <span>›</span>
+      <span class="text-[#E53935] font-bold">#{{ order.order_reference }}</span>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <button onclick="window.print()" class="text-xs font-bold text-gray-700 hover:text-black border border-gray-300 rounded-full px-3 py-1.5 bg-white shadow-xs">
+        🖨 Print Invoice
+      </button>
+      <a href="{% url 'support:contact' %}?ref={{ order.order_reference }}" class="text-xs font-bold text-[#E53935] hover:underline">
+        Need Help?
+      </a>
+    </div>
+  </div>
+
+  <!-- Order Status Header Card -->
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-5">
+      <div>
+        <span class="text-[11px] font-bold uppercase tracking-wider text-gray-400 block">Official Order Receipt</span>
+        <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Order #{{ order.order_reference }}</h1>
+        <p class="text-xs text-gray-500 mt-0.5">Placed on {{ order.created_at|date:"F d, Y • h:i A" }}</p>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <span class="text-xs font-black px-3 py-1 rounded-full {% if order.payment_status == 'paid' %}bg-emerald-100 text-emerald-800{% else %}bg-amber-100 text-amber-800{% endif %}">
+          Payment: {{ order.get_payment_status_display }}
+        </span>
+        <span class="text-xs font-black px-3 py-1 rounded-full bg-blue-50 text-blue-800">
+          {{ order.get_fulfillment_status_display }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Live 4-Stage Fulfillment Timeline -->
+    <div class="py-2">
+      <h3 class="text-xs font-extrabold uppercase tracking-wider text-gray-400 mb-6">Fulfillment Tracking</h3>
+      
+      <div class="grid grid-cols-4 gap-2 relative">
+        
+        <!-- Step 1: Placed -->
+        <div class="text-center relative">
+          <div class="w-8 h-8 mx-auto rounded-full {% if status_step >= 1 %}bg-[#10B981] text-white{% else %}bg-gray-200 text-gray-500{% endif %} flex items-center justify-center font-bold text-xs mb-2 shadow-sm">
+            ✓
+          </div>
+          <span class="text-xs font-extrabold text-[#111111] block">Order Placed</span>
+          <span class="text-[10px] text-gray-400 block">{{ order.created_at|date:"M d" }}</span>
+        </div>
+
+        <!-- Step 2: Payment Verified -->
+        <div class="text-center relative">
+          <div class="w-8 h-8 mx-auto rounded-full {% if status_step >= 2 %}bg-[#10B981] text-white{% else %}bg-gray-200 text-gray-500{% endif %} flex items-center justify-center font-bold text-xs mb-2 shadow-sm">
+            {% if status_step >= 2 %}✓{% else %}2{% endif %}
+          </div>
+          <span class="text-xs font-extrabold text-[#111111] block">Payment Verified</span>
+          <span class="text-[10px] text-gray-400 block">Paystack</span>
+        </div>
+
+        <!-- Step 3: Processing -->
+        <div class="text-center relative">
+          <div class="w-8 h-8 mx-auto rounded-full {% if status_step >= 3 %}bg-[#10B981] text-white{% elif status_step == 2 %}bg-[#FFC928] text-[#111111] animate-pulse{% else %}bg-gray-200 text-gray-500{% endif %} flex items-center justify-center font-bold text-xs mb-2 shadow-sm">
+            {% if status_step >= 3 %}✓{% else %}3{% endif %}
+          </div>
+          <span class="text-xs font-extrabold text-[#111111] block">Processing</span>
+          <span class="text-[10px] text-gray-400 block">Packaging</span>
+        </div>
+
+        <!-- Step 4: Dispatched / Delivered -->
+        <div class="text-center relative">
+          <div class="w-8 h-8 mx-auto rounded-full {% if status_step >= 4 %}bg-[#10B981] text-white{% else %}bg-gray-200 text-gray-500{% endif %} flex items-center justify-center font-bold text-xs mb-2 shadow-sm">
+            {% if status_step >= 5 %}✓{% else %}4{% endif %}
+          </div>
+          <span class="text-xs font-extrabold text-[#111111] block">{% if status_step == 5 %}Delivered{% else %}Dispatched{% endif %}</span>
+          <span class="text-[10px] text-gray-400 block">Carrier Delivery</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 2-Column: Order Items & Delivery/Payment Details -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left: Order Items List (lg:col-span-7) -->
+    <div class="lg:col-span-7 bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+      <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider pb-2 border-b border-gray-100">
+        Ordered Products ({{ order.items.count }})
+      </h3>
+
+      <div class="divide-y divide-gray-100">
+        {% for item in order.items.all %}
+        <div class="py-3.5 flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-14 h-14 rounded-xl bg-gray-100 border border-gray-200 overflow-hidden flex items-center justify-center flex-shrink-0 text-xl font-bold">
+              📦
+            </div>
+            <div class="space-y-0.5">
+              <h4 class="text-xs sm:text-sm font-bold text-[#111111]">{{ item.product_name }}</h4>
+              {% if item.variant_name %}
+                <span class="text-[11px] text-gray-500 block">{{ item.variant_name }}</span>
+              {% endif %}
+              <span class="text-[11px] text-gray-400">Qty: {{ item.quantity }} × ₦{{ item.unit_price|floatformat:0|intcomma }}</span>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <span class="text-sm font-black text-[#111111]">₦{{ item.line_total|floatformat:0|intcomma }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Right: Summary & Delivery Details (lg:col-span-5) -->
+    <div class="lg:col-span-5 space-y-6">
+
+      <!-- Order Summary Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-3.5">
+        <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider pb-2 border-b border-gray-100">
+          Payment Breakdown
+        </h3>
+
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between text-gray-600">
+            <span>Items Subtotal:</span>
+            <span class="font-bold text-[#111111]">₦{{ order.items_subtotal|floatformat:0|intcomma }}</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Shipping & Handling:</span>
+            <span class="font-bold text-[#111111]">₦{{ order.shipping_fee|floatformat:0|intcomma }}</span>
+          </div>
+          {% if order.discount_amount > 0 %}
+          <div class="flex justify-between text-emerald-600 font-bold">
+            <span>Promotional Discount:</span>
+            <span>-₦{{ order.discount_amount|floatformat:0|intcomma }}</span>
+          </div>
+          {% endif %}
+
+          <div class="pt-3 border-t border-gray-200 flex justify-between items-baseline">
+            <span class="text-sm font-bold text-[#111111]">Total Amount Paid:</span>
+            <span class="text-xl font-black text-[#E53935]">₦{{ order.total_amount|floatformat:0|intcomma }}</span>
+          </div>
+        </div>
+
+        <div class="pt-2 text-[11px] text-gray-500">
+          <span>Payment Gateway: <strong>{{ order.get_payment_method_display }}</strong></span>
+        </div>
+      </div>
+
+      <!-- Shipping Information Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-3">
+        <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider pb-2 border-b border-gray-100">
+          Shipping & Delivery Address
+        </h3>
+
+        <div class="text-xs text-gray-700 space-y-1">
+          <p class="font-black text-sm text-[#111111]">{{ order.shipping_recipient_name }}</p>
+          <p class="text-gray-500 font-semibold">{{ order.shipping_phone }}</p>
+          <p class="text-gray-600">{{ order.shipping_street_address }}</p>
+          <p class="text-gray-600">{{ order.shipping_city }}, {{ order.shipping_state }}, {{ order.shipping_country }}</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

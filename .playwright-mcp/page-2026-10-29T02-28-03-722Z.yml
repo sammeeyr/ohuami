@@ -1,0 +1,275 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e3]:
+    - generic [ref=f1e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f1e5]:
+      - generic [ref=f1e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f1e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f1e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f1e9]:
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]:
+        - link [ref=f1e12] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f1e13]
+        - generic [ref=f1e15]:
+          - generic [ref=f1e16]: Sunshine Fashion
+          - button "+ Follow" [ref=f1e17] [cursor=pointer]:
+            - generic [ref=f1e18]: +
+            - text: Follow
+      - navigation [ref=f1e19]:
+        - link "Shop" [ref=f1e20] [cursor=pointer]:
+          - /url: "#featured-products"
+        - link "Categories" [ref=f1e24] [cursor=pointer]:
+          - /url: "#categories-section"
+        - link "About" [ref=f1e25] [cursor=pointer]:
+          - /url: "#about-store"
+      - generic [ref=f1e26]:
+        - link "Search" [ref=f1e27] [cursor=pointer]:
+          - /url: /catalog/search/
+        - link "Profile" [ref=f1e30] [cursor=pointer]:
+          - /url: /accounts/profile/
+        - link "3" [ref=f1e33] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f1e37]:
+    - generic [ref=f1e38]:
+      - generic [ref=f1e39]:
+        - img "Style That Speaks You" [ref=f1e41]
+        - generic [ref=f1e43]:
+          - generic [ref=f1e44]: Trendy. Classy. Affordable.
+          - heading "Style that speaks you." [level=1] [ref=f1e45]: Style thatspeaks you.
+          - paragraph [ref=f1e46]: Discover the latest fashion, accessories and lifestyle essentials — all in one place.
+          - link "Shop Now" [ref=f1e48] [cursor=pointer]:
+            - /url: "#featured-products"
+      - generic [ref=f1e50]:
+        - link "Women Women" [ref=f1e51] [cursor=pointer]:
+          - /url: /catalog/category/women/
+          - img "Women" [ref=f1e53]
+          - generic [ref=f1e54]: Women
+        - link "Men Men" [ref=f1e55] [cursor=pointer]:
+          - /url: /catalog/category/men/
+          - img "Men" [ref=f1e57]
+          - generic [ref=f1e58]: Men
+        - link "Bags Bags" [ref=f1e59] [cursor=pointer]:
+          - /url: /catalog/category/bags/
+          - img "Bags" [ref=f1e61]
+          - generic [ref=f1e62]: Bags
+        - link "Shoes Shoes" [ref=f1e63] [cursor=pointer]:
+          - /url: /catalog/category/shoes/
+          - img "Shoes" [ref=f1e65]
+          - generic [ref=f1e66]: Shoes
+        - link "Accessories Accessories" [ref=f1e67] [cursor=pointer]:
+          - /url: /catalog/category/accessories/
+          - img "Accessories" [ref=f1e69]
+          - generic [ref=f1e70]: Accessories
+        - link "Beauty Beauty" [ref=f1e71] [cursor=pointer]:
+          - /url: /catalog/category/beauty/
+          - img "Beauty" [ref=f1e73]
+          - generic [ref=f1e74]: Beauty
+      - generic [ref=f1e75]:
+        - generic [ref=f1e76]:
+          - heading "Featured Products" [level=2] [ref=f1e77]
+          - link "View all →" [ref=f1e78] [cursor=pointer]:
+            - /url: /catalog/
+            - generic [ref=f1e79]: View all
+            - generic [ref=f1e80]: →
+        - generic [ref=f1e81]:
+          - generic [ref=f1e82]:
+            - generic [ref=f1e83]:
+              - link [ref=f1e84] [cursor=pointer]:
+                - /url: /catalog/product/classy-handbag/
+                - img "Classy Handbag" [ref=f1e85]
+              - generic [ref=f1e86]: Hot
+              - button [ref=f1e87] [cursor=pointer]
+            - generic [ref=f1e90]:
+              - generic [ref=f1e91]:
+                - generic [ref=f1e92]: Bags
+                - link "Classy Handbag" [ref=f1e93] [cursor=pointer]:
+                  - /url: /catalog/product/classy-handbag/
+                - generic [ref=f1e94]:
+                  - generic [ref=f1e95]: ★★★★★
+                  - generic [ref=f1e96]: (24)
+              - generic [ref=f1e97]:
+                - generic [ref=f1e98]:
+                  - generic [ref=f1e99]: ₦18500
+                  - generic [ref=f1e100]: ₦24000
+                - button "Add to Cart" [ref=f1e101] [cursor=pointer]
+          - generic [ref=f1e104]:
+            - generic [ref=f1e105]:
+              - link [ref=f1e106] [cursor=pointer]:
+                - /url: /catalog/product/elegant-midi-dress/
+                - img "Elegant Midi Dress" [ref=f1e107]
+              - generic [ref=f1e108]: "-20%"
+              - button [ref=f1e109] [cursor=pointer]
+            - generic [ref=f1e112]:
+              - generic [ref=f1e113]:
+                - generic [ref=f1e114]: Women
+                - link "Elegant Midi Dress" [ref=f1e115] [cursor=pointer]:
+                  - /url: /catalog/product/elegant-midi-dress/
+                - generic [ref=f1e116]:
+                  - generic [ref=f1e117]: ★★★★★
+                  - generic [ref=f1e118]: (24)
+              - generic [ref=f1e119]:
+                - generic [ref=f1e120]:
+                  - generic [ref=f1e121]: ₦28000
+                  - generic [ref=f1e122]: ₦35000
+                - button "Add to Cart" [ref=f1e123] [cursor=pointer]
+          - generic [ref=f1e126]:
+            - generic [ref=f1e127]:
+              - link [ref=f1e128] [cursor=pointer]:
+                - /url: /catalog/product/glow-radiance-serum/
+                - img "Glow Radiance Vitamin C Serum" [ref=f1e129]
+              - button [ref=f1e130] [cursor=pointer]
+            - generic [ref=f1e133]:
+              - generic [ref=f1e134]:
+                - generic [ref=f1e135]: Beauty
+                - link "Glow Radiance Vitamin C Serum" [ref=f1e136] [cursor=pointer]:
+                  - /url: /catalog/product/glow-radiance-serum/
+                - generic [ref=f1e137]:
+                  - generic [ref=f1e138]: ★★★★★
+                  - generic [ref=f1e139]: (24)
+              - generic [ref=f1e140]:
+                - generic [ref=f1e141]:
+                  - generic [ref=f1e142]: ₦12500
+                  - generic [ref=f1e143]: ₦15000
+                - button "Add to Cart" [ref=f1e144] [cursor=pointer]
+          - generic [ref=f1e147]:
+            - generic [ref=f1e148]:
+              - link [ref=f1e149] [cursor=pointer]:
+                - /url: /catalog/product/retro-aviator-sunglasses/
+                - img "Retro Aviator Sunglasses" [ref=f1e150]
+              - button [ref=f1e151] [cursor=pointer]
+            - generic [ref=f1e154]:
+              - generic [ref=f1e155]:
+                - generic [ref=f1e156]: Accessories
+                - link "Retro Aviator Sunglasses" [ref=f1e157] [cursor=pointer]:
+                  - /url: /catalog/product/retro-aviator-sunglasses/
+                - generic [ref=f1e158]:
+                  - generic [ref=f1e159]: ★★★★★
+                  - generic [ref=f1e160]: (24)
+              - generic [ref=f1e161]:
+                - generic [ref=f1e162]:
+                  - generic [ref=f1e163]: ₦9500
+                  - generic [ref=f1e164]: ₦12000
+                - button "Add to Cart" [ref=f1e165] [cursor=pointer]
+          - generic [ref=f1e168]:
+            - generic [ref=f1e169]:
+              - link [ref=f1e170] [cursor=pointer]:
+                - /url: /catalog/product/casual-linen-shirt/
+                - img "Casual Linen Shirt" [ref=f1e171]
+              - button [ref=f1e172] [cursor=pointer]
+            - generic [ref=f1e175]:
+              - generic [ref=f1e176]:
+                - generic [ref=f1e177]: Men
+                - link "Casual Linen Shirt" [ref=f1e178] [cursor=pointer]:
+                  - /url: /catalog/product/casual-linen-shirt/
+                - generic [ref=f1e179]:
+                  - generic [ref=f1e180]: ★★★★★
+                  - generic [ref=f1e181]: (24)
+              - generic [ref=f1e182]:
+                - generic [ref=f1e183]:
+                  - generic [ref=f1e184]: ₦16000
+                  - generic [ref=f1e185]: ₦20000
+                - button "Add to Cart" [ref=f1e186] [cursor=pointer]
+          - generic [ref=f1e189]:
+            - generic [ref=f1e190]:
+              - link [ref=f1e191] [cursor=pointer]:
+                - /url: /catalog/product/white-sneakers/
+                - img "White Sneakers" [ref=f1e192]
+              - generic [ref=f1e193]: Popular
+              - button [ref=f1e194] [cursor=pointer]
+            - generic [ref=f1e197]:
+              - generic [ref=f1e198]:
+                - generic [ref=f1e199]: Shoes
+                - link "White Sneakers" [ref=f1e200] [cursor=pointer]:
+                  - /url: /catalog/product/white-sneakers/
+                - generic [ref=f1e201]:
+                  - generic [ref=f1e202]: ★★★★★
+                  - generic [ref=f1e203]: (24)
+              - generic [ref=f1e204]:
+                - generic [ref=f1e205]:
+                  - generic [ref=f1e206]: ₦22000
+                  - generic [ref=f1e207]: ₦28000
+                - button "Add to Cart" [ref=f1e208] [cursor=pointer]
+      - generic [ref=f1e212]:
+        - generic [ref=f1e213]:
+          - generic [ref=f1e214]: 🚚
+          - generic [ref=f1e215]:
+            - heading "Nationwide Fast Delivery" [level=4] [ref=f1e216]
+            - paragraph [ref=f1e217]: Prompt, insured dispatch to your doorstep anywhere in Nigeria.
+        - generic [ref=f1e218]:
+          - generic [ref=f1e219]: 🔒
+          - generic [ref=f1e220]:
+            - heading "Verified Secure Payments" [level=4] [ref=f1e221]
+            - paragraph [ref=f1e222]: Pay via Paystack using Card, Bank Transfer, USSD or Cash on Delivery.
+        - generic [ref=f1e223]:
+          - generic [ref=f1e224]: ✨
+          - generic [ref=f1e225]:
+            - heading "Authentic Quality Guaranteed" [level=4] [ref=f1e226]
+            - paragraph [ref=f1e227]: Every garment and accessory is vetted for premium stitching and durability.
+  - contentinfo [ref=f1e228]:
+    - generic [ref=f1e229]:
+      - generic [ref=f1e230]:
+        - link [ref=f1e231] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f1e232]
+        - paragraph [ref=f1e233]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=f1e234]:
+          - text: "Parent Company:"
+          - strong [ref=f1e235]: Cube Tech Enterprises
+      - generic [ref=f1e236]:
+        - heading "Shop & Discover" [level=4] [ref=f1e237]
+        - list [ref=f1e238]:
+          - listitem [ref=f1e239]:
+            - link "All Products & Gadgets" [ref=f1e240] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=f1e241]:
+            - link "⚡ Flash Sale Deals" [ref=f1e242] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=f1e243]:
+            - link "🎟 Active Promo Coupons" [ref=f1e244] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=f1e245]:
+            - link "Sunshine Fashion Flagship" [ref=f1e246] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=f1e247]:
+        - heading "Customer Care" [level=4] [ref=f1e248]
+        - list [ref=f1e249]:
+          - listitem [ref=f1e250]:
+            - link "Contact Us & Support Tickets" [ref=f1e251] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=f1e252]:
+            - link "Order Tracking & Receipts" [ref=f1e253] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=f1e254]:
+            - link "My Account & Addresses" [ref=f1e255] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=f1e256]:
+            - 'link "Tel: +234 800 2823 8324" [ref=f1e257] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=f1e258]:
+        - heading "Sell on OHUAMI" [level=4] [ref=f1e259]
+        - list [ref=f1e260]:
+          - listitem [ref=f1e261]:
+            - link "Merchant Dashboard" [ref=f1e262] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=f1e263]:
+            - link "Product Management" [ref=f1e264] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=f1e265]:
+            - link "Order Fulfillment" [ref=f1e266] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=f1e267]:
+            - link "Platform Control Center" [ref=f1e268] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=f1e269]:
+      - generic [ref=f1e270]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=f1e271]:
+        - generic [ref=f1e272]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=f1e273]: •
+        - generic [ref=f1e274]: Paystack Verified
+        - generic [ref=f1e275]: •
+        - generic [ref=f1e276]: Nationwide Express Logistics
+  - button "Customer Support" [ref=f1e277] [cursor=pointer]

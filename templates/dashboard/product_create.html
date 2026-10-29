@@ -1,0 +1,569 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}{% if is_editing %}Edit {{ product.name }}{% else %}Add New Product{% endif %} — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold mb-1">
+        <a href="{% url 'dashboard:index' %}" class="hover:text-gray-700">Dashboard</a>
+        <span>›</span>
+        <a href="{% url 'dashboard:products' %}" class="hover:text-gray-700">Products</a>
+        <span>›</span>
+        <span class="text-[#E53935] font-bold">{% if is_editing %}Edit Product #{{ product.id }}{% else %}New Product{% endif %}</span>
+      </nav>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111] flex items-center gap-3">
+        {% if is_editing %}Edit Product: {{ product.name }}{% else %}Create New Catalog Product{% endif %}
+      </h1>
+      <p class="text-xs text-gray-500 mt-0.5">Upload gallery photos, configure variants, and preview your live product page in real time.</p>
+    </div>
+
+    <!-- Mobile Tab Switcher (Visible on small screens) -->
+    <div class="flex items-center gap-2 lg:hidden">
+      <button type="button" onclick="showFormTab()" id="tabBtnForm" class="text-xs font-bold px-4 py-2 rounded-xl bg-[#111111] text-[#FFC928]">
+        ✏️ Edit Form
+      </button>
+      <button type="button" onclick="showPreviewTab()" id="tabBtnPreview" class="text-xs font-bold px-4 py-2 rounded-xl bg-gray-100 text-gray-700">
+        👁️ Live Preview
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Split Screen: Form on Left (7 cols), Live Preview on Right (5 cols) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- ===================================================================== -->
+    <!-- 1. PRODUCT FORM (LEFT COLUMN - 7 COLS) -->
+    <!-- ===================================================================== -->
+    <div id="formSection" class="lg:col-span-7 space-y-6">
+
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+        <form method="POST" enctype="multipart/form-data" action="{% if is_editing %}{% url 'dashboard:product_edit' product_id=product.id %}{% else %}{% url 'dashboard:product_create' %}{% endif %}" class="space-y-6">
+          {% csrf_token %}
+
+          <!-- Section A: Title & Category -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-black uppercase text-gray-400 tracking-wider">General Information</h3>
+            
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Product Title <span class="text-[#E53935]">*</span></label>
+              {{ form.name }}
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Category <span class="text-[#E53935]">*</span></label>
+                {{ form.category }}
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Brand</label>
+                {{ form.brand }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Section B: Media & Gallery Uploads -->
+          <div class="space-y-4 border-t border-gray-100 pt-6">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-black uppercase text-gray-400 tracking-wider">Product Photos & Media</h3>
+              <span class="text-[11px] text-gray-400">PNG, JPG, WEBP up to 5MB</span>
+            </div>
+
+            <!-- Primary Cover Image Upload -->
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1.5">
+                Primary Cover Image <span class="text-[#E53935]">*</span>
+              </label>
+              <div class="border-2 border-dashed border-gray-200 hover:border-[#E53935] rounded-2xl p-4 transition bg-gray-50/50">
+                <div class="flex items-center gap-4">
+                  <div class="w-16 h-16 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0 border border-gray-200 flex items-center justify-center" id="primaryImagePreviewBox">
+                    {% if is_editing and product.primary_image %}
+                      <img src="{{ product.primary_image.image.url }}" alt="Primary" class="w-full h-full object-cover" id="primaryImagePreviewImg">
+                    {% else %}
+                      <span class="text-gray-400 text-xs font-bold" id="primaryImagePlaceholder">IMG</span>
+                      <img src="" alt="Primary Preview" class="w-full h-full object-cover hidden" id="primaryImagePreviewImg">
+                    {% endif %}
+                  </div>
+                  <div class="flex-1">
+                    {{ form.primary_image }}
+                    <span class="text-[10px] text-gray-400 mt-1 block">This image will appear on catalog cards and the top of the storefront gallery.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional Gallery Images Upload -->
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1.5">
+                Additional Gallery Photos (Multiple)
+              </label>
+              <div class="border-2 border-dashed border-gray-200 hover:border-gray-400 rounded-2xl p-4 transition bg-gray-50/50">
+                {{ form.additional_images }}
+                <span class="text-[10px] text-gray-400 mt-1 block">Upload extra angles, lifestyle shots, or fabric close-ups.</span>
+              </div>
+            </div>
+
+            <!-- Existing Photos Gallery (If Editing) -->
+            {% if is_editing and existing_images %}
+            <div class="space-y-2 pt-2">
+              <span class="text-xs font-bold text-gray-700 block">Existing Gallery Photos ({{ existing_images.count }})</span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {% for img in existing_images %}
+                <div class="relative group rounded-2xl overflow-hidden border border-gray-200 bg-gray-50 aspect-square">
+                  <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                  
+                  {% if img.is_primary %}
+                    <span class="absolute top-1.5 left-1.5 bg-[#10B981] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-full shadow-sm">
+                      Cover Photo
+                    </span>
+                  {% else %}
+                    <form method="post" action="{% url 'dashboard:product_image_set_primary' product_id=product.id image_id=img.id %}" class="absolute top-1.5 left-1.5">
+                      {% csrf_token %}
+                      <button type="submit" class="bg-black/75 hover:bg-black text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-sm transition">
+                        Set Primary
+                      </button>
+                    </form>
+                  {% endif %}
+
+                  <form method="post" action="{% url 'dashboard:product_image_delete' product_id=product.id image_id=img.id %}" onsubmit="return confirm('Remove this image?');" class="absolute top-1.5 right-1.5">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-[#E53935] text-white w-6 h-6 rounded-full flex items-center justify-center text-xs font-black hover:bg-red-700 shadow-sm transition">
+                      ✕
+                    </button>
+                  </form>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+          <!-- Section C: Pricing & Stock -->
+          <div class="space-y-4 border-t border-gray-100 pt-6">
+            <h3 class="text-xs font-black uppercase text-gray-400 tracking-wider">Pricing & Inventory</h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Base Price (₦) <span class="text-[#E53935]">*</span></label>
+                {{ form.base_price }}
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Crossed-out Price (₦)</label>
+                {{ form.comparison_price }}
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Stock Quantity <span class="text-[#E53935]">*</span></label>
+                {{ form.stock_quantity }}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">SKU Code <span class="text-[#E53935]">*</span></label>
+                {{ form.sku }}
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Badge Text (e.g. -20% or Hot Deal)</label>
+                {{ form.badge_text }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Section D: Description -->
+          <div class="space-y-4 border-t border-gray-100 pt-6">
+            <h3 class="text-xs font-black uppercase text-gray-400 tracking-wider">Product Description</h3>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Full Description <span class="text-[#E53935]">*</span></label>
+              {{ form.description }}
+            </div>
+          </div>
+
+          <!-- Section E: Flags & Visibility -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
+            <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+              {{ form.is_active }}
+              <span class="font-bold text-emerald-800">Is Active</span>
+            </label>
+            <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+              {{ form.is_flash_sale }}
+              <span>Flash Sale</span>
+            </label>
+            <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+              {{ form.is_featured }}
+              <span>Featured</span>
+            </label>
+            <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+              {{ form.is_trending }}
+              <span>Trending</span>
+            </label>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="pt-4 flex items-center justify-between border-t border-gray-100">
+            <a href="{% url 'dashboard:products' %}" class="text-xs font-bold text-gray-500 hover:text-black">
+              ← Cancel
+            </a>
+            <button type="submit" class="bg-[#FFC928] hover:bg-[#F5B800] text-black font-extrabold text-xs px-8 py-3 rounded-full shadow-sm transition">
+              {% if is_editing %}Save Product Changes{% else %}Publish Product to Store{% endif %}
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- 2. LIVE STOREFRONT PREVIEW (RIGHT COLUMN - 5 COLS) -->
+    <!-- ===================================================================== -->
+    <div id="previewSection" class="lg:col-span-5 hidden lg:block sticky top-6 space-y-4">
+
+      <!-- Preview Header & Device Controls -->
+      <div class="bg-white rounded-2xl p-4 border border-gray-200/90 shadow-sm flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-black text-[#111111]">Storefront Live Preview</span>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <button type="button" onclick="setPreviewMode('desktop')" id="btnDeskMode" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-[#111111] text-white">
+            💻 Desktop
+          </button>
+          <button type="button" onclick="setPreviewMode('mobile')" id="btnMobMode" class="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200">
+            📱 Mobile
+          </button>
+          {% if is_editing %}
+          <a href="{% url 'catalog:product_detail' slug=product.slug %}" target="_blank" class="text-[11px] font-bold text-[#E53935] hover:underline ml-1">
+            Open ↗
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Preview Container: Faithfully Reproduces Screen 4 (PDP) -->
+      <div id="previewContainer" class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-6 transition-all duration-300 mx-auto w-full">
+
+        <!-- Storefront mini navigation bar simulation -->
+        <div class="flex items-center justify-between pb-3 border-b border-gray-100 text-xs">
+          <div class="flex items-center gap-2 font-bold text-[#111111]">
+            <img src="{% static 'images/ohuami-icon.svg' %}" alt="OHUAMI" class="h-5 w-auto">
+            <span class="text-[11px] font-extrabold">{{ store.name }}</span>
+          </div>
+          <span class="text-[10px] text-gray-400 font-mono">Storefront Preview</span>
+        </div>
+
+        <!-- Gallery & Product Detail Layout -->
+        <div class="space-y-5">
+
+          <!-- 1. Gallery Section (Thumbnails + Main Image with Badge) -->
+          <div class="flex gap-3">
+            <!-- Left Vertical Thumbnail Strip -->
+            <div class="flex flex-col gap-2 w-12 flex-shrink-0" id="previewThumbStrip">
+              <div class="w-12 h-14 rounded-xl border-2 border-[#111111] overflow-hidden bg-gray-100 flex items-center justify-center flex-shrink-0">
+                {% if is_editing and product.primary_image %}
+                  <img src="{{ product.primary_image.image.url }}" alt="Thumb" class="w-full h-full object-cover" id="previewThumb0">
+                {% else %}
+                  <img src="" alt="Thumb" class="w-full h-full object-cover hidden" id="previewThumb0">
+                  <span class="text-[10px] text-gray-400 font-bold" id="previewThumb0Placeholder">1</span>
+                {% endif %}
+              </div>
+              <div class="w-12 h-14 rounded-xl border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center flex-shrink-0 text-gray-300 text-[10px] font-bold">
+                2
+              </div>
+              <div class="w-12 h-14 rounded-xl border border-gray-200 overflow-hidden bg-gray-50 flex items-center justify-center flex-shrink-0 text-gray-300 text-[10px] font-bold">
+                3
+              </div>
+            </div>
+
+            <!-- Main Image with Sale Badge -->
+            <div class="flex-1 relative rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 aspect-[3/4] flex items-center justify-center">
+              {% if is_editing and product.primary_image %}
+                <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover" id="previewMainImg">
+                <div class="hidden flex-col items-center justify-center text-gray-400 p-4 text-center" id="previewMainImgPlaceholder">
+                  <span class="text-3xl mb-1">👗</span>
+                  <span class="text-xs font-bold text-gray-500">Image will appear here</span>
+                </div>
+              {% else %}
+                <img src="" alt="Live Preview" class="w-full h-full object-cover hidden" id="previewMainImg">
+                <div class="flex flex-col items-center justify-center text-gray-400 p-4 text-center" id="previewMainImgPlaceholder">
+                  <span class="text-3xl mb-1">👗</span>
+                  <span class="text-xs font-bold text-gray-500">Upload cover image to preview</span>
+                </div>
+              {% endif %}
+
+              <!-- Red Sale Discount Badge (Screen 4 Visual Direction) -->
+              <span id="previewDiscountBadge" class="absolute top-2.5 right-2.5 bg-[#E53935] text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-md">
+                {% if product.badge_text %}{{ product.badge_text }}{% elif product.discount_percentage %}-{{ product.discount_percentage }}%{% else %}SALE{% endif %}
+              </span>
+            </div>
+          </div>
+
+          <!-- 2. Product Detail Info -->
+          <div class="space-y-3">
+            
+            <!-- Category & Title -->
+            <div>
+              <span id="previewCategory" class="text-[10px] font-black uppercase text-gray-400 tracking-wider">
+                {{ product.category.name|default:"Fashion & Apparel" }}
+              </span>
+              <h2 id="previewTitle" class="text-lg font-black text-[#111111] leading-tight mt-0.5">
+                {{ product.name|default:"Elegant Midi Dress" }}
+              </h2>
+            </div>
+
+            <!-- Ratings Row (Screen 4 Reference) -->
+            <div class="flex items-center gap-2">
+              <div class="flex text-[#FFC928] text-xs">
+                ★★★★★
+              </div>
+              <span class="text-xs text-gray-500 font-semibold">(24 reviews)</span>
+            </div>
+
+            <!-- Price Display (Bold Black + Crossed out Gray) -->
+            <div class="flex items-baseline gap-2.5">
+              <span id="previewPrice" class="text-xl font-black text-[#111111]">
+                ₦{{ product.base_price|default:"28000"|floatformat:0|intcomma }}
+              </span>
+              <span id="previewCompPrice" class="text-xs text-gray-400 line-through font-semibold">
+                {% if product.comparison_price %}₦{{ product.comparison_price|floatformat:0|intcomma }}{% else %}₦35,000{% endif %}
+              </span>
+            </div>
+
+            <!-- Description Paragraph -->
+            <p id="previewDesc" class="text-xs text-gray-600 leading-relaxed line-clamp-3">
+              {{ product.description|default:"A perfect blend of style and comfort. Designed for modern living with premium fabrics and flawless tailoring." }}
+            </p>
+
+            <!-- Color Swatches (Screen 4) -->
+            <div class="space-y-1.5 pt-1">
+              <span class="text-[10px] font-black uppercase text-gray-500">Color Options</span>
+              <div class="flex items-center gap-2">
+                <button type="button" class="w-6 h-6 rounded-full bg-[#8B1E3F] ring-2 ring-offset-2 ring-[#111111] cursor-default"></button>
+                <button type="button" class="w-6 h-6 rounded-full bg-[#111111] cursor-default"></button>
+                <button type="button" class="w-6 h-6 rounded-full bg-[#EFE8DC] border border-gray-300 cursor-default"></button>
+              </div>
+            </div>
+
+            <!-- Size Pills (Screen 4) -->
+            <div class="space-y-1.5">
+              <span class="text-[10px] font-black uppercase text-gray-500">Select Size</span>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[11px] font-bold px-3 py-1 rounded-lg border border-gray-200 text-gray-700">S</span>
+                <span class="text-[11px] font-bold px-3 py-1 rounded-lg bg-[#111111] text-white">M</span>
+                <span class="text-[11px] font-bold px-3 py-1 rounded-lg border border-gray-200 text-gray-700">L</span>
+                <span class="text-[11px] font-bold px-3 py-1 rounded-lg border border-gray-200 text-gray-700">XL</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons: Add to Cart & Buy Now CTA -->
+            <div class="space-y-2 pt-2">
+              <button type="button" class="w-full bg-white hover:bg-gray-50 text-[#111111] font-extrabold text-xs py-3 rounded-full border border-gray-200 transition shadow-sm">
+                Add to Cart
+              </button>
+              <button type="button" class="w-full bg-[#FFC928] hover:bg-[#F5B800] text-[#111111] font-black text-xs py-3 rounded-full shadow-md transition">
+                Buy Now
+              </button>
+            </div>
+
+            <!-- Trust Row -->
+            <div class="grid grid-cols-3 gap-1 pt-3 text-[10px] text-gray-500 text-center border-t border-gray-100 font-medium">
+              <div>🚚 Fast Delivery</div>
+              <div>🔒 Secure Payments</div>
+              <div>🔄 Easy Returns</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Client-side Real-time Preview Synchronization Script -->
+<script>
+function formatNaira(val) {
+  if (!val || isNaN(val)) return '₦0';
+  const num = parseFloat(val);
+  return '₦' + num.toLocaleString('en-US');
+}
+
+function updateLivePreview() {
+  // 1. Title
+  const nameInput = document.getElementById('id_name');
+  const previewTitle = document.getElementById('previewTitle');
+  if (nameInput && previewTitle) {
+    previewTitle.textContent = nameInput.value.trim() || 'Product Title';
+  }
+
+  // 2. Base Price
+  const basePriceInput = document.getElementById('id_base_price');
+  const previewPrice = document.getElementById('previewPrice');
+  if (basePriceInput && previewPrice) {
+    previewPrice.textContent = formatNaira(basePriceInput.value);
+  }
+
+  // 3. Comparison Price & Discount Calculation
+  const compPriceInput = document.getElementById('id_comparison_price');
+  const previewCompPrice = document.getElementById('previewCompPrice');
+  const badgeTextInput = document.getElementById('id_badge_text');
+  const previewDiscountBadge = document.getElementById('previewDiscountBadge');
+
+  const baseVal = parseFloat(basePriceInput ? basePriceInput.value : 0) || 0;
+  const compVal = parseFloat(compPriceInput ? compPriceInput.value : 0) || 0;
+
+  if (compPriceInput && previewCompPrice) {
+    if (compVal > 0) {
+      previewCompPrice.textContent = formatNaira(compVal);
+      previewCompPrice.classList.remove('hidden');
+    } else {
+      previewCompPrice.classList.add('hidden');
+    }
+  }
+
+  // 4. Badge text
+  if (previewDiscountBadge) {
+    if (badgeTextInput && badgeTextInput.value.trim()) {
+      previewDiscountBadge.textContent = badgeTextInput.value.trim();
+      previewDiscountBadge.classList.remove('hidden');
+    } else if (compVal > baseVal && baseVal > 0) {
+      const discountPct = Math.round(((compVal - baseVal) / compVal) * 100);
+      previewDiscountBadge.textContent = `-${discountPct}%`;
+      previewDiscountBadge.classList.remove('hidden');
+    } else {
+      previewDiscountBadge.textContent = 'HOT';
+    }
+  }
+
+  // 5. Description
+  const descInput = document.getElementById('id_description');
+  const previewDesc = document.getElementById('previewDesc');
+  if (descInput && previewDesc) {
+    previewDesc.textContent = descInput.value.trim() || 'Product description will appear here...';
+  }
+
+  // 6. Category
+  const catInput = document.getElementById('id_category');
+  const previewCat = document.getElementById('previewCategory');
+  if (catInput && previewCat && catInput.selectedIndex >= 0) {
+    previewCat.textContent = catInput.options[catInput.selectedIndex].text;
+  }
+}
+
+// Attach event listeners for real-time live typing updates
+document.addEventListener('DOMContentLoaded', function() {
+  const inputs = ['id_name', 'id_base_price', 'id_comparison_price', 'id_badge_text', 'id_description', 'id_category'];
+  inputs.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', updateLivePreview);
+      el.addEventListener('change', updateLivePreview);
+    }
+  });
+
+  // Primary image client-side instant preview
+  const primaryInput = document.getElementById('id_primary_image');
+  if (primaryInput) {
+    primaryInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const mainImg = document.getElementById('previewMainImg');
+          const placeholder = document.getElementById('previewMainImgPlaceholder');
+          const thumb0 = document.getElementById('previewThumb0');
+          const thumb0Placeholder = document.getElementById('previewThumb0Placeholder');
+          const formPreviewImg = document.getElementById('primaryImagePreviewImg');
+          const formPlaceholder = document.getElementById('primaryImagePlaceholder');
+
+          if (mainImg) {
+            mainImg.src = evt.target.result;
+            mainImg.classList.remove('hidden');
+          }
+          if (placeholder) placeholder.classList.add('hidden');
+
+          if (thumb0) {
+            thumb0.src = evt.target.result;
+            thumb0.classList.remove('hidden');
+          }
+          if (thumb0Placeholder) thumb0Placeholder.classList.add('hidden');
+
+          if (formPreviewImg) {
+            formPreviewImg.src = evt.target.result;
+            formPreviewImg.classList.remove('hidden');
+          }
+          if (formPlaceholder) formPlaceholder.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  // Initial update
+  updateLivePreview();
+});
+
+// Device view switcher
+function setPreviewMode(mode) {
+  const container = document.getElementById('previewContainer');
+  const btnDesk = document.getElementById('btnDeskMode');
+  const btnMob = document.getElementById('btnMobMode');
+
+  if (mode === 'mobile') {
+    container.classList.add('max-w-sm', 'border-gray-800', 'shadow-2xl');
+    btnMob.className = 'text-[11px] font-bold px-2.5 py-1 rounded-lg bg-[#111111] text-white';
+    btnDesk.className = 'text-[11px] font-bold px-2.5 py-1 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200';
+  } else {
+    container.classList.remove('max-w-sm', 'border-gray-800', 'shadow-2xl');
+    btnDesk.className = 'text-[11px] font-bold px-2.5 py-1 rounded-lg bg-[#111111] text-white';
+    btnMob.className = 'text-[11px] font-bold px-2.5 py-1 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200';
+  }
+}
+
+// Mobile responsive tabs
+function showFormTab() {
+  document.getElementById('formSection').classList.remove('hidden');
+  document.getElementById('previewSection').classList.add('hidden');
+  document.getElementById('tabBtnForm').className = 'text-xs font-bold px-4 py-2 rounded-xl bg-[#111111] text-[#FFC928]';
+  document.getElementById('tabBtnPreview').className = 'text-xs font-bold px-4 py-2 rounded-xl bg-gray-100 text-gray-700';
+}
+
+function showPreviewTab() {
+  document.getElementById('formSection').classList.add('hidden');
+  document.getElementById('previewSection').classList.remove('hidden');
+  document.getElementById('tabBtnPreview').className = 'text-xs font-bold px-4 py-2 rounded-xl bg-[#111111] text-[#FFC928]';
+  document.getElementById('tabBtnForm').className = 'text-xs font-bold px-4 py-2 rounded-xl bg-gray-100 text-gray-700';
+}
+</script>
+{% endblock %}

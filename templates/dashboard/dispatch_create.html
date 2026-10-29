@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dispatch Order — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="border-b border-gray-200 pb-5">
+    <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold mb-1">
+      <a href="{% url 'dashboard:index' %}" class="hover:text-gray-700">Dashboard</a>
+      <span>›</span>
+      <a href="{% url 'dashboard:logistics' %}" class="hover:text-gray-700">Logistics</a>
+      <span>›</span>
+      <span class="text-[#E53935] font-bold">Dispatch Order</span>
+    </nav>
+    <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Assign Courier & Dispatch Order</h1>
+    <p class="text-xs text-gray-500 mt-0.5">Generate an official OHUAMI tracking number and handover order to delivery carrier.</p>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Dispatch Form Card -->
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+    <form method="POST" action="{% url 'dashboard:dispatch_create' %}" class="space-y-4">
+      {% csrf_token %}
+
+      <!-- Order Selection -->
+      <div>
+        <label class="block text-xs font-bold text-gray-700 mb-1">Select Order to Dispatch <span class="text-[#E53935]">*</span></label>
+        <select name="order_id" required class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-xs font-bold focus:outline-none focus:border-[#E53935]">
+          {% if selected_order %}
+            <option value="{{ selected_order.id }}" selected>
+              Order #{{ selected_order.order_reference }} — {{ selected_order.customer_name }} (₦{{ selected_order.total_amount|floatformat:0 }})
+            </option>
+          {% else %}
+            <option value="">-- Choose an unfulfilled order --</option>
+            {% for o in available_orders %}
+              <option value="{{ o.id }}">
+                Order #{{ o.order_reference }} — {{ o.customer_name }} (₦{{ o.total_amount|floatformat:0 }})
+              </option>
+            {% endfor %}
+          {% endif %}
+        </select>
+      </div>
+
+      <!-- Carrier / Courier Selection -->
+      <div>
+        <label class="block text-xs font-bold text-gray-700 mb-1">Assign Dispatch Courier / Rider</label>
+        {{ form.carrier }}
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Recipient Name <span class="text-[#E53935]">*</span></label>
+          {{ form.recipient_name }}
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Recipient Phone <span class="text-[#E53935]">*</span></label>
+          {{ form.recipient_phone }}
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-gray-700 mb-1">Delivery Destination Address <span class="text-[#E53935]">*</span></label>
+        {{ form.delivery_address }}
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Estimated Delivery Date</label>
+          {{ form.estimated_delivery }}
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Initial Dispatch Milestone</label>
+          {{ form.status }}
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-gray-700 mb-1">Special Handling Instructions / Notes</label>
+        {{ form.dispatch_notes }}
+      </div>
+
+      <div class="pt-4 flex items-center justify-between border-t border-gray-100">
+        <a href="{% url 'dashboard:logistics' %}" class="text-xs font-bold text-gray-500 hover:text-black">
+          ← Cancel and Return
+        </a>
+        <button type="submit" class="bg-[#FFC928] hover:bg-[#F5B800] text-black font-extrabold text-xs px-8 py-3 rounded-full shadow-sm transition">
+          Generate Tracking & Dispatch
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

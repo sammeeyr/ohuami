@@ -1,0 +1,174 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=e9]:
+    - generic [ref=e10]:
+      - link [ref=e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=e12]
+      - generic [ref=e14]:
+        - textbox "Search laptops, phones, electronics, gadgets..." [ref=e15]
+        - button "Search" [ref=e19] [cursor=pointer]
+      - generic [ref=e20]:
+        - link "0" [ref=e21] [cursor=pointer]:
+          - /url: /wishlist/
+        - link "3" [ref=e25] [cursor=pointer]:
+          - /url: /cart/
+        - link "A Account" [ref=e29] [cursor=pointer]:
+          - /url: /accounts/profile/
+          - generic [ref=e30]: A
+          - generic [ref=e31]: Account
+  - main [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e35]:
+        - generic [ref=e36]: 24/7 Dedicated Care
+        - heading "How Can We Help You?" [level=1] [ref=e37]
+        - paragraph [ref=e38]: Have questions about an order, delivery timelines, becoming a verified merchant, or custom domain setup? Submit a ticket below or connect directly with our support team.
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - generic [ref=e41]:
+            - heading "Send an Inquiry or Ticket" [level=2] [ref=e42]
+            - paragraph [ref=e43]: Fill out the form below and our team will get back to you promptly.
+          - generic [ref=e44]:
+            - generic [ref=e45]:
+              - generic [ref=e46]:
+                - generic [ref=e47]: Your Full Name *
+                - textbox "Your Full Name" [ref=e48]: Admin OHUAMI
+              - generic [ref=e49]:
+                - generic [ref=e50]: Email Address *
+                - textbox "you@example.com" [ref=e51]: admin@ohuami.com
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - generic [ref=e54]: Phone Number (Optional)
+                - textbox "+234 800 000 0000" [ref=e55]
+              - generic [ref=e56]:
+                - generic [ref=e57]: Subject *
+                - textbox "Subject (e.g. Order Delivery Inquiry or Merchant Support)" [ref=e58]
+            - generic [ref=e59]:
+              - generic [ref=e60]: Your Message or Issue Description *
+              - textbox "Explain your question, order issue, or feedback in detail..." [ref=e61]
+            - button "Submit Support Request" [ref=e63] [cursor=pointer]
+        - generic [ref=e64]:
+          - generic [ref=e65]:
+            - heading "Official Contact Details" [level=3] [ref=e66]
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - generic [ref=e69]: 📍
+                - generic [ref=e70]:
+                  - strong [ref=e71]: "Office Address:"
+                  - text: Plot 1204, Commercial District, Central Business District, Abuja, Nigeria
+              - generic [ref=e72]:
+                - generic [ref=e73]: 📞
+                - generic [ref=e74]:
+                  - strong [ref=e75]: "Customer Care Phone:"
+                  - link "+234 800 2823 8324" [ref=e76] [cursor=pointer]:
+                    - /url: tel:+234 800 2823 8324
+              - generic [ref=e77]:
+                - generic [ref=e78]: ✉️
+                - generic [ref=e79]:
+                  - strong [ref=e80]: "Official Support Email:"
+                  - link "support@ohuami.com" [ref=e81] [cursor=pointer]:
+                    - /url: mailto:support@ohuami.com
+              - generic [ref=e82]:
+                - generic [ref=e83]: 💬
+                - generic [ref=e84]:
+                  - strong [ref=e85]: "WhatsApp Direct:"
+                  - link "Chat with Care Specialist" [ref=e86] [cursor=pointer]:
+                    - /url: https://wa.me/+234 801 234 5678
+            - generic [ref=e87]:
+              - generic [ref=e88]: "Operating Hours:"
+              - generic [ref=e89]: Mon - Sat (8:00 AM - 8:00 PM)
+          - generic [ref=e90]:
+            - heading "Frequently Asked Questions" [level=3] [ref=e91]
+            - generic [ref=e92]:
+              - group [ref=e93]:
+                - generic "How fast is delivery within Nigeria? ▼" [ref=e94] [cursor=pointer]:
+                  - generic [ref=e95]: How fast is delivery within Nigeria?
+                  - generic [ref=e96]: ▼
+              - group [ref=e97]:
+                - generic "What payment options are supported? ▼" [ref=e98] [cursor=pointer]:
+                  - generic [ref=e99]: What payment options are supported?
+                  - generic [ref=e100]: ▼
+              - group [ref=e101]:
+                - generic "What is the return and refund policy? ▼" [ref=e102] [cursor=pointer]:
+                  - generic [ref=e103]: What is the return and refund policy?
+                  - generic [ref=e104]: ▼
+              - group [ref=e105]:
+                - generic "How do I become a merchant on OHUAMI? ▼" [ref=e106] [cursor=pointer]:
+                  - generic [ref=e107]: How do I become a merchant on OHUAMI?
+                  - generic [ref=e108]: ▼
+              - group [ref=e109]:
+                - generic "How can I track my order? ▼" [ref=e110] [cursor=pointer]:
+                  - generic [ref=e111]: How can I track my order?
+                  - generic [ref=e112]: ▼
+  - contentinfo [ref=e113]:
+    - generic [ref=e114]:
+      - generic [ref=e115]:
+        - link [ref=e116] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=e117]
+        - paragraph [ref=e118]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=e119]:
+          - text: "Parent Company:"
+          - strong [ref=e120]: Cube Tech Enterprises
+      - generic [ref=e121]:
+        - heading "Shop & Discover" [level=4] [ref=e122]
+        - list [ref=e123]:
+          - listitem [ref=e124]:
+            - link "All Products & Gadgets" [ref=e125] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=e126]:
+            - link "⚡ Flash Sale Deals" [ref=e127] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=e128]:
+            - link "🎟 Active Promo Coupons" [ref=e129] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=e130]:
+            - link "Sunshine Fashion Flagship" [ref=e131] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=e132]:
+        - heading "Customer Care" [level=4] [ref=e133]
+        - list [ref=e134]:
+          - listitem [ref=e135]:
+            - link "Contact Us & Support Tickets" [ref=e136] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=e137]:
+            - link "Order Tracking & Receipts" [ref=e138] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=e139]:
+            - link "My Account & Addresses" [ref=e140] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=e141]:
+            - 'link "Tel: +234 800 2823 8324" [ref=e142] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=e143]:
+        - heading "Sell on OHUAMI" [level=4] [ref=e144]
+        - list [ref=e145]:
+          - listitem [ref=e146]:
+            - link "Merchant Dashboard" [ref=e147] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=e148]:
+            - link "Product Management" [ref=e149] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=e150]:
+            - link "Order Fulfillment" [ref=e151] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=e152]:
+            - link "Platform Control Center" [ref=e153] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=e154]:
+      - generic [ref=e155]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=e156]:
+        - generic [ref=e157]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=e158]: •
+        - generic [ref=e159]: Paystack Verified
+        - generic [ref=e160]: •
+        - generic [ref=e161]: Nationwide Express Logistics
+  - button "Customer Support" [ref=e162] [cursor=pointer]

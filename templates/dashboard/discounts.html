@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Store Discounts & Coupons — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold mb-1">
+        <a href="{% url 'dashboard:index' %}" class="hover:text-gray-700">Dashboard</a>
+        <span>›</span>
+        <span class="text-[#E53935] font-bold">Discounts</span>
+      </nav>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Promotions & Coupon Codes</h1>
+      <p class="text-xs text-gray-500 mt-0.5">Create discount codes to boost conversions and reward loyal buyers.</p>
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left: Existing Coupons Table (lg:col-span-7) -->
+    <div class="lg:col-span-7 bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+      <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider pb-2 border-b border-gray-100">
+        Active Coupons
+      </h3>
+
+      <div class="space-y-3">
+        {% for coupon in coupons %}
+        <div class="p-4 rounded-2xl border border-dashed border-[#E53935] bg-red-50/20 flex items-center justify-between gap-3">
+          <div class="space-y-1">
+            <span class="inline-block bg-[#E53935] text-white text-[9px] font-black uppercase px-2 py-0.5 rounded-full">
+              {{ coupon.get_discount_type_display }}
+            </span>
+            <h4 class="font-black text-base text-[#111111]">{{ coupon.code }}</h4>
+            <p class="text-xs text-gray-500">{{ coupon.description }}</p>
+            <div class="text-[10px] text-gray-400 flex items-center gap-3">
+              <span>Value: <strong>{% if coupon.discount_type == 'percentage' %}{{ coupon.discount_value }}%{% else %}₦{{ coupon.discount_value|floatformat:0|intcomma }}{% endif %}</strong></span>
+              <span>Used: <strong>{{ coupon.times_used }}</strong></span>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full {% if coupon.is_active %}bg-emerald-100 text-emerald-800{% else %}bg-gray-100 text-gray-600{% endif %}">
+              {% if coupon.is_active %}Active{% else %}Inactive{% endif %}
+            </span>
+          </div>
+        </div>
+        {% empty %}
+        <p class="text-xs text-gray-400 py-6 text-center">No promo coupons created yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Right: Create New Coupon Form (lg:col-span-5) -->
+    <div class="lg:col-span-5 bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+      <div>
+        <h3 class="text-sm font-extrabold text-[#111111] uppercase tracking-wider">Create New Coupon</h3>
+        <p class="text-xs text-gray-500">Configure discount value and limitations.</p>
+      </div>
+
+      <form method="POST" action="{% url 'dashboard:discounts' %}" class="space-y-3.5">
+        {% csrf_token %}
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Coupon Code (Uppercase) *</label>
+          {{ form.code }}
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Description</label>
+          {{ form.description }}
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Discount Type *</label>
+            {{ form.discount_type }}
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Discount Value *</label>
+            {{ form.discount_value }}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Min Order Value (₦)</label>
+            {{ form.min_order_value }}
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Usage Limit</label>
+            {{ form.usage_limit }}
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-black py-3 rounded-full transition shadow-md">
+            Publish Coupon Code
+          </button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

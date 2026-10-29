@@ -1,3 +1,4 @@
+import secrets
 from decimal import Decimal
 from django.db import models
 from django.conf import settings
@@ -79,6 +80,15 @@ class Store(models.Model):
     verified_merchant = models.BooleanField(default=True)
     verification_notes = models.TextField(blank=True, default='')
 
+    # CORS & Headless API Configuration
+    cors_allowed_origins = models.TextField(
+        blank=True,
+        default="http://localhost:3000, http://127.0.0.1:3000, http://localhost:8000",
+        help_text="Comma-separated allowed origins for cross-origin resource sharing (CORS)"
+    )
+    api_key = models.CharField(max_length=64, blank=True, default='', db_index=True, help_text="Secret API key for headless store integration")
+    api_key_enabled = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -95,7 +105,19 @@ class Store(models.Model):
             self.slug = slugify(self.name)
         if not self.subdomain:
             self.subdomain = self.slug
+        if not self.api_key:
+            self.api_key = f"ohu_{secrets.token_hex(24)}"
         super().save(*args, **kwargs)
+
+    def regenerate_api_key(self):
+        self.api_key = f"ohu_{secrets.token_hex(24)}"
+        self.save(update_fields=['api_key'])
+        return self.api_key
+
+    def get_cors_origins_list(self):
+        if not self.cors_allowed_origins:
+            return []
+        return [origin.strip() for origin in self.cors_allowed_origins.split(',') if origin.strip()]
 
     def get_absolute_url(self):
         return reverse('catalog:storefront', kwargs={'store_slug': self.slug})
@@ -107,6 +129,14 @@ class Store(models.Model):
         if self.tier:
             return self.tier.commission_rate
         return Decimal('5.00')
+
+    @property
+    def effective_max_products(self):
+        if self.max_products_limit:
+            return self.max_products_limit
+        if self.tier:
+            return self.tier.max_products
+        return 500
 
 
 class Category(models.Model):

@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .models import User
+from django.contrib import messages
+from django.views.decorators.http import require_POST
+from .models import User, Address
+from .forms import ProfileUpdateForm, AddressForm, ChangePasswordForm
 from apps.orders.models import Order
 from apps.cart.services import CartService
 
@@ -73,5 +76,79 @@ def logout_view(request):
 
 @login_required
 def profile_view(request):
-    orders = Order.objects.filter(customer=request.user).order_by('-created_at')[:5]
-    return render(request, 'accounts/profile.html', {'orders': orders})
+    """Customer account center with addresses, profile details, and orders."""
+    user = request.user
+    orders = Order.objects.filter(customer=user).order_by('-created_at')[:8]
+    addresses = user.addresses.all()
+
+    profile_form = ProfileUpdateForm(instance=user)
+    address_form = AddressForm()
+    password_form = ChangePasswordForm(user=user)
+
+    context = {
+        'orders': orders,
+        'addresses': addresses,
+        'profile_form': profile_form,
+        'address_form': address_form,
+        'password_form': password_form,
+    }
+    return render(request, 'accounts/profile.html', context)
+
+
+@login_required
+@require_POST
+def update_profile_view(request):
+    form = ProfileUpdateForm(request.POST, instance=request.user)
+    if form.is_valid():
+        form.save()
+        messages.success(request, "Your profile information has been updated.")
+    else:
+        messages.error(request, "Failed to update profile. Please verify your entries.")
+    return redirect('accounts:profile')
+
+
+@login_required
+@require_POST
+def add_address_view(request):
+    form = AddressForm(request.POST)
+    if form.is_valid():
+        address = form.save(commit=False)
+        address.user = request.user
+        address.save()
+        messages.success(request, "New delivery address saved successfully!")
+    else:
+        messages.error(request, "Could not save address. Please check all required fields.")
+    return redirect('accounts:profile')
+
+
+@login_required
+@require_POST
+def delete_address_view(request, address_id):
+    address = get_object_or_404(Address, id=address_id, user=request.user)
+    address.delete()
+    messages.success(request, "Address deleted.")
+    return redirect('accounts:profile')
+
+
+@login_required
+@require_POST
+def set_default_address_view(request, address_id):
+    address = get_object_or_404(Address, id=address_id, user=request.user)
+    address.is_default = True
+    address.save()
+    messages.success(request, f"'{address.recipient_name}' set as your default shipping address.")
+    return redirect('accounts:profile')
+
+
+@login_required
+@require_POST
+def change_password_view(request):
+    form = ChangePasswordForm(user=request.user, data=request.POST)
+    if form.is_valid():
+        user = form.save()
+        update_session_auth_hash(request, user)
+        messages.success(request, "Your password was successfully updated!")
+    else:
+        errors = "; ".join([f"{k}: {', '.join(v)}" for k, v in form.errors.items()])
+        messages.error(request, f"Password change error: {errors}")
+    return redirect('accounts:profile')

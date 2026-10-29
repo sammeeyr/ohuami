@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Manage Products — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Dashboard Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111] flex items-center gap-3">
+        Catalog Products
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-800">
+          {{ products_count }} / {{ max_limit }} Quota ({{ store.plan }})
+        </span>
+      </h1>
+      <p class="text-xs text-gray-500 mt-0.5">Full CRUD inventory control, pricing, variants, and stock management for {{ store.name }}.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      {% if is_at_limit %}
+        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
+          Quota Reached
+        </span>
+      {% else %}
+        <a href="{% url 'dashboard:product_create' %}" class="bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-black px-5 py-2.5 rounded-full shadow-md transition inline-flex items-center gap-1.5">
+          <span>+</span> Add New Product
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Filters & Search Bar -->
+  <div class="bg-white rounded-2xl p-4 border border-gray-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <form method="get" class="flex-1 flex items-center gap-2">
+      <input type="text" name="q" value="{{ query }}" placeholder="Search products by title or SKU..." class="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#E53935]">
+      <select name="status" class="px-3 py-2 rounded-xl border border-gray-200 text-xs font-semibold focus:outline-none focus:border-[#E53935]">
+        <option value="all" {% if status_filter == 'all' %}selected{% endif %}>All Statuses</option>
+        <option value="active" {% if status_filter == 'active' %}selected{% endif %}>Active Only</option>
+        <option value="inactive" {% if status_filter == 'inactive' %}selected{% endif %}>Inactive / Draft</option>
+      </select>
+      <button type="submit" class="bg-[#111111] hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-xl">
+        Filter
+      </button>
+      {% if query or status_filter != 'all' %}
+        <a href="{% url 'dashboard:products' %}" class="text-xs text-gray-500 hover:text-red-600 font-semibold px-2 py-2">Clear</a>
+      {% endif %}
+    </form>
+  </div>
+
+  <!-- Products Table Card -->
+  <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm overflow-hidden space-y-4">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Product</th>
+            <th class="pb-3">Category</th>
+            <th class="pb-3">SKU</th>
+            <th class="pb-3">Price</th>
+            <th class="pb-3">Stock</th>
+            <th class="pb-3">Status</th>
+            <th class="pb-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for product in products %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="py-3 font-bold text-[#111111]">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0 border border-gray-200">
+                  {% if product.primary_image %}
+                    <img src="{{ product.primary_image.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                  {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-400 font-bold text-xs">IMG</div>
+                  {% endif %}
+                </div>
+                <div>
+                  <h4 class="font-extrabold text-sm text-[#111111] line-clamp-1">{{ product.name }}</h4>
+                  {% if product.badge_text %}
+                    <span class="text-[9px] font-black uppercase bg-red-50 text-[#E53935] px-1.5 py-0.5 rounded">
+                      {{ product.badge_text }}
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+            </td>
+            <td class="py-3 text-gray-600 font-medium">{{ product.category.name|default:"General" }}</td>
+            <td class="py-3 font-mono text-gray-500 text-[11px]">{{ product.sku }}</td>
+            <td class="py-3">
+              <span class="font-black text-[#111111]">₦{{ product.base_price|floatformat:0|intcomma }}</span>
+              {% if product.comparison_price %}
+                <span class="text-gray-400 line-through text-[10px] block">₦{{ product.comparison_price|floatformat:0|intcomma }}</span>
+              {% endif %}
+            </td>
+            <td class="py-3">
+              <span class="font-bold {% if product.stock_quantity > 5 %}text-emerald-700{% else %}text-[#E53935]{% endif %}">
+                {{ product.stock_quantity }} in stock
+              </span>
+            </td>
+            <td class="py-3">
+              <form method="post" action="{% url 'dashboard:product_toggle_status' product_id=product.id %}" class="inline">
+                {% csrf_token %}
+                <button type="submit" title="Click to toggle status" class="text-[10px] font-bold px-2.5 py-1 rounded-full cursor-pointer transition {% if product.is_active %}bg-emerald-100 text-emerald-800 hover:bg-emerald-200{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+                  {% if product.is_active %}● Active{% else %}○ Inactive{% endif %}
+                </button>
+              </form>
+            </td>
+            <td class="py-3 text-right space-x-2">
+              <a href="{% url 'dashboard:product_edit' product_id=product.id %}" class="text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline">
+                Edit
+              </a>
+              <span class="text-gray-300">|</span>
+              <a href="{% url 'catalog:product_detail' slug=product.slug %}" target="_blank" class="text-xs font-bold text-gray-600 hover:text-black hover:underline">
+                View ↗
+              </a>
+              <span class="text-gray-300">|</span>
+              <form method="post" action="{% url 'dashboard:product_delete' product_id=product.id %}" class="inline" onsubmit="return confirm('Are you sure you want to delete \'{{ product.name }}\'?');">
+                {% csrf_token %}
+                <button type="submit" class="text-xs font-bold text-[#E53935] hover:text-red-800 hover:underline">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="py-8 text-center text-gray-400">
+              No products found matching your filter. Click <a href="{% url 'dashboard:product_create' %}" class="text-[#E53935] font-bold underline">Add New Product</a> to populate your inventory.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

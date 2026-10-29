@@ -1,0 +1,93 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=e5]
+      - navigation [ref=e6]:
+        - link "Features" [ref=e7] [cursor=pointer]:
+          - /url: "#features"
+        - link "Pricing" [ref=e8] [cursor=pointer]:
+          - /url: "#pricing"
+        - link "Success Stories Live" [ref=e9] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+          - generic [ref=e10]: Success Stories
+          - generic [ref=e11]: Live
+        - button "Resources" [ref=e13] [cursor=pointer]
+      - generic [ref=e17]:
+        - link "Dashboard" [ref=e18] [cursor=pointer]:
+          - /url: /dashboard/
+        - link "Logout" [ref=e19] [cursor=pointer]:
+          - /url: /accounts/logout/
+        - link "Get Started" [ref=e20] [cursor=pointer]:
+          - /url: /accounts/register/
+  - generic [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]: The all-in-one commerce platform for African businesses
+      - heading "Your market. Your business. Your growth." [level=1] [ref=e28]
+      - paragraph [ref=e29]: Create your online store, manage products and inventory, process orders, accept payments, and grow with powerful tools — all in one place.
+      - generic [ref=e30]:
+        - link "Start for Free" [ref=e31] [cursor=pointer]:
+          - /url: /accounts/register/
+        - link "▶ Watch Demo" [ref=e32] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+          - generic [ref=e33]: ▶
+          - generic [ref=e34]: Watch Demo
+      - generic [ref=e35]:
+        - generic [ref=e36]: Instant Store Setup
+        - generic [ref=e39]: Zero Setup Fee
+        - generic [ref=e42]: Paystack Ready
+    - generic [ref=e45]:
+      - img "African Merchant with Tablet" [ref=e48]
+      - generic [ref=e49]:
+        - generic [ref=e50]: Total Sales
+        - generic [ref=e51]: ₦1,245,600
+        - generic [ref=e53]:
+          - text: ▲ +12%
+          - generic [ref=e54]: from last week
+      - generic [ref=e66]:
+        - generic [ref=e67]: Your store is live
+        - generic [ref=e68]: www.sunshinefashion.ohuami.com
+  - generic [ref=e71]:
+    - link [ref=e72] [cursor=pointer]:
+      - /url: /catalog/store/sunshine-fashion/
+      - heading "Online Stores" [level=3] [ref=e76]
+      - paragraph [ref=e77]: Your brand, your store
+    - link [ref=e78] [cursor=pointer]:
+      - /url: /dashboard/
+      - heading "Inventory" [level=3] [ref=e82]
+      - paragraph [ref=e83]: Track stock, variants
+    - link [ref=e84] [cursor=pointer]:
+      - /url: /dashboard/
+      - heading "Orders & Payments" [level=3] [ref=e88]
+      - paragraph [ref=e89]: Multiple payment options
+    - link [ref=e90] [cursor=pointer]:
+      - /url: /dashboard/
+      - heading "Analytics" [level=3] [ref=e94]
+      - paragraph [ref=e95]: Make data-driven decisions
+    - link [ref=e96] [cursor=pointer]:
+      - /url: /dashboard/
+      - heading "Automation & AI" [level=3] [ref=e100]
+      - paragraph [ref=e101]: Work smarter.
+  - generic [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e106]: Live Merchant Showcase
+      - heading "Experience \"Sunshine Fashion\" Live" [level=2] [ref=e107]
+      - paragraph [ref=e108]: Explore the active merchant storefront with high-conversion product variants, instant cart checkout, and seamless Paystack payment integration.
+    - generic [ref=e109]:
+      - link "Visit Customer Storefront →" [ref=e110] [cursor=pointer]:
+        - /url: /catalog/store/sunshine-fashion/
+      - link "Open Merchant Dashboard" [ref=e111] [cursor=pointer]:
+        - /url: /dashboard/
+  - contentinfo [ref=e112]:
+    - generic [ref=e113]:
+      - generic [ref=e114]:
+        - img "OHUAMI" [ref=e115]
+        - generic [ref=e116]: "|"
+        - generic [ref=e117]: Commerce made for your ambition.
+      - generic [ref=e118]:
+        - generic [ref=e119]: © 2026 OHUAMI. Powered by Cube Tech Enterprises.
+        - link "Merchant Portal" [ref=e120] [cursor=pointer]:
+          - /url: /dashboard/
+        - link "Admin" [ref=e121] [cursor=pointer]:
+          - /url: /admin/

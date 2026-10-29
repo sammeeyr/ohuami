@@ -1,7 +1,71 @@
 import json
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib import messages
 from django.views.decorators.http import require_POST
+from apps.core.models import StoreSetting
 from .models import ChatMessage, SupportEnquiry
+from .forms import SupportEnquiryForm
+
+
+def contact_view(request):
+    """Customer care and support enquiry ticketing page."""
+    submitted_ticket = None
+    initial_data = {}
+    if request.user.is_authenticated:
+        initial_data = {
+            'name': request.user.get_full_name() or request.user.email.split('@')[0],
+            'email': request.user.email,
+            'phone': request.user.phone,
+        }
+
+    if request.method == 'POST':
+        form = SupportEnquiryForm(request.POST)
+        if form.is_valid():
+            enquiry = form.save(commit=False)
+            if request.user.is_authenticated:
+                enquiry.user = request.user
+            enquiry.save()
+            submitted_ticket = enquiry.ticket_number
+            messages.success(request, f"Your support ticket #{enquiry.ticket_number} has been created! Our team will contact you shortly.")
+            form = SupportEnquiryForm(initial=initial_data)
+        else:
+            messages.error(request, "Please check the form inputs and try again.")
+    else:
+        form = SupportEnquiryForm(initial=initial_data)
+
+    settings = StoreSetting.get_settings()
+
+    faqs = [
+        {
+            'question': "How fast is delivery within Nigeria?",
+            'answer': "Orders within Abuja and Lagos are delivered within 24 hours. For all other states across Nigeria, standard delivery takes 2 to 4 business days. Express same-day shipping is also available in select locations."
+        },
+        {
+            'question': "What payment options are supported?",
+            'answer': "We accept Nigerian bank debit cards (Mastercard, Visa, Verve), Direct Bank Transfers, USSD quick checkout, and Pay on Delivery for verified addresses via our Paystack gateway."
+        },
+        {
+            'question': "What is the return and refund policy?",
+            'answer': "We offer a 7-day hassle-free return window for items in original, undamaged packaging. Refunds are processed back to your original payment method within 3 to 5 business days."
+        },
+        {
+            'question': "How do I become a merchant on OHUAMI?",
+            'answer': "You can sign up directly as a merchant from our homepage or contact our merchant onboarding team at merchant-support@ohuami.com to configure your store tier, BVN verification, and custom domain."
+        },
+        {
+            'question': "How can I track my order?",
+            'answer': "Navigate to Account > My Orders to view live timeline tracking (Placed → Payment Verified → Processing → Dispatched → Delivered)."
+        }
+    ]
+
+    context = {
+        'form': form,
+        'submitted_ticket': submitted_ticket,
+        'store_setting': settings,
+        'faqs': faqs,
+    }
+    return render(request, 'support/contact.html', context)
 
 
 @require_POST

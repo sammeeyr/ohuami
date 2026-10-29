@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CORS & API Management — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold mb-1">
+        <a href="{% url 'dashboard:index' %}" class="hover:text-gray-700">Dashboard</a>
+        <span>›</span>
+        <span class="text-[#E53935] font-bold">API & CORS</span>
+      </nav>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Headless API & CORS Configuration</h1>
+      <p class="text-xs text-gray-500 mt-0.5">Control allowed origins for external storefronts, mobile apps, and integrate third-party services with {{ store.name }}.</p>
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- Left Col: CORS Allowed Origins -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+      <div>
+        <h3 class="text-base font-black text-[#111111] flex items-center gap-2">
+          <span>🌐 Cross-Origin Resource Sharing (CORS)</span>
+        </h3>
+        <p class="text-xs text-gray-500 mt-1 leading-relaxed">
+          Specify which domains or localhost ports are authorized to execute browser-based API calls (e.g. Next.js, Vue, mobile apps, custom storefronts) to your store.
+        </p>
+      </div>
+
+      <form method="POST" action="{% url 'dashboard:api_cors' %}" class="space-y-4">
+        {% csrf_token %}
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">
+            Allowed Origins (Comma-separated)
+          </label>
+          {{ form.cors_allowed_origins }}
+          <span class="text-[10px] text-gray-400 mt-1 block">
+            Example: <code>http://localhost:3000, https://sunshinefashion.ng, https://app.myshop.com</code>
+          </span>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-gray-50 border border-gray-100">
+          <label class="flex items-center gap-2 text-xs font-semibold text-gray-700 cursor-pointer">
+            {{ form.api_key_enabled }}
+            <span class="font-bold text-emerald-800">Enable Headless API Access</span>
+          </label>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="bg-[#111111] hover:bg-black text-[#FFC928] font-extrabold text-xs px-6 py-2.5 rounded-full shadow-sm transition">
+            Save CORS Origins
+          </button>
+        </div>
+      </form>
+
+      <!-- Active Origins Preview -->
+      <div class="border-t border-gray-100 pt-4">
+        <span class="text-[10px] font-black uppercase text-gray-400 block mb-2">Currently Whitelisted Origins</span>
+        <div class="flex flex-wrap gap-1.5">
+          {% for o in origins_list %}
+            <span class="font-mono text-[11px] font-bold bg-blue-50 text-blue-700 px-2.5 py-1 rounded-lg border border-blue-200">
+              {{ o }}
+            </span>
+          {% empty %}
+            <span class="text-xs text-gray-400 italic">No custom origins registered. Standard domain defaults apply.</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Col: Store API Key & Security -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+      <div>
+        <h3 class="text-base font-black text-[#111111] flex items-center gap-2">
+          <span>🔑 Store Secret API Key</span>
+        </h3>
+        <p class="text-xs text-gray-500 mt-1 leading-relaxed">
+          Use this secret key to authenticate programmatic requests to your store API from backend servers or authorized client applications.
+        </p>
+      </div>
+
+      <!-- API Key Box -->
+      <div class="p-4 rounded-2xl bg-gray-900 text-white space-y-3">
+        <div class="flex items-center justify-between text-xs text-gray-400 font-bold uppercase">
+          <span>Bearer API Token</span>
+          <span class="text-emerald-400">● Active</span>
+        </div>
+        <div class="flex items-center justify-between gap-2 bg-black/50 p-2.5 rounded-xl border border-white/10 font-mono text-xs">
+          <input type="password" id="apiKeyField" value="{{ store.api_key }}" readonly class="bg-transparent text-[#FFC928] font-bold w-full focus:outline-none">
+          <button type="button" onclick="toggleKeyVisibility()" class="text-gray-400 hover:text-white px-2 py-0.5 text-[11px]">
+            Show
+          </button>
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <button type="button" onclick="copyApiKey()" class="text-xs font-bold text-[#FFC928] hover:underline">
+            Copy to Clipboard
+          </button>
+          <form method="post" action="{% url 'dashboard:api_regenerate_key' %}" onsubmit="return confirm('Regenerating this key will invalidate all existing integrations. Continue?');">
+            {% csrf_token %}
+            <button type="submit" class="text-xs font-bold text-red-400 hover:text-red-300">
+              Regenerate Key
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Quick Integration Snippet -->
+      <div class="space-y-2">
+        <span class="text-[10px] font-black uppercase text-gray-400 block">HTTP Header Authentication</span>
+        <pre class="bg-gray-50 p-3 rounded-xl border border-gray-100 text-[11px] font-mono text-gray-800 overflow-x-auto">
+// Example Javascript Fetch with CORS:
+fetch('{{ request.scheme }}://{{ request.get_host }}/dashboard/api/products/', {
+  headers: {
+    'X-Store-Key': '{{ store.api_key|default:"your_store_key" }}',
+    'Content-Type': 'application/json'
+  }
+})
+.then(res => res.json())
+.then(data => console.log(data));</pre>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- API Endpoints Reference Card -->
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-4">
+    <h3 class="text-sm font-extrabold text-[#111111]">RESTful API Endpoints Directory</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Method</th>
+            <th class="pb-3">Endpoint</th>
+            <th class="pb-3">Description</th>
+            <th class="pb-3">CORS Enabled</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 font-mono text-[11px]">
+          <tr>
+            <td class="py-2.5"><span class="font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">GET</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/products/</td>
+            <td class="py-2.5 text-gray-600 font-sans">List all products in catalog with stock, pricing, and variants.</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2.5"><span class="font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded">POST</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/products/</td>
+            <td class="py-2.5 text-gray-600 font-sans">Programmatically create a new product item (quota checked).</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2.5"><span class="font-black text-purple-700 bg-purple-50 px-2 py-0.5 rounded">PATCH</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/products/&lt;id&gt;/</td>
+            <td class="py-2.5 text-gray-600 font-sans">Update price, stock, active status, or badge for an existing product.</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2.5"><span class="font-black text-red-700 bg-red-50 px-2 py-0.5 rounded">DELETE</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/products/&lt;id&gt;/</td>
+            <td class="py-2.5 text-gray-600 font-sans">Delete a product from the merchant catalog.</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2.5"><span class="font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">GET</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/orders/</td>
+            <td class="py-2.5 text-gray-600 font-sans">Retrieve order feed, filterable by status (paid, pending, shipped).</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2.5"><span class="font-black text-blue-700 bg-blue-50 px-2 py-0.5 rounded">POST</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/logistics/</td>
+            <td class="py-2.5 text-gray-600 font-sans">Assign an order to a courier and trigger dispatch tracking.</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+          <tr>
+            <td class="py-2.5"><span class="font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">GET</span></td>
+            <td class="py-2.5 font-bold text-[#111111]">/dashboard/api/customers/</td>
+            <td class="py-2.5 text-gray-600 font-sans">Fetch customer relationships, tags, and lifetime value data.</td>
+            <td class="py-2.5 text-emerald-600 font-sans font-bold">✓ Yes</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleKeyVisibility() {
+  const f = document.getElementById('apiKeyField');
+  f.type = f.type === 'password' ? 'text' : 'password';
+}
+
+function copyApiKey() {
+  const f = document.getElementById('apiKeyField');
+  navigator.clipboard.writeText(f.value);
+  alert('API Key copied to clipboard!');
+}
+</script>
+{% endblock %}

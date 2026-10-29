@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Manage Orders — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111]">Store Orders & Fulfillment</h1>
+      <p class="text-xs text-gray-500 mt-0.5">Manage customer orders, view receipts, and assign dispatch riders for {{ store.name }}.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="{% url 'dashboard:order_create' %}" class="bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-black px-5 py-2.5 rounded-full shadow-md transition inline-flex items-center gap-1.5">
+        <span>+</span> Create Manual Order
+      </a>
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Filters & Search Bar -->
+  <div class="bg-white rounded-2xl p-4 border border-gray-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <form method="get" class="flex-1 flex items-center gap-2">
+      <input type="text" name="q" value="{{ query }}" placeholder="Search by reference, customer name, email, or phone..." class="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-xs focus:outline-none focus:border-[#E53935]">
+      <input type="hidden" name="status" value="{{ current_status }}">
+      <button type="submit" class="bg-[#111111] hover:bg-black text-white text-xs font-bold px-4 py-2 rounded-xl">
+        Search
+      </button>
+      {% if query %}
+        <a href="{% url 'dashboard:orders' %}?status={{ current_status }}" class="text-xs text-gray-500 hover:text-red-600 font-semibold px-2 py-2">Clear</a>
+      {% endif %}
+    </form>
+
+    <!-- Status Filter Pills -->
+    <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+      <a href="{% url 'dashboard:orders' %}?status=ALL{% if query %}&q={{ query }}{% endif %}" class="text-xs font-bold px-3 py-1.5 rounded-full {% if current_status == 'ALL' %}bg-[#111111] text-[#FFC928]{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+        All
+      </a>
+      <a href="{% url 'dashboard:orders' %}?status=UNFULFILLED{% if query %}&q={{ query }}{% endif %}" class="text-xs font-bold px-3 py-1.5 rounded-full {% if current_status == 'UNFULFILLED' %}bg-[#111111] text-[#FFC928]{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+        Unfulfilled
+      </a>
+      <a href="{% url 'dashboard:orders' %}?status=PROCESSING{% if query %}&q={{ query }}{% endif %}" class="text-xs font-bold px-3 py-1.5 rounded-full {% if current_status == 'PROCESSING' %}bg-[#111111] text-[#FFC928]{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+        Processing
+      </a>
+      <a href="{% url 'dashboard:orders' %}?status=SHIPPED{% if query %}&q={{ query }}{% endif %}" class="text-xs font-bold px-3 py-1.5 rounded-full {% if current_status == 'SHIPPED' %}bg-[#111111] text-[#FFC928]{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+        Shipped
+      </a>
+      <a href="{% url 'dashboard:orders' %}?status=DELIVERED{% if query %}&q={{ query }}{% endif %}" class="text-xs font-bold px-3 py-1.5 rounded-full {% if current_status == 'DELIVERED' %}bg-[#111111] text-[#FFC928]{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+        Delivered
+      </a>
+    </div>
+  </div>
+
+  <!-- Orders Table Card -->
+  <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm overflow-hidden space-y-4">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Order Ref</th>
+            <th class="pb-3">Customer</th>
+            <th class="pb-3">Date</th>
+            <th class="pb-3">Items</th>
+            <th class="pb-3">Total</th>
+            <th class="pb-3">Payment</th>
+            <th class="pb-3">Fulfillment</th>
+            <th class="pb-3">Dispatch Tracking</th>
+            <th class="pb-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for order in orders %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="py-3 font-extrabold text-[#111111]">
+              <a href="{% url 'dashboard:order_detail' order_id=order.id %}" class="hover:text-[#E53935] underline">
+                #{{ order.order_reference }}
+              </a>
+            </td>
+            <td class="py-3">
+              <span class="font-bold text-gray-900 block">{{ order.customer_name }}</span>
+              <span class="text-gray-400 text-[10px]">{{ order.customer_email }}</span>
+            </td>
+            <td class="py-3 text-gray-500">{{ order.created_at|date:"M d, Y" }}</td>
+            <td class="py-3 text-gray-700 font-medium">{{ order.items.count }} item{{ order.items.count|pluralize }}</td>
+            <td class="py-3 font-black text-[#111111]">₦{{ order.total_amount|floatformat:0|intcomma }}</td>
+            <td class="py-3">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full {% if order.payment_status == 'paid' %}bg-emerald-100 text-emerald-800{% else %}bg-amber-100 text-amber-800{% endif %}">
+                {{ order.get_payment_status_display }}
+              </span>
+            </td>
+            <td class="py-3">
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full {% if order.fulfillment_status == 'delivered' %}bg-emerald-100 text-emerald-800{% elif order.fulfillment_status == 'shipped' %}bg-blue-100 text-blue-800{% elif order.fulfillment_status == 'processing' %}bg-amber-100 text-amber-800{% else %}bg-gray-100 text-gray-600{% endif %}">
+                {{ order.get_fulfillment_status_display }}
+              </span>
+            </td>
+            <td class="py-3">
+              {% if order.shipment %}
+                <span class="font-mono text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                  {{ order.shipment.tracking_number }}
+                </span>
+              {% else %}
+                <a href="{% url 'dashboard:dispatch_create' %}?order_id={{ order.id }}" class="text-[10px] font-bold text-gray-500 hover:text-black bg-gray-100 px-2 py-0.5 rounded hover:bg-gray-200">
+                  + Assign Dispatch
+                </a>
+              {% endif %}
+            </td>
+            <td class="py-3 text-right">
+              <a href="{% url 'dashboard:order_detail' order_id=order.id %}" class="bg-[#111111] hover:bg-black text-white text-[10px] font-bold px-3 py-1.5 rounded-lg inline-block transition">
+                Manage ↗
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="9" class="py-8 text-center text-gray-400">
+              No orders found for the selected filter.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

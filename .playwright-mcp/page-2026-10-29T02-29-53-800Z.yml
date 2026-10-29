@@ -1,0 +1,81 @@
+- generic [active] [ref=f3e1]:
+  - link "Skip to main content" [ref=f3e2] [cursor=pointer]:
+    - /url: "#content-start"
+  - generic [ref=f3e3]:
+    - banner [ref=f3e4]:
+      - link "OHUAMI Control Panel Super Admin" [ref=f3e7] [cursor=pointer]:
+        - /url: /admin/
+        - img "OHUAMI" [ref=f3e8]
+        - generic [ref=f3e9]:
+          - generic [ref=f3e10]: Control Panel
+          - generic [ref=f3e11]: Super Admin
+      - generic [ref=f3e12]:
+        - text: Welcome,
+        - strong [ref=f3e13]: Chinedu
+        - text: .
+        - link "Control Center" [ref=f3e14] [cursor=pointer]:
+          - /url: /dashboard/control-panel/
+        - link "View site" [ref=f3e18] [cursor=pointer]:
+          - /url: /
+        - text: /
+        - link "Change password" [ref=f3e19] [cursor=pointer]:
+          - /url: /admin/password_change/
+        - text: /
+        - button "Log out" [ref=f3e21] [cursor=pointer]
+        - 'button "Toggle theme (current theme: auto)" [ref=f3e22] [cursor=pointer]'
+    - main [ref=f3e27]:
+      - generic [ref=f3e28]:
+        - heading "Platform Management & Multi-Store Control" [level=1] [ref=f3e31]
+        - generic [ref=f3e32]:
+          - generic [ref=f3e33]:
+            - generic [ref=f3e34]:
+              - generic [ref=f3e35]:
+                - heading "OHUAMI Control Panel CUBE TECH ENTERPRISES" [level=1] [ref=f3e36]:
+                  - text: OHUAMI Control Panel
+                  - generic [ref=f3e37]: CUBE TECH ENTERPRISES
+                - paragraph [ref=f3e38]: Unified Multi-Merchant Governance, Global Settings, Store Tiers & Platform Feature Switchboard
+              - link "Open Super Admin Control Center" [ref=f3e40] [cursor=pointer]:
+                - /url: /dashboard/control-panel/
+            - generic [ref=f3e44]:
+              - link "Stores & Merchants 3 All Stores Verified" [ref=f3e45] [cursor=pointer]:
+                - /url: /admin/catalog/store/
+                - generic [ref=f3e46]:
+                  - generic [ref=f3e47]: Stores & Merchants
+                  - generic [ref=f3e51]: "3"
+                - generic [ref=f3e52]: All Stores Verified
+              - link "Multi-Merchant Tiers 4 Free, Starter, Pro, Enterprise" [ref=f3e54] [cursor=pointer]:
+                - /url: /admin/catalog/merchanttier/
+                - generic [ref=f3e55]:
+                  - generic [ref=f3e56]: Multi-Merchant Tiers
+                  - generic [ref=f3e62]: "4"
+                - generic [ref=f3e63]: Free, Starter, Pro, Enterprise
+              - link "Platform Services 9/9 All Systems Operational" [ref=f3e65] [cursor=pointer]:
+                - /url: /admin/core/platformservice/
+                - generic [ref=f3e66]:
+                  - generic [ref=f3e67]: Platform Services
+                  - generic [ref=f3e74]: 9/9
+                - generic [ref=f3e75]: All Systems Operational
+              - link "Platform Commission 5.0% ● Storefronts Live" [ref=f3e77] [cursor=pointer]:
+                - /url: /admin/core/storesetting/
+                - generic [ref=f3e78]:
+                  - generic [ref=f3e79]: Platform Commission
+                  - generic [ref=f3e83]: 5.0%
+                - generic [ref=f3e84]: ● Storefronts Live
+            - generic [ref=f3e86]:
+              - generic [ref=f3e87]: "Quick Actions:"
+              - link "🔍 Review KYC Submissions" [ref=f3e88] [cursor=pointer]:
+                - /url: /admin/catalog/store/?status__exact=PENDING
+              - link "⚡ Edit Tier Limits & Fees" [ref=f3e90] [cursor=pointer]:
+                - /url: /admin/catalog/merchanttier/
+              - link "🧩 Toggle Feature Flags" [ref=f3e92] [cursor=pointer]:
+                - /url: /admin/core/platformservice/
+              - link "⚙️ Global Payout & Delivery" [ref=f3e94] [cursor=pointer]:
+                - /url: /admin/core/storesetting/
+              - link "📋 System Audit Trail" [ref=f3e96] [cursor=pointer]:
+                - /url: /admin/core/auditlog/
+          - paragraph [ref=f3e98]: You don’t have permission to view or edit anything.
+        - generic [ref=f3e100]:
+          - heading "Recent actions" [level=2] [ref=f3e101]
+          - heading "My actions" [level=3] [ref=f3e102]
+          - paragraph [ref=f3e103]: None available
+    - contentinfo

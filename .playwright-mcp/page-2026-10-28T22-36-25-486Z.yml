@@ -1,0 +1,231 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e3]:
+    - generic [ref=f1e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f1e5]:
+      - generic [ref=f1e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f1e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f1e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f1e9]:
+    - generic [ref=f1e10]:
+      - generic [ref=f1e11]:
+        - link [ref=f1e12] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f1e13]
+        - link "Sunshine Fashion ↗" [ref=f1e15] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+          - generic [ref=f1e16]: Sunshine Fashion
+          - generic [ref=f1e17]: ↗
+      - navigation [ref=f1e18]:
+        - link "Home" [ref=f1e19] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+        - link "Shop" [ref=f1e20] [cursor=pointer]:
+          - /url: /catalog/
+        - link "Categories" [ref=f1e24] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/#categories-section
+        - link "About" [ref=f1e25] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/#about-store
+      - generic [ref=f1e26]:
+        - link "Search" [ref=f1e27] [cursor=pointer]:
+          - /url: /catalog/search/
+        - link "Profile" [ref=f1e30] [cursor=pointer]:
+          - /url: /accounts/profile/
+        - link "3" [ref=f1e33] [cursor=pointer]:
+          - /url: /cart/
+  - main [ref=f1e37]:
+    - generic [ref=f1e38]:
+      - navigation [ref=f1e39]:
+        - link "Home" [ref=f1e40] [cursor=pointer]:
+          - /url: /catalog/store/sunshine-fashion/
+        - generic [ref=f1e41]: /
+        - link "Shop" [ref=f1e42] [cursor=pointer]:
+          - /url: /catalog/
+        - generic [ref=f1e43]: /
+        - generic [ref=f1e44]: Women
+      - generic [ref=f1e45]:
+        - generic [ref=f1e46]:
+          - generic [ref=f1e47]:
+            - button [ref=f1e48] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f1e49]
+            - button [ref=f1e50] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f1e51]
+            - button [ref=f1e52] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f1e53]
+            - button [ref=f1e54] [cursor=pointer]:
+              - img "Elegant Midi Dress" [ref=f1e55]
+          - generic [ref=f1e56]:
+            - generic [ref=f1e57]: "-20%"
+            - img "Elegant Midi Dress" [ref=f1e58]
+        - generic [ref=f1e59]:
+          - generic [ref=f1e60]:
+            - generic [ref=f1e61]:
+              - heading "Elegant Midi Dress" [level=1] [ref=f1e62]
+              - button "Wishlist" [ref=f1e63] [cursor=pointer]
+            - generic [ref=f1e66]:
+              - generic [ref=f1e67]: ★★★★★
+              - generic [ref=f1e68]: (24 reviews)
+          - generic [ref=f1e69]:
+            - generic [ref=f1e70]: ₦28,000
+            - generic [ref=f1e71]: ₦35,000
+          - paragraph [ref=f1e72]: A perfect blend of style and comfort. This elegant midi dress is designed for modern women who love simplicity with class. Made from high-grade stretch-crepe fabric that flatters every silhouette, suitable for formal events, dinners, or classy office wear.
+          - generic [ref=f1e73]:
+            - generic [ref=f1e74]: Color
+            - generic [ref=f1e75]:
+              - button "Burgundy" [ref=f1e76] [cursor=pointer]
+              - button "Black" [ref=f1e77] [cursor=pointer]
+              - button "Cream" [ref=f1e78] [cursor=pointer]
+          - generic [ref=f1e79]:
+            - generic [ref=f1e80]: Size
+            - generic [ref=f1e81]:
+              - button "S" [ref=f1e82] [cursor=pointer]
+              - button "M" [ref=f1e83] [cursor=pointer]
+              - button "L" [ref=f1e84] [cursor=pointer]
+              - button "XL" [ref=f1e85] [cursor=pointer]
+          - generic [ref=f1e86]:
+            - generic [ref=f1e87]:
+              - button "-" [ref=f1e88] [cursor=pointer]
+              - generic [ref=f1e89]: "1"
+              - button "+" [ref=f1e90] [cursor=pointer]
+            - generic [ref=f1e91]: "Available: 45"
+          - generic [ref=f1e92]:
+            - button "Add to Cart" [ref=f1e93] [cursor=pointer]
+            - button "Buy Now" [ref=f1e94] [cursor=pointer]
+          - generic [ref=f1e95]:
+            - generic [ref=f1e96]:
+              - generic [ref=f1e97]: 🚚
+              - generic [ref=f1e98]: Fast Delivery
+            - generic [ref=f1e99]:
+              - generic [ref=f1e100]: 🔒
+              - generic [ref=f1e101]: Secure Payments
+            - generic [ref=f1e102]:
+              - generic [ref=f1e103]: 🔄
+              - generic [ref=f1e104]: Easy Returns
+      - generic [ref=f1e105]:
+        - generic [ref=f1e106]:
+          - generic [ref=f1e107]:
+            - heading "Customer Reviews & Ratings 2 Verified" [level=2] [ref=f1e108]:
+              - text: Customer Reviews & Ratings
+              - generic [ref=f1e109]: 2 Verified
+            - paragraph [ref=f1e110]: Real feedback from verified purchasers across Nigeria.
+          - generic [ref=f1e111]:
+            - generic [ref=f1e112]: "4.9"
+            - generic [ref=f1e113]:
+              - generic [ref=f1e114]: ★★★★★
+              - text: Based on 2 reviews
+        - generic [ref=f1e115]:
+          - generic [ref=f1e116]:
+            - heading "Recent Reviews" [level=3] [ref=f1e117]
+            - generic [ref=f1e118]:
+              - generic [ref=f1e119]:
+                - generic [ref=f1e120]:
+                  - generic [ref=f1e121]:
+                    - generic [ref=f1e122]: H
+                    - generic [ref=f1e123]:
+                      - heading "Halima Abubakar" [level=4] [ref=f1e124]
+                      - generic [ref=f1e125]: ✓ Verified Purchase
+                  - generic [ref=f1e126]:
+                    - generic [ref=f1e127]: ★ ★ ★ ★ ★
+                    - text: Oct 28, 2026
+                - generic [ref=f1e128]: Fast delivery & true to size
+                - paragraph [ref=f1e129]: Delivered in Abuja within 24 hours. The burgundy color is rich and elegant. Will definitely order in black too.
+              - generic [ref=f1e130]:
+                - generic [ref=f1e131]:
+                  - generic [ref=f1e132]:
+                    - generic [ref=f1e133]: "N"
+                    - generic [ref=f1e134]:
+                      - heading "Ngozi Eze" [level=4] [ref=f1e135]
+                      - generic [ref=f1e136]: ✓ Verified Purchase
+                  - generic [ref=f1e137]:
+                    - generic [ref=f1e138]: ★ ★ ★ ★ ★
+                    - text: Oct 28, 2026
+                - generic [ref=f1e139]: Absolutely stunning dress!
+                - paragraph [ref=f1e140]: The fabric quality exceeded my expectations. Hugs the curves beautifully and received so many compliments at my friend's wedding in Lagos!
+          - generic [ref=f1e141]:
+            - generic [ref=f1e142]:
+              - heading "Leave a Review" [level=3] [ref=f1e143]
+              - paragraph [ref=f1e144]: Share your shopping experience with the community.
+            - generic [ref=f1e145]:
+              - generic [ref=f1e146]:
+                - generic [ref=f1e147]: Your Name
+                - textbox "Your Name or Nickname" [ref=f1e148]: Admin OHUAMI
+              - generic [ref=f1e149]:
+                - generic [ref=f1e150]: Rating
+                - combobox [ref=f1e151]:
+                  - option "★★★★★ (5 Stars - Excellent)" [selected]
+                  - option "★★★★☆ (4 Stars - Very Good)"
+                  - option "★★★☆☆ (3 Stars - Average)"
+                  - option "★★☆☆☆ (2 Stars - Poor)"
+                  - option "★☆☆☆☆ (1 Star - Terrible)"
+              - generic [ref=f1e152]:
+                - generic [ref=f1e153]: Review Headline
+                - textbox "Headline for your review (e.g. Great quality and fits perfectly!)" [ref=f1e154]
+              - generic [ref=f1e155]:
+                - generic [ref=f1e156]: Review Comments
+                - textbox "Write your full review here. How was the material, packaging, delivery, and overall experience?" [ref=f1e157]
+              - button "Submit Product Review" [ref=f1e158] [cursor=pointer]
+  - contentinfo [ref=f1e159]:
+    - generic [ref=f1e160]:
+      - generic [ref=f1e161]:
+        - link [ref=f1e162] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f1e163]
+        - paragraph [ref=f1e164]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=f1e165]:
+          - text: "Parent Company:"
+          - strong [ref=f1e166]: Cube Tech Enterprises
+      - generic [ref=f1e167]:
+        - heading "Shop & Discover" [level=4] [ref=f1e168]
+        - list [ref=f1e169]:
+          - listitem [ref=f1e170]:
+            - link "All Products & Gadgets" [ref=f1e171] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=f1e172]:
+            - link "⚡ Flash Sale Deals" [ref=f1e173] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=f1e174]:
+            - link "🎟 Active Promo Coupons" [ref=f1e175] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=f1e176]:
+            - link "Sunshine Fashion Flagship" [ref=f1e177] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=f1e178]:
+        - heading "Customer Care" [level=4] [ref=f1e179]
+        - list [ref=f1e180]:
+          - listitem [ref=f1e181]:
+            - link "Contact Us & Support Tickets" [ref=f1e182] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=f1e183]:
+            - link "Order Tracking & Receipts" [ref=f1e184] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=f1e185]:
+            - link "My Account & Addresses" [ref=f1e186] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=f1e187]:
+            - 'link "Tel: +234 800 2823 8324" [ref=f1e188] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=f1e189]:
+        - heading "Sell on OHUAMI" [level=4] [ref=f1e190]
+        - list [ref=f1e191]:
+          - listitem [ref=f1e192]:
+            - link "Merchant Dashboard" [ref=f1e193] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=f1e194]:
+            - link "Product Management" [ref=f1e195] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=f1e196]:
+            - link "Order Fulfillment" [ref=f1e197] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=f1e198]:
+            - link "Platform Control Center" [ref=f1e199] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=f1e200]:
+      - generic [ref=f1e201]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=f1e202]:
+        - generic [ref=f1e203]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=f1e204]: •
+        - generic [ref=f1e205]: Paystack Verified
+        - generic [ref=f1e206]: •
+        - generic [ref=f1e207]: Nationwide Express Logistics
+  - button "Customer Support" [ref=f1e208] [cursor=pointer]

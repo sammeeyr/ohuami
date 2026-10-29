@@ -128,6 +128,70 @@
     {% block content %}{% endblock %}
   </main>
 
+  <!-- Production-Grade Global Footer -->
+  <footer class="bg-[#111111] text-white pt-12 pb-24 md:pb-12 mt-12 border-t border-gray-800">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Col 1: Brand -->
+      <div class="space-y-3">
+        <a href="{% url 'core:home' %}" class="inline-block">
+          <img src="{% static 'images/ohuami-horizontal-dark.svg' %}" alt="{{ brand_name }}" class="h-8 w-auto">
+        </a>
+        <p class="text-xs text-gray-400 leading-relaxed">
+          {{ brand_tagline }} {{ brand_secondary }} An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        </p>
+        <div class="text-[11px] text-gray-500 font-semibold">
+          Parent Company: <strong class="text-white">{{ parent_company }}</strong>
+        </div>
+      </div>
+
+      <!-- Col 2: Marketplace & Catalog -->
+      <div class="space-y-3 text-xs">
+        <h4 class="font-extrabold uppercase tracking-wider text-sm text-[#FFC928]">Shop & Discover</h4>
+        <ul class="space-y-2 text-gray-400 font-medium">
+          <li><a href="{% url 'catalog:list' %}" class="hover:text-white transition">All Products & Gadgets</a></li>
+          <li><a href="{% url 'promotions:flash_sale' %}" class="hover:text-white transition">⚡ Flash Sale Deals</a></li>
+          <li><a href="{% url 'promotions:coupons' %}" class="hover:text-white transition">🎟 Active Promo Coupons</a></li>
+          <li><a href="{% url 'catalog:storefront_default' %}" class="hover:text-white transition">Sunshine Fashion Flagship</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Customer Care & Services -->
+      <div class="space-y-3 text-xs">
+        <h4 class="font-extrabold uppercase tracking-wider text-sm text-[#FFC928]">Customer Care</h4>
+        <ul class="space-y-2 text-gray-400 font-medium">
+          <li><a href="{% url 'support:contact' %}" class="hover:text-white transition">Contact Us & Support Tickets</a></li>
+          <li><a href="{% url 'orders:history' %}" class="hover:text-white transition">Order Tracking & Receipts</a></li>
+          <li><a href="{% url 'accounts:profile' %}" class="hover:text-white transition">My Account & Addresses</a></li>
+          <li><a href="tel:{{ store_setting.support_phone }}" class="hover:text-white transition">Tel: {{ store_setting.support_phone|default:'+234 800 2823 8324' }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Merchants & Enterprise -->
+      <div class="space-y-3 text-xs">
+        <h4 class="font-extrabold uppercase tracking-wider text-sm text-[#FFC928]">Sell on OHUAMI</h4>
+        <ul class="space-y-2 text-gray-400 font-medium">
+          <li><a href="{% url 'dashboard:index' %}" class="hover:text-white transition">Merchant Dashboard</a></li>
+          <li><a href="{% url 'dashboard:products' %}" class="hover:text-white transition">Product Management</a></li>
+          <li><a href="{% url 'dashboard:orders' %}" class="hover:text-white transition">Order Fulfillment</a></li>
+          <li><a href="{% url 'dashboard:super_admin_control_panel' %}" class="hover:text-white transition">Platform Control Center</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 mt-8 pt-6 border-t border-gray-800 text-[11px] text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div>
+        &copy; 2026 {{ brand_name }} — {{ parent_company }}. All rights reserved.
+      </div>
+      <div class="flex items-center gap-4">
+        <span>🔒 256-bit SSL Secure Checkout</span>
+        <span>•</span>
+        <span>Paystack Verified</span>
+        <span>•</span>
+        <span>Nationwide Express Logistics</span>
+      </div>
+    </div>
+  </footer>
+
   <!-- Floating Customer Support Widget (Matching Reference A) -->
   <button onclick="toggleSupportWidget()" class="support-widget-btn" aria-label="Customer Support">
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

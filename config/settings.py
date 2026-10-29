@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     
     # Third-party
+    'corsheaders',
     'rest_framework',
     
     # Internal Modular Apps
@@ -59,6 +60,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -177,3 +179,24 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
 }
+
+# Cross-Origin Resource Sharing (CORS) Settings
+from corsheaders.defaults import default_headers, default_methods
+
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'x-store-key',
+    'x-store-id',
+    'x-merchant-id',
+]
+CORS_ALLOW_METHODS = list(default_methods) + [
+    'PATCH',
+    'DELETE',
+]

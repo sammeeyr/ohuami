@@ -157,29 +157,13 @@
 
 {% block branding %}
 <div id="site-name">
-  <div class="ohuami-admin-logo">
-    <svg viewBox="0 0 460 110" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 34px; width: auto;">
-      <!-- Store Awning Symbol -->
-      <path d="M18 42C18 36 22 30 28 28L72 14C76 12.8 80 12.8 84 14L128 28C134 30 138 36 138 42V48C138 56 132 62 124 62C116 62 110 56 110 48C110 56 104 62 96 62C88 62 82 56 82 48C82 56 76 62 68 62C60 62 54 56 54 48C54 56 48 62 40 62C32 62 26 56 26 48V42H18Z" fill="#E53935"/>
-      <path d="M38 30L44 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-      <path d="M66 22L70 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-      <path d="M94 22L90 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-      <path d="M122 30L116 48" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
-      <!-- Connected commerce nodes & smile -->
-      <path d="M26 62C26 89.6 48.4 112 76 112C101.2 112 122 93.4 125.4 69.2" stroke="#FFC928" stroke-width="15" stroke-linecap="round"/>
-      <circle cx="126" cy="62" r="6" fill="#111111"/>
-      <circle cx="140" cy="74" r="5" fill="#111111"/>
-      <circle cx="132" cy="88" r="4" fill="#111111"/>
-      <!-- Wordmark OHUAMI -->
-      <text x="162" y="80" font-family="'Montserrat', sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" letter-spacing="-0.03em">OHU</text>
-      <text x="328" y="80" font-family="'Montserrat', sans-serif" font-weight="900" font-size="64" fill="#FFC928" letter-spacing="-0.03em">A</text>
-      <text x="382" y="80" font-family="'Montserrat', sans-serif" font-weight="900" font-size="64" fill="#FFFFFF" letter-spacing="-0.03em">MI</text>
-    </svg>
+  <a href="{% url 'admin:index' %}" class="ohuami-admin-logo">
+    <img src="{% static 'images/ohuami-horizontal-dark.svg' %}" alt="OHUAMI" style="height: 34px; width: auto; object-fit: contain;">
     <div class="ohuami-admin-title">
       <span>Control Panel</span>
       <span class="badge">Super Admin</span>
     </div>
-  </div>
+  </a>
 </div>
 {% endblock %}
 

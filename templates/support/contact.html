@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact & Customer Support — {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- Header Banner -->
+  <div class="bg-gradient-to-r from-[#111111] via-[#1A1A22] to-[#241717] rounded-3xl p-6 sm:p-10 text-white border border-gray-800 shadow-xl relative overflow-hidden">
+    <div class="max-w-2xl space-y-3 relative z-10">
+      <span class="inline-block bg-[#FFC928] text-[#111111] text-xs font-black uppercase px-3 py-1 rounded-full">
+        24/7 Dedicated Care
+      </span>
+      <h1 class="text-2xl sm:text-4xl font-black text-white">How Can We Help You?</h1>
+      <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+        Have questions about an order, delivery timelines, becoming a verified merchant, or custom domain setup? 
+        Submit a ticket below or connect directly with our support team.
+      </p>
+    </div>
+  </div>
+
+  {% if submitted_ticket %}
+  <div class="bg-emerald-50 border-2 border-emerald-500 rounded-2xl p-6 text-emerald-900 flex items-start gap-4">
+    <div class="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
+      ✓
+    </div>
+    <div>
+      <h3 class="text-base font-extrabold text-emerald-900">Support Ticket Created Successfully!</h3>
+      <p class="text-xs text-emerald-800 mt-1">
+        Your tracking ticket reference is <strong class="text-emerald-950 font-black">#{{ submitted_ticket }}</strong>. 
+        A confirmation has been logged, and an OHUAMI customer care specialist will respond within 2 to 4 business hours.
+      </p>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Main 2-Column Content -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+    <!-- Left Column: Support Enquiry Form (lg:col-span-7) -->
+    <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/90 shadow-sm space-y-6">
+      <div>
+        <h2 class="text-lg sm:text-xl font-black text-[#111111]">Send an Inquiry or Ticket</h2>
+        <p class="text-xs text-gray-500 mt-1">Fill out the form below and our team will get back to you promptly.</p>
+      </div>
+
+      <form method="POST" action="{% url 'support:contact' %}" class="space-y-4">
+        {% csrf_token %}
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Your Full Name <span class="text-[#E53935]">*</span></label>
+            {{ form.name }}
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Email Address <span class="text-[#E53935]">*</span></label>
+            {{ form.email }}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number (Optional)</label>
+            {{ form.phone }}
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Subject <span class="text-[#E53935]">*</span></label>
+            {{ form.subject }}
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Your Message or Issue Description <span class="text-[#E53935]">*</span></label>
+          {{ form.message }}
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full sm:w-auto bg-[#E53935] hover:bg-[#D32F2F] text-white font-black text-sm px-8 py-3.5 rounded-full transition shadow-md">
+            Submit Support Request
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right Column: Official Contact Channels & FAQs (lg:col-span-5) -->
+    <div class="lg:col-span-5 space-y-6">
+      
+      <!-- Channels Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+        <h3 class="text-base font-black text-[#111111]">Official Contact Details</h3>
+        
+        <div class="space-y-3.5 text-xs text-gray-600">
+          <div class="flex items-start gap-3">
+            <span class="text-base">📍</span>
+            <div>
+              <strong class="text-gray-900 block font-bold">Office Address:</strong>
+              <span>{{ store_setting.office_address|default:"Plot 104, Central Business District, Abuja, Nigeria" }}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-base">📞</span>
+            <div>
+              <strong class="text-gray-900 block font-bold">Customer Care Phone:</strong>
+              <a href="tel:{{ store_setting.support_phone }}" class="text-[#E53935] font-bold hover:underline">
+                {{ store_setting.support_phone|default:"+234 800 2823 8324" }}
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-base">✉️</span>
+            <div>
+              <strong class="text-gray-900 block font-bold">Official Support Email:</strong>
+              <a href="mailto:{{ store_setting.support_email }}" class="text-[#E53935] font-bold hover:underline">
+                {{ store_setting.support_email|default:"support@ohuami.com" }}
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="text-base">💬</span>
+            <div>
+              <strong class="text-gray-900 block font-bold">WhatsApp Direct:</strong>
+              <a href="https://wa.me/{{ store_setting.whatsapp_support_phone|default:'2348012345678' }}" target="_blank" class="text-emerald-600 font-bold hover:underline">
+                Chat with Care Specialist
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500 font-medium">
+          <span>Operating Hours:</span>
+          <span class="font-bold text-[#111111]">Mon - Sat (8:00 AM - 8:00 PM)</span>
+        </div>
+      </div>
+
+      <!-- FAQ Accordion Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+        <h3 class="text-base font-black text-[#111111]">Frequently Asked Questions</h3>
+
+        <div class="space-y-2">
+          {% for faq in faqs %}
+          <details class="group rounded-xl border border-gray-100 bg-gray-50 p-3.5 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-xs font-extrabold text-[#111111]">
+              <span>{{ faq.question }}</span>
+              <span class="shrink-0 transition duration-300 group-open:-rotate-180 text-gray-400">▼</span>
+            </summary>
+            <p class="mt-2 text-xs leading-relaxed text-gray-600 border-t border-gray-200/60 pt-2">
+              {{ faq.answer }}
+            </p>
+          </details>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

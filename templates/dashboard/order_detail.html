@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Manage Order #{{ order.order_reference }} — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Breadcrumbs & Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <nav class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold mb-1">
+        <a href="{% url 'dashboard:index' %}" class="hover:text-gray-700">Dashboard</a>
+        <span>›</span>
+        <a href="{% url 'dashboard:orders' %}" class="hover:text-gray-700">Orders</a>
+        <span>›</span>
+        <span class="text-[#E53935] font-bold">#{{ order.order_reference }}</span>
+      </nav>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111] flex items-center gap-3">
+        Order #{{ order.order_reference }}
+        <span class="text-xs font-bold px-2.5 py-1 rounded-full {% if order.payment_status == 'paid' %}bg-emerald-100 text-emerald-800{% else %}bg-amber-100 text-amber-800{% endif %}">
+          {{ order.get_payment_status_display }}
+        </span>
+        <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 text-blue-800">
+          {{ order.get_fulfillment_status_display }}
+        </span>
+      </h1>
+      <p class="text-xs text-gray-500 mt-0.5">Placed on {{ order.created_at|date:"F d, Y \a\t h:i A" }} by {{ order.customer_name }}</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="{% url 'orders:detail' order_ref=order.order_reference %}" target="_blank" class="text-xs font-bold text-gray-700 hover:text-black bg-gray-100 px-4 py-2 rounded-xl transition">
+        Customer Receipt ↗
+      </a>
+      {% if order.order_status != 'cancelled' %}
+      <form method="post" action="{% url 'dashboard:order_cancel' order_id=order.id %}" onsubmit="return confirm('Cancel this order and restock items?');">
+        {% csrf_token %}
+        <button type="submit" class="text-xs font-bold text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 px-4 py-2 rounded-xl transition">
+          Cancel Order
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Left 2 Cols: Order Items & Dispatch Tracking -->
+    <div class="lg:col-span-2 space-y-6">
+
+      <!-- Ordered Items Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+        <h3 class="text-sm font-extrabold text-[#111111]">Items in Order ({{ order.items.count }})</h3>
+        <div class="divide-y divide-gray-100">
+          {% for item in order.items.all %}
+          <div class="py-3 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl bg-gray-100 border border-gray-200 overflow-hidden flex-shrink-0 flex items-center justify-center font-bold text-xs text-gray-400">
+                {% if item.product and item.product.primary_image %}
+                  <img src="{{ item.product.primary_image.image.url }}" alt="{{ item.product_name }}" class="w-full h-full object-cover">
+                {% else %}
+                  ITEM
+                {% endif %}
+              </div>
+              <div>
+                <h4 class="text-xs font-extrabold text-[#111111]">{{ item.product_name }}</h4>
+                <p class="text-[11px] text-gray-500 font-mono">SKU: {{ item.sku }} • Qty: {{ item.quantity }}</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-black text-[#111111] block">₦{{ item.line_total|floatformat:0|intcomma }}</span>
+              <span class="text-[10px] text-gray-400">₦{{ item.unit_price|floatformat:0|intcomma }} each</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Financial Totals -->
+        <div class="border-t border-gray-100 pt-4 space-y-2 text-xs">
+          <div class="flex justify-between text-gray-600">
+            <span>Items Subtotal</span>
+            <span class="font-bold">₦{{ order.items_subtotal|floatformat:0|intcomma }}</span>
+          </div>
+          <div class="flex justify-between text-gray-600">
+            <span>Delivery Fee</span>
+            <span class="font-bold">₦{{ order.shipping_fee|floatformat:0|intcomma }}</span>
+          </div>
+          {% if order.discount_amount > 0 %}
+          <div class="flex justify-between text-emerald-700">
+            <span>Coupon Discount</span>
+            <span class="font-bold">-₦{{ order.discount_amount|floatformat:0|intcomma }}</span>
+          </div>
+          {% endif %}
+          <div class="flex justify-between text-base font-black text-[#111111] border-t border-gray-100 pt-3">
+            <span>Total Amount</span>
+            <span class="text-[#E53935]">₦{{ order.total_amount|floatformat:0|intcomma }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dispatch & Logistics Assignment Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+        <h3 class="text-sm font-extrabold text-[#111111] flex items-center justify-between">
+          <span>Logistics & Courier Dispatch</span>
+          {% if shipment %}
+            <span class="font-mono text-xs text-blue-700 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">
+              Tracking: {{ shipment.tracking_number }}
+            </span>
+          {% endif %}
+        </h3>
+
+        {% if shipment %}
+          <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 space-y-3">
+            <div class="grid grid-cols-2 gap-4 text-xs">
+              <div>
+                <span class="text-gray-400 font-semibold block text-[10px] uppercase">Assigned Courier</span>
+                <span class="font-bold text-[#111111]">{{ shipment.carrier.name|default:"In-House Fleet" }} ({{ shipment.carrier.phone|default:"No phone" }})</span>
+              </div>
+              <div>
+                <span class="text-gray-400 font-semibold block text-[10px] uppercase">Current Tracking Status</span>
+                <span class="font-extrabold text-blue-700">{{ shipment.get_status_display }}</span>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 pt-3 flex items-center justify-between">
+              <span class="text-xs text-gray-500">Advance milestone:</span>
+              <form method="post" action="{% url 'dashboard:dispatch_update_status' shipment_id=shipment.id %}" class="flex items-center gap-2">
+                {% csrf_token %}
+                <select name="status" class="text-xs font-bold bg-white border border-gray-200 rounded-xl px-3 py-1.5">
+                  <option value="pending_pickup" {% if shipment.status == 'pending_pickup' %}selected{% endif %}>Pending Pickup</option>
+                  <option value="picked_up" {% if shipment.status == 'picked_up' %}selected{% endif %}>Picked Up</option>
+                  <option value="in_transit" {% if shipment.status == 'in_transit' %}selected{% endif %}>In Transit</option>
+                  <option value="out_for_delivery" {% if shipment.status == 'out_for_delivery' %}selected{% endif %}>Out for Delivery</option>
+                  <option value="delivered" {% if shipment.status == 'delivered' %}selected{% endif %}>Delivered</option>
+                </select>
+                <button type="submit" class="bg-[#111111] text-white text-xs font-bold px-3 py-1.5 rounded-xl hover:bg-black">
+                  Update
+                </button>
+              </form>
+            </div>
+          </div>
+        {% else %}
+          <div class="p-4 rounded-2xl bg-amber-50/50 border border-amber-100 text-xs text-amber-900 space-y-3">
+            <p>This order has not been dispatched yet. Assign an in-house rider or partner courier to generate an automated tracking number.</p>
+            <a href="{% url 'dashboard:dispatch_create' %}?order_id={{ order.id }}" class="inline-block bg-[#111111] hover:bg-black text-[#FFC928] text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
+              + Dispatch & Assign Rider
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <!-- Right Col: Customer & Status Controls -->
+    <div class="space-y-6">
+
+      <!-- Status Control Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+        <h3 class="text-sm font-extrabold text-[#111111]">Update Order Status</h3>
+        <form method="post" action="{% url 'dashboard:update_order_status' order_id=order.id %}" class="space-y-3">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          
+          <div>
+            <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Fulfillment Status</label>
+            <select name="status" class="w-full text-xs font-bold bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 focus:border-[#E53935] focus:outline-none">
+              <option value="unfulfilled" {% if order.fulfillment_status == 'unfulfilled' %}selected{% endif %}>Unfulfilled</option>
+              <option value="processing" {% if order.fulfillment_status == 'processing' %}selected{% endif %}>Processing</option>
+              <option value="shipped" {% if order.fulfillment_status == 'shipped' %}selected{% endif %}>Shipped</option>
+              <option value="delivered" {% if order.fulfillment_status == 'delivered' %}selected{% endif %}>Delivered</option>
+              <option value="returned" {% if order.fulfillment_status == 'returned' %}selected{% endif %}>Returned</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-500 uppercase mb-1">Payment Status</label>
+            <select name="payment_status" class="w-full text-xs font-bold bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 focus:border-[#E53935] focus:outline-none">
+              <option value="pending" {% if order.payment_status == 'pending' %}selected{% endif %}>Pending</option>
+              <option value="paid" {% if order.payment_status == 'paid' %}selected{% endif %}>Paid (Verified)</option>
+              <option value="failed" {% if order.payment_status == 'failed' %}selected{% endif %}>Failed</option>
+              <option value="refunded" {% if order.payment_status == 'refunded' %}selected{% endif %}>Refunded</option>
+              <option value="cancelled" {% if order.payment_status == 'cancelled' %}selected{% endif %}>Cancelled</option>
+            </select>
+          </div>
+
+          <button type="submit" class="w-full bg-[#111111] hover:bg-black text-white text-xs font-bold py-2.5 rounded-xl shadow-sm transition">
+            Save Order Status
+          </button>
+        </form>
+      </div>
+
+      <!-- Customer Profile Card -->
+      <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm space-y-4">
+        <h3 class="text-sm font-extrabold text-[#111111]">Customer Information</h3>
+        <div class="space-y-3 text-xs">
+          <div>
+            <span class="text-gray-400 font-semibold block text-[10px] uppercase">Name</span>
+            <span class="font-bold text-[#111111]">{{ order.customer_name }}</span>
+          </div>
+          <div>
+            <span class="text-gray-400 font-semibold block text-[10px] uppercase">Email</span>
+            <a href="mailto:{{ order.customer_email }}" class="font-medium text-blue-600 hover:underline">{{ order.customer_email }}</a>
+          </div>
+          <div>
+            <span class="text-gray-400 font-semibold block text-[10px] uppercase">Phone</span>
+            <a href="tel:{{ order.customer_phone }}" class="font-mono text-gray-700 hover:underline">{{ order.customer_phone }}</a>
+          </div>
+          <div class="border-t border-gray-100 pt-3">
+            <span class="text-gray-400 font-semibold block text-[10px] uppercase">Delivery Address</span>
+            <p class="font-medium text-gray-700 mt-1 leading-relaxed">{{ order.formatted_shipping_address }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

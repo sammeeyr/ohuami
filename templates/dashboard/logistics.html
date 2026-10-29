@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Logistics & Dispatch — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111] flex items-center gap-3">
+        Logistics & Dispatch Control
+      </h1>
+      <p class="text-xs text-gray-500 mt-0.5">Manage last-mile deliveries, tracking numbers, partner couriers, and in-house delivery riders for {{ store.name }}.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="{% url 'dashboard:carrier_create' %}" class="bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold px-4 py-2.5 rounded-full transition inline-flex items-center gap-1.5">
+        <span>+</span> Register Courier / Rider
+      </a>
+      <a href="{% url 'dashboard:dispatch_create' %}" class="bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-black px-5 py-2.5 rounded-full shadow-md transition inline-flex items-center gap-1.5">
+        <span>+</span> Dispatch an Order
+      </a>
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- 4 Logistics KPI Metrics -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-white rounded-3xl p-5 border border-gray-200/90 shadow-sm">
+      <div class="text-[10px] font-black uppercase text-gray-400">Active Shipments</div>
+      <div class="text-2xl font-black text-[#111111] mt-1">{{ active_shipments_count }}</div>
+      <div class="text-[11px] text-gray-500 mt-1">Pending or in route</div>
+    </div>
+    <div class="bg-white rounded-3xl p-5 border border-gray-200/90 shadow-sm">
+      <div class="text-[10px] font-black uppercase text-gray-400">In Transit</div>
+      <div class="text-2xl font-black text-blue-600 mt-1">{{ in_transit_count }}</div>
+      <div class="text-[11px] text-gray-500 mt-1">Currently with couriers</div>
+    </div>
+    <div class="bg-white rounded-3xl p-5 border border-gray-200/90 shadow-sm">
+      <div class="text-[10px] font-black uppercase text-gray-400">Delivered Shipments</div>
+      <div class="text-2xl font-black text-emerald-600 mt-1">{{ delivered_count }}</div>
+      <div class="text-[11px] text-gray-500 mt-1">Confirmed safe deliveries</div>
+    </div>
+    <div class="bg-white rounded-3xl p-5 border border-gray-200/90 shadow-sm">
+      <div class="text-[10px] font-black uppercase text-gray-400">Active Carriers / Riders</div>
+      <div class="text-2xl font-black text-[#111111] mt-1">{{ active_carriers_count }}</div>
+      <div class="text-[11px] text-gray-500 mt-1">Fleet & external partners</div>
+    </div>
+  </div>
+
+  <!-- Shipments Management Table -->
+  <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm overflow-hidden space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-extrabold text-[#111111]">Active Deliveries & Tracking</h3>
+      <span class="text-xs text-gray-400">{{ shipments.count }} total shipment{{ shipments.count|pluralize }}</span>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Tracking Number</th>
+            <th class="pb-3">Order</th>
+            <th class="pb-3">Carrier / Rider</th>
+            <th class="pb-3">Recipient & Address</th>
+            <th class="pb-3">Status</th>
+            <th class="pb-3 text-right">Update Milestone</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for shipment in shipments %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="py-3 font-mono font-bold text-blue-700">
+              {{ shipment.tracking_number }}
+            </td>
+            <td class="py-3 font-bold text-[#111111]">
+              <a href="{% url 'dashboard:order_detail' order_id=shipment.order.id %}" class="hover:underline">
+                #{{ shipment.order.order_reference }}
+              </a>
+            </td>
+            <td class="py-3">
+              {% if shipment.carrier %}
+                <span class="font-bold text-gray-800 block">{{ shipment.carrier.name }}</span>
+                <span class="text-[10px] text-gray-400">{{ shipment.carrier.get_vehicle_type_display }} • {{ shipment.carrier.phone }}</span>
+              {% else %}
+                <span class="text-gray-400 font-medium">In-House Dispatch</span>
+              {% endif %}
+            </td>
+            <td class="py-3">
+              <span class="font-bold text-gray-900 block">{{ shipment.recipient_name }}</span>
+              <span class="text-[10px] text-gray-500 line-clamp-1">{{ shipment.delivery_address }}</span>
+            </td>
+            <td class="py-3">
+              <span class="text-[10px] font-bold px-2.5 py-0.5 rounded-full {% if shipment.status == 'delivered' %}bg-emerald-100 text-emerald-800{% elif shipment.status == 'in_transit' %}bg-blue-100 text-blue-800{% elif shipment.status == 'out_for_delivery' %}bg-purple-100 text-purple-800{% else %}bg-amber-100 text-amber-800{% endif %}">
+                {{ shipment.get_status_display }}
+              </span>
+            </td>
+            <td class="py-3 text-right">
+              <form method="post" action="{% url 'dashboard:dispatch_update_status' shipment_id=shipment.id %}" class="inline-flex items-center gap-1.5">
+                {% csrf_token %}
+                <select name="status" class="text-[11px] font-bold bg-gray-50 border border-gray-200 rounded-lg px-2 py-1">
+                  <option value="pending_pickup" {% if shipment.status == 'pending_pickup' %}selected{% endif %}>Pending Pickup</option>
+                  <option value="picked_up" {% if shipment.status == 'picked_up' %}selected{% endif %}>Picked Up</option>
+                  <option value="in_transit" {% if shipment.status == 'in_transit' %}selected{% endif %}>In Transit</option>
+                  <option value="out_for_delivery" {% if shipment.status == 'out_for_delivery' %}selected{% endif %}>Out for Delivery</option>
+                  <option value="delivered" {% if shipment.status == 'delivered' %}selected{% endif %}>Delivered</option>
+                </select>
+                <button type="submit" class="bg-[#111111] hover:bg-black text-white text-[10px] font-bold px-2.5 py-1 rounded-lg">
+                  Set
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="py-8 text-center text-gray-400">
+              No shipments created yet. Click <a href="{% url 'dashboard:dispatch_create' %}" class="text-[#E53935] font-bold underline">Dispatch an Order</a> to begin tracking.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Carriers & Riders Directory Card -->
+  <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm overflow-hidden space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-sm font-extrabold text-[#111111]">Registered Couriers & In-House Riders</h3>
+      <a href="{% url 'dashboard:carrier_create' %}" class="text-xs font-bold text-[#E53935] hover:underline">
+        + Register New Carrier
+      </a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Courier / Rider Name</th>
+            <th class="pb-3">Type</th>
+            <th class="pb-3">Vehicle</th>
+            <th class="pb-3">Phone</th>
+            <th class="pb-3">Coverage Areas</th>
+            <th class="pb-3">Status</th>
+            <th class="pb-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for carrier in carriers %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="py-3 font-bold text-[#111111]">
+              {{ carrier.name }}
+              {% if carrier.contact_person %}<span class="text-[10px] text-gray-400 block">Lead: {{ carrier.contact_person }}</span>{% endif %}
+            </td>
+            <td class="py-3 font-medium text-gray-600">{{ carrier.get_carrier_type_display }}</td>
+            <td class="py-3 font-medium text-gray-800">
+              {{ carrier.get_vehicle_type_display }}
+              {% if carrier.vehicle_number %}<span class="font-mono text-[10px] text-gray-400 block">{{ carrier.vehicle_number }}</span>{% endif %}
+            </td>
+            <td class="py-3 font-mono text-gray-600">{{ carrier.phone }}</td>
+            <td class="py-3 text-gray-500 text-[11px]">{{ carrier.service_areas|default:"All Areas" }}</td>
+            <td class="py-3">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full {% if carrier.is_active %}bg-emerald-100 text-emerald-800{% else %}bg-gray-100 text-gray-600{% endif %}">
+                {% if carrier.is_active %}Active{% else %}Inactive{% endif %}
+              </span>
+            </td>
+            <td class="py-3 text-right space-x-2">
+              <a href="{% url 'dashboard:carrier_edit' carrier_id=carrier.id %}" class="text-xs font-bold text-blue-600 hover:underline">
+                Edit
+              </a>
+              <span class="text-gray-300">|</span>
+              <form method="post" action="{% url 'dashboard:carrier_delete' carrier_id=carrier.id %}" class="inline" onsubmit="return confirm('Remove courier \'{{ carrier.name }}\'?');">
+                {% csrf_token %}
+                <button type="submit" class="text-xs font-bold text-[#E53935] hover:underline">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="7" class="py-8 text-center text-gray-400">
+              No couriers or delivery riders registered yet. Click <a href="{% url 'dashboard:carrier_create' %}" class="text-[#E53935] font-bold underline">Register Courier / Rider</a> to add your fleet.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

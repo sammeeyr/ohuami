@@ -96,9 +96,18 @@ def product_detail(request, slug):
         is_active=True
     ).exclude(id=product.id)[:4]
 
+    reviews = product.reviews.filter(is_moderated=True).order_by('-created_at')
+    from apps.reviews.forms import ReviewForm
+    initial_name = ''
+    if request.user.is_authenticated:
+        initial_name = request.user.get_full_name() or request.user.email.split('@')[0]
+    review_form = ReviewForm(initial={'customer_name': initial_name})
+
     context = {
         'product': product,
         'related_products': related_products,
+        'reviews': reviews,
+        'review_form': review_form,
     }
     return render(request, 'catalog/product_detail.html', context)
 

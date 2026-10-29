@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static humanize %}
+
+{% block title %}Manage Agents & Staff — {{ store.name }} | {{ brand_name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- Merchant Sub-Nav Tabs -->
+  <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-gray-200 text-xs font-bold text-gray-500">
+    <a href="{% url 'dashboard:index' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Dashboard</a>
+    <a href="{% url 'dashboard:products' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Products</a>
+    <a href="{% url 'dashboard:orders' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Orders</a>
+    <a href="{% url 'dashboard:logistics' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Logistics & Dispatch</a>
+    <a href="{% url 'dashboard:customers' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Customers</a>
+    <a href="{% url 'dashboard:agents' %}" class="px-3 py-1.5 rounded-lg bg-[#FFC928] text-black font-extrabold shadow-sm">Agents & Staff</a>
+    <a href="{% url 'dashboard:discounts' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Discounts</a>
+    <a href="{% url 'dashboard:api_cors' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">API & CORS</a>
+    <a href="{% url 'dashboard:settings' %}" class="px-3 py-1.5 rounded-lg hover:bg-gray-100 hover:text-black">Settings</a>
+  </div>
+
+  <!-- Header Banner -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-5">
+    <div>
+      <h1 class="text-xl sm:text-2xl font-black text-[#111111] flex items-center gap-3">
+        Store Agents & Staff
+        <span class="text-xs font-bold px-3 py-1 rounded-full bg-gray-100 text-gray-800">
+          {{ agents_count }} / {{ max_staff }} Staff Seats ({{ store.plan }})
+        </span>
+      </h1>
+      <p class="text-xs text-gray-500 mt-0.5">Invite team members, assign support agents, and manage store operational permissions for {{ store.name }}.</p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      {% if is_at_limit %}
+        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-200">
+          Staff Limit Reached
+        </span>
+      {% else %}
+        <a href="{% url 'dashboard:agent_create' %}" class="bg-[#E53935] hover:bg-[#D32F2F] text-white text-xs font-black px-5 py-2.5 rounded-full shadow-md transition inline-flex items-center gap-1.5">
+          <span>+</span> Add Team Member
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Messages Feedback -->
+  {% if messages %}
+  <div class="space-y-2">
+    {% for message in messages %}
+      <div class="p-4 rounded-2xl text-xs font-bold {% if message.tags == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200{% else %}bg-red-50 text-red-800 border border-red-200{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Agents Table Card -->
+  <div class="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-sm overflow-hidden space-y-4">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead>
+          <tr class="border-b border-gray-100 text-gray-400 font-bold uppercase text-[10px]">
+            <th class="pb-3">Agent / Member</th>
+            <th class="pb-3">Role</th>
+            <th class="pb-3">Contact</th>
+            <th class="pb-3">Permissions</th>
+            <th class="pb-3">Status</th>
+            <th class="pb-3 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {% for agent in agents %}
+          <tr class="hover:bg-gray-50 transition">
+            <td class="py-3 font-bold text-[#111111]">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-[#111111] text-[#FFC928] font-black flex items-center justify-center text-xs flex-shrink-0">
+                  {{ agent.name|slice:":2"|upper }}
+                </div>
+                <div>
+                  <h4 class="font-extrabold text-sm text-[#111111]">{{ agent.name }}</h4>
+                  <span class="text-[10px] text-gray-400">Added {{ agent.created_at|date:"M d, Y" }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="py-3">
+              <span class="font-bold text-gray-800 bg-gray-100 px-2.5 py-1 rounded-lg text-[11px]">
+                {{ agent.get_role_display }}
+              </span>
+            </td>
+            <td class="py-3">
+              <div class="text-xs">
+                <a href="mailto:{{ agent.email }}" class="font-medium text-blue-600 hover:underline block">{{ agent.email }}</a>
+                {% if agent.phone %}<span class="text-[10px] text-gray-400">{{ agent.phone }}</span>{% endif %}
+              </div>
+            </td>
+            <td class="py-3">
+              <div class="flex flex-wrap gap-1">
+                {% if agent.can_manage_products %}<span class="text-[9px] font-bold bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded">Products</span>{% endif %}
+                {% if agent.can_manage_orders %}<span class="text-[9px] font-bold bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded">Orders</span>{% endif %}
+                {% if agent.can_manage_dispatch %}<span class="text-[9px] font-bold bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded">Dispatch</span>{% endif %}
+                {% if agent.can_manage_customers %}<span class="text-[9px] font-bold bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded">CRM</span>{% endif %}
+              </div>
+            </td>
+            <td class="py-3">
+              <form method="post" action="{% url 'dashboard:agent_toggle_status' agent_id=agent.id %}" class="inline">
+                {% csrf_token %}
+                <button type="submit" class="text-[10px] font-bold px-2.5 py-1 rounded-full cursor-pointer transition {% if agent.is_active %}bg-emerald-100 text-emerald-800 hover:bg-emerald-200{% else %}bg-gray-100 text-gray-600 hover:bg-gray-200{% endif %}">
+                  {% if agent.is_active %}● Active{% else %}○ Suspended{% endif %}
+                </button>
+              </form>
+            </td>
+            <td class="py-3 text-right space-x-2">
+              <a href="{% url 'dashboard:agent_edit' agent_id=agent.id %}" class="text-xs font-bold text-blue-600 hover:text-blue-800 hover:underline">
+                Edit
+              </a>
+              <span class="text-gray-300">|</span>
+              <form method="post" action="{% url 'dashboard:agent_delete' agent_id=agent.id %}" class="inline" onsubmit="return confirm('Remove team member \'{{ agent.name }}\'?');">
+                {% csrf_token %}
+                <button type="submit" class="text-xs font-bold text-[#E53935] hover:text-red-800 hover:underline">
+                  Remove
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="py-8 text-center text-gray-400">
+              No staff agents registered yet. Click <a href="{% url 'dashboard:agent_create' %}" class="text-[#E53935] font-bold underline">Add Team Member</a> to invite colleagues.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

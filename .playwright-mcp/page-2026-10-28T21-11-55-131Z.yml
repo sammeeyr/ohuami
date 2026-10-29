@@ -1,0 +1,392 @@
+- generic [active] [ref=f3e1]:
+  - link "Skip to main content" [ref=f3e2] [cursor=pointer]:
+    - /url: "#content-start"
+  - generic [ref=f3e3]:
+    - banner [ref=f3e4]:
+      - generic [ref=f3e7]:
+        - img [ref=f3e8]:
+          - generic [ref=f3e18]: OHU
+          - generic [ref=f3e19]: A
+          - generic [ref=f3e20]: MI
+        - generic [ref=f3e21]:
+          - generic [ref=f3e22]: Control Panel
+          - generic [ref=f3e23]: Super Admin
+      - generic [ref=f3e24]:
+        - text: Welcome,
+        - strong [ref=f3e25]: Admin
+        - text: .
+        - link "Control Center" [ref=f3e26] [cursor=pointer]:
+          - /url: /dashboard/control-panel/
+        - link "View site" [ref=f3e30] [cursor=pointer]:
+          - /url: /
+        - text: /
+        - link "Change password" [ref=f3e31] [cursor=pointer]:
+          - /url: /admin/password_change/
+        - text: /
+        - button "Log out" [ref=f3e33] [cursor=pointer]
+        - 'button "Toggle theme (current theme: auto)" [ref=f3e34] [cursor=pointer]'
+    - main [ref=f3e39]:
+      - generic [ref=f3e40]:
+        - heading "Platform Management & Multi-Store Control" [level=1] [ref=f3e43]
+        - generic [ref=f3e44]:
+          - generic [ref=f3e45]:
+            - generic [ref=f3e46]:
+              - generic [ref=f3e47]:
+                - heading "OHUAMI Control Panel CUBE TECH ENTERPRISES" [level=1] [ref=f3e48]:
+                  - text: OHUAMI Control Panel
+                  - generic [ref=f3e49]: CUBE TECH ENTERPRISES
+                - paragraph [ref=f3e50]: Unified Multi-Merchant Governance, Global Settings, Store Tiers & Platform Feature Switchboard
+              - link "Open Super Admin Control Center" [ref=f3e52] [cursor=pointer]:
+                - /url: /dashboard/control-panel/
+            - generic [ref=f3e56]:
+              - link "Stores & Merchants 3 All Stores Verified" [ref=f3e57] [cursor=pointer]:
+                - /url: /admin/catalog/store/
+                - generic [ref=f3e58]:
+                  - generic [ref=f3e59]: Stores & Merchants
+                  - generic [ref=f3e63]: "3"
+                - generic [ref=f3e64]: All Stores Verified
+              - link "Multi-Merchant Tiers 4 Free, Starter, Pro, Enterprise" [ref=f3e66] [cursor=pointer]:
+                - /url: /admin/catalog/merchanttier/
+                - generic [ref=f3e67]:
+                  - generic [ref=f3e68]: Multi-Merchant Tiers
+                  - generic [ref=f3e74]: "4"
+                - generic [ref=f3e75]: Free, Starter, Pro, Enterprise
+              - link "Platform Services 9/9 All Systems Operational" [ref=f3e77] [cursor=pointer]:
+                - /url: /admin/core/platformservice/
+                - generic [ref=f3e78]:
+                  - generic [ref=f3e79]: Platform Services
+                  - generic [ref=f3e86]: 9/9
+                - generic [ref=f3e87]: All Systems Operational
+              - link "Platform Commission 5.00% ● Storefronts Live" [ref=f3e89] [cursor=pointer]:
+                - /url: /admin/core/storesetting/
+                - generic [ref=f3e90]:
+                  - generic [ref=f3e91]: Platform Commission
+                  - generic [ref=f3e95]: 5.00%
+                - generic [ref=f3e96]: ● Storefronts Live
+            - generic [ref=f3e98]:
+              - generic [ref=f3e99]: "Quick Actions:"
+              - link "🔍 Review KYC Submissions" [ref=f3e100] [cursor=pointer]:
+                - /url: /admin/catalog/store/?status__exact=PENDING
+              - link "⚡ Edit Tier Limits & Fees" [ref=f3e102] [cursor=pointer]:
+                - /url: /admin/catalog/merchanttier/
+              - link "🧩 Toggle Feature Flags" [ref=f3e104] [cursor=pointer]:
+                - /url: /admin/core/platformservice/
+              - link "⚙️ Global Payout & Delivery" [ref=f3e106] [cursor=pointer]:
+                - /url: /admin/core/storesetting/
+              - link "📋 System Audit Trail" [ref=f3e108] [cursor=pointer]:
+                - /url: /admin/core/auditlog/
+          - table [ref=f3e111]:
+            - caption [ref=f3e112]:
+              - link "Accounts" [ref=f3e113] [cursor=pointer]:
+                - /url: /admin/accounts/
+            - rowgroup [ref=f3e114]:
+              - row [ref=f3e115]:
+                - columnheader "Model name" [ref=f3e116]
+                - columnheader "Add link" [ref=f3e117]
+                - columnheader "Change or view list link" [ref=f3e118]
+            - rowgroup [ref=f3e119]:
+              - row [ref=f3e120]:
+                - rowheader [ref=f3e121]:
+                  - link "Addresses" [ref=f3e122] [cursor=pointer]:
+                    - /url: /admin/accounts/address/
+                - cell [ref=f3e123]:
+                  - link "Add" [ref=f3e124] [cursor=pointer]:
+                    - /url: /admin/accounts/address/add/
+                - cell [ref=f3e125]:
+                  - link "Change" [ref=f3e126] [cursor=pointer]:
+                    - /url: /admin/accounts/address/
+              - row [ref=f3e127]:
+                - rowheader [ref=f3e128]:
+                  - link "Users" [ref=f3e129] [cursor=pointer]:
+                    - /url: /admin/accounts/user/
+                - cell [ref=f3e130]:
+                  - link "Add" [ref=f3e131] [cursor=pointer]:
+                    - /url: /admin/accounts/user/add/
+                - cell [ref=f3e132]:
+                  - link "Change" [ref=f3e133] [cursor=pointer]:
+                    - /url: /admin/accounts/user/
+          - table [ref=f3e135]:
+            - caption [ref=f3e136]:
+              - link "Authentication and Authorization" [ref=f3e137] [cursor=pointer]:
+                - /url: /admin/auth/
+            - rowgroup [ref=f3e138]:
+              - row [ref=f3e139]:
+                - columnheader "Model name" [ref=f3e140]
+                - columnheader "Add link" [ref=f3e141]
+                - columnheader "Change or view list link" [ref=f3e142]
+            - rowgroup [ref=f3e143]:
+              - row [ref=f3e144]:
+                - rowheader [ref=f3e145]:
+                  - link "Groups" [ref=f3e146] [cursor=pointer]:
+                    - /url: /admin/auth/group/
+                - cell [ref=f3e147]:
+                  - link "Add" [ref=f3e148] [cursor=pointer]:
+                    - /url: /admin/auth/group/add/
+                - cell [ref=f3e149]:
+                  - link "Change" [ref=f3e150] [cursor=pointer]:
+                    - /url: /admin/auth/group/
+          - table [ref=f3e152]:
+            - caption [ref=f3e153]:
+              - link "Catalog" [ref=f3e154] [cursor=pointer]:
+                - /url: /admin/catalog/
+            - rowgroup [ref=f3e155]:
+              - row [ref=f3e156]:
+                - columnheader "Model name" [ref=f3e157]
+                - columnheader "Add link" [ref=f3e158]
+                - columnheader "Change or view list link" [ref=f3e159]
+            - rowgroup [ref=f3e160]:
+              - row [ref=f3e161]:
+                - rowheader [ref=f3e162]:
+                  - link "Brands" [ref=f3e163] [cursor=pointer]:
+                    - /url: /admin/catalog/brand/
+                - cell [ref=f3e164]:
+                  - link "Add" [ref=f3e165] [cursor=pointer]:
+                    - /url: /admin/catalog/brand/add/
+                - cell [ref=f3e166]:
+                  - link "Change" [ref=f3e167] [cursor=pointer]:
+                    - /url: /admin/catalog/brand/
+              - row [ref=f3e168]:
+                - rowheader [ref=f3e169]:
+                  - link "Categories" [ref=f3e170] [cursor=pointer]:
+                    - /url: /admin/catalog/category/
+                - cell [ref=f3e171]:
+                  - link "Add" [ref=f3e172] [cursor=pointer]:
+                    - /url: /admin/catalog/category/add/
+                - cell [ref=f3e173]:
+                  - link "Change" [ref=f3e174] [cursor=pointer]:
+                    - /url: /admin/catalog/category/
+              - row [ref=f3e175]:
+                - rowheader [ref=f3e176]:
+                  - link "Merchant Tiers" [ref=f3e177] [cursor=pointer]:
+                    - /url: /admin/catalog/merchanttier/
+                - cell [ref=f3e178]:
+                  - link "Add" [ref=f3e179] [cursor=pointer]:
+                    - /url: /admin/catalog/merchanttier/add/
+                - cell [ref=f3e180]:
+                  - link "Change" [ref=f3e181] [cursor=pointer]:
+                    - /url: /admin/catalog/merchanttier/
+              - row [ref=f3e182]:
+                - rowheader [ref=f3e183]:
+                  - link "Product Images" [ref=f3e184] [cursor=pointer]:
+                    - /url: /admin/catalog/productimage/
+                - cell [ref=f3e185]:
+                  - link "Add" [ref=f3e186] [cursor=pointer]:
+                    - /url: /admin/catalog/productimage/add/
+                - cell [ref=f3e187]:
+                  - link "Change" [ref=f3e188] [cursor=pointer]:
+                    - /url: /admin/catalog/productimage/
+              - row [ref=f3e189]:
+                - rowheader [ref=f3e190]:
+                  - link "Product Variants" [ref=f3e191] [cursor=pointer]:
+                    - /url: /admin/catalog/productvariant/
+                - cell [ref=f3e192]:
+                  - link "Add" [ref=f3e193] [cursor=pointer]:
+                    - /url: /admin/catalog/productvariant/add/
+                - cell [ref=f3e194]:
+                  - link "Change" [ref=f3e195] [cursor=pointer]:
+                    - /url: /admin/catalog/productvariant/
+              - row [ref=f3e196]:
+                - rowheader [ref=f3e197]:
+                  - link "Product attribute values" [ref=f3e198] [cursor=pointer]:
+                    - /url: /admin/catalog/productattributevalue/
+                - cell [ref=f3e199]:
+                  - link "Add" [ref=f3e200] [cursor=pointer]:
+                    - /url: /admin/catalog/productattributevalue/add/
+                - cell [ref=f3e201]:
+                  - link "Change" [ref=f3e202] [cursor=pointer]:
+                    - /url: /admin/catalog/productattributevalue/
+              - row [ref=f3e203]:
+                - rowheader [ref=f3e204]:
+                  - link "Product attributes" [ref=f3e205] [cursor=pointer]:
+                    - /url: /admin/catalog/productattribute/
+                - cell [ref=f3e206]:
+                  - link "Add" [ref=f3e207] [cursor=pointer]:
+                    - /url: /admin/catalog/productattribute/add/
+                - cell [ref=f3e208]:
+                  - link "Change" [ref=f3e209] [cursor=pointer]:
+                    - /url: /admin/catalog/productattribute/
+              - row [ref=f3e210]:
+                - rowheader [ref=f3e211]:
+                  - link "Products" [ref=f3e212] [cursor=pointer]:
+                    - /url: /admin/catalog/product/
+                - cell [ref=f3e213]:
+                  - link "Add" [ref=f3e214] [cursor=pointer]:
+                    - /url: /admin/catalog/product/add/
+                - cell [ref=f3e215]:
+                  - link "Change" [ref=f3e216] [cursor=pointer]:
+                    - /url: /admin/catalog/product/
+              - row [ref=f3e217]:
+                - rowheader [ref=f3e218]:
+                  - link "Stores" [ref=f3e219] [cursor=pointer]:
+                    - /url: /admin/catalog/store/
+                - cell [ref=f3e220]:
+                  - link "Add" [ref=f3e221] [cursor=pointer]:
+                    - /url: /admin/catalog/store/add/
+                - cell [ref=f3e222]:
+                  - link "Change" [ref=f3e223] [cursor=pointer]:
+                    - /url: /admin/catalog/store/
+          - table [ref=f3e225]:
+            - caption [ref=f3e226]:
+              - link "Core" [ref=f3e227] [cursor=pointer]:
+                - /url: /admin/core/
+            - rowgroup [ref=f3e228]:
+              - row [ref=f3e229]:
+                - columnheader "Model name" [ref=f3e230]
+                - columnheader "Add link" [ref=f3e231]
+                - columnheader "Change or view list link" [ref=f3e232]
+            - rowgroup [ref=f3e233]:
+              - row [ref=f3e234]:
+                - rowheader [ref=f3e235]:
+                  - link "Audit logs" [ref=f3e236] [cursor=pointer]:
+                    - /url: /admin/core/auditlog/
+                - cell [ref=f3e237]:
+                  - link "Add" [ref=f3e238] [cursor=pointer]:
+                    - /url: /admin/core/auditlog/add/
+                - cell [ref=f3e239]:
+                  - link "Change" [ref=f3e240] [cursor=pointer]:
+                    - /url: /admin/core/auditlog/
+              - row [ref=f3e241]:
+                - rowheader [ref=f3e242]:
+                  - link "Features & Services" [ref=f3e243] [cursor=pointer]:
+                    - /url: /admin/core/platformservice/
+                - cell [ref=f3e244]:
+                  - link "Add" [ref=f3e245] [cursor=pointer]:
+                    - /url: /admin/core/platformservice/add/
+                - cell [ref=f3e246]:
+                  - link "Change" [ref=f3e247] [cursor=pointer]:
+                    - /url: /admin/core/platformservice/
+              - row [ref=f3e248]:
+                - rowheader [ref=f3e249]:
+                  - link "Global Stores Settings" [ref=f3e250] [cursor=pointer]:
+                    - /url: /admin/core/storesetting/
+                - cell [ref=f3e251]:
+                  - link "Add" [ref=f3e252] [cursor=pointer]:
+                    - /url: /admin/core/storesetting/add/
+                - cell [ref=f3e253]:
+                  - link "Change" [ref=f3e254] [cursor=pointer]:
+                    - /url: /admin/core/storesetting/
+          - table [ref=f3e256]:
+            - caption [ref=f3e257]:
+              - link "Inventory" [ref=f3e258] [cursor=pointer]:
+                - /url: /admin/inventory/
+            - rowgroup [ref=f3e259]:
+              - row [ref=f3e260]:
+                - columnheader "Model name" [ref=f3e261]
+                - columnheader "Add link" [ref=f3e262]
+                - columnheader "Change or view list link" [ref=f3e263]
+            - rowgroup [ref=f3e264]:
+              - row [ref=f3e265]:
+                - rowheader [ref=f3e266]:
+                  - link "Stock movements" [ref=f3e267] [cursor=pointer]:
+                    - /url: /admin/inventory/stockmovement/
+                - cell [ref=f3e268]:
+                  - link "Add" [ref=f3e269] [cursor=pointer]:
+                    - /url: /admin/inventory/stockmovement/add/
+                - cell [ref=f3e270]:
+                  - link "Change" [ref=f3e271] [cursor=pointer]:
+                    - /url: /admin/inventory/stockmovement/
+          - table [ref=f3e273]:
+            - caption [ref=f3e274]:
+              - link "Orders" [ref=f3e275] [cursor=pointer]:
+                - /url: /admin/orders/
+            - rowgroup [ref=f3e276]:
+              - row [ref=f3e277]:
+                - columnheader "Model name" [ref=f3e278]
+                - columnheader "Add link" [ref=f3e279]
+                - columnheader "Change or view list link" [ref=f3e280]
+            - rowgroup [ref=f3e281]:
+              - row [ref=f3e282]:
+                - rowheader [ref=f3e283]:
+                  - link "Orders" [ref=f3e284] [cursor=pointer]:
+                    - /url: /admin/orders/order/
+                - cell [ref=f3e285]:
+                  - link "Add" [ref=f3e286] [cursor=pointer]:
+                    - /url: /admin/orders/order/add/
+                - cell [ref=f3e287]:
+                  - link "Change" [ref=f3e288] [cursor=pointer]:
+                    - /url: /admin/orders/order/
+          - table [ref=f3e290]:
+            - caption [ref=f3e291]:
+              - link "Promotions" [ref=f3e292] [cursor=pointer]:
+                - /url: /admin/promotions/
+            - rowgroup [ref=f3e293]:
+              - row [ref=f3e294]:
+                - columnheader "Model name" [ref=f3e295]
+                - columnheader "Add link" [ref=f3e296]
+                - columnheader "Change or view list link" [ref=f3e297]
+            - rowgroup [ref=f3e298]:
+              - row [ref=f3e299]:
+                - rowheader [ref=f3e300]:
+                  - link "Campaigns" [ref=f3e301] [cursor=pointer]:
+                    - /url: /admin/promotions/campaign/
+                - cell [ref=f3e302]:
+                  - link "Add" [ref=f3e303] [cursor=pointer]:
+                    - /url: /admin/promotions/campaign/add/
+                - cell [ref=f3e304]:
+                  - link "Change" [ref=f3e305] [cursor=pointer]:
+                    - /url: /admin/promotions/campaign/
+              - row [ref=f3e306]:
+                - rowheader [ref=f3e307]:
+                  - link "Coupons" [ref=f3e308] [cursor=pointer]:
+                    - /url: /admin/promotions/coupon/
+                - cell [ref=f3e309]:
+                  - link "Add" [ref=f3e310] [cursor=pointer]:
+                    - /url: /admin/promotions/coupon/add/
+                - cell [ref=f3e311]:
+                  - link "Change" [ref=f3e312] [cursor=pointer]:
+                    - /url: /admin/promotions/coupon/
+          - table [ref=f3e314]:
+            - caption [ref=f3e315]:
+              - link "Reviews" [ref=f3e316] [cursor=pointer]:
+                - /url: /admin/reviews/
+            - rowgroup [ref=f3e317]:
+              - row [ref=f3e318]:
+                - columnheader "Model name" [ref=f3e319]
+                - columnheader "Add link" [ref=f3e320]
+                - columnheader "Change or view list link" [ref=f3e321]
+            - rowgroup [ref=f3e322]:
+              - row [ref=f3e323]:
+                - rowheader [ref=f3e324]:
+                  - link "Reviews" [ref=f3e325] [cursor=pointer]:
+                    - /url: /admin/reviews/review/
+                - cell [ref=f3e326]:
+                  - link "Add" [ref=f3e327] [cursor=pointer]:
+                    - /url: /admin/reviews/review/add/
+                - cell [ref=f3e328]:
+                  - link "Change" [ref=f3e329] [cursor=pointer]:
+                    - /url: /admin/reviews/review/
+          - table [ref=f3e331]:
+            - caption [ref=f3e332]:
+              - link "Support" [ref=f3e333] [cursor=pointer]:
+                - /url: /admin/support/
+            - rowgroup [ref=f3e334]:
+              - row [ref=f3e335]:
+                - columnheader "Model name" [ref=f3e336]
+                - columnheader "Add link" [ref=f3e337]
+                - columnheader "Change or view list link" [ref=f3e338]
+            - rowgroup [ref=f3e339]:
+              - row [ref=f3e340]:
+                - rowheader [ref=f3e341]:
+                  - link "Chat messages" [ref=f3e342] [cursor=pointer]:
+                    - /url: /admin/support/chatmessage/
+                - cell [ref=f3e343]:
+                  - link "Add" [ref=f3e344] [cursor=pointer]:
+                    - /url: /admin/support/chatmessage/add/
+                - cell [ref=f3e345]:
+                  - link "Change" [ref=f3e346] [cursor=pointer]:
+                    - /url: /admin/support/chatmessage/
+              - row [ref=f3e347]:
+                - rowheader [ref=f3e348]:
+                  - link "Support Enquiries" [ref=f3e349] [cursor=pointer]:
+                    - /url: /admin/support/supportenquiry/
+                - cell [ref=f3e350]:
+                  - link "Add" [ref=f3e351] [cursor=pointer]:
+                    - /url: /admin/support/supportenquiry/add/
+                - cell [ref=f3e352]:
+                  - link "Change" [ref=f3e353] [cursor=pointer]:
+                    - /url: /admin/support/supportenquiry/
+        - generic [ref=f3e355]:
+          - heading "Recent actions" [level=2] [ref=f3e356]
+          - heading "My actions" [level=3] [ref=f3e357]
+          - paragraph [ref=f3e358]: None available
+    - contentinfo

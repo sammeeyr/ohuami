@@ -1,0 +1,286 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e3]:
+    - generic [ref=f6e4]: 🚀 Free Express Delivery on orders over ₦50,000 across Nigeria
+    - generic [ref=f6e5]:
+      - generic [ref=f6e6]:
+        - text: "Customer Care:"
+        - link "+234 800 2823 8324" [ref=f6e7] [cursor=pointer]:
+          - /url: tel:+234 800 2823 8324
+      - link "Admin Dashboard" [ref=f6e8] [cursor=pointer]:
+        - /url: /dashboard/
+  - banner [ref=f6e9]:
+    - generic [ref=f6e10]:
+      - link [ref=f6e11] [cursor=pointer]:
+        - /url: /
+        - img "OHUAMI" [ref=f6e12]
+      - generic [ref=f6e14]:
+        - textbox "Search laptops, phones, electronics, gadgets..." [ref=f6e15]
+        - button "Search" [ref=f6e19] [cursor=pointer]
+      - generic [ref=f6e20]:
+        - link "0" [ref=f6e21] [cursor=pointer]:
+          - /url: /wishlist/
+        - link "Cart" [ref=f6e25] [cursor=pointer]:
+          - /url: /cart/
+        - link "C Account" [ref=f6e28] [cursor=pointer]:
+          - /url: /accounts/profile/
+          - generic [ref=f6e29]: C
+          - generic [ref=f6e30]: Account
+  - main [ref=f6e31]:
+    - generic [ref=f6e32]:
+      - generic [ref=f6e33]:
+        - link "Dashboard" [ref=f6e34] [cursor=pointer]:
+          - /url: /dashboard/
+        - link "Products" [ref=f6e35] [cursor=pointer]:
+          - /url: /dashboard/products/
+        - link "Orders" [ref=f6e36] [cursor=pointer]:
+          - /url: /dashboard/orders/
+        - link "Logistics & Dispatch" [ref=f6e37] [cursor=pointer]:
+          - /url: /dashboard/logistics/
+        - link "Customers" [ref=f6e38] [cursor=pointer]:
+          - /url: /dashboard/customers/
+        - link "Agents & Staff" [ref=f6e39] [cursor=pointer]:
+          - /url: /dashboard/agents/
+        - link "Discounts" [ref=f6e40] [cursor=pointer]:
+          - /url: /dashboard/discounts/
+        - link "API & CORS" [ref=f6e41] [cursor=pointer]:
+          - /url: /dashboard/api-cors/
+        - link "Settings" [ref=f6e42] [cursor=pointer]:
+          - /url: /dashboard/settings/
+      - generic [ref=f6e44]:
+        - navigation [ref=f6e45]:
+          - link "Dashboard" [ref=f6e46] [cursor=pointer]:
+            - /url: /dashboard/
+          - generic [ref=f6e47]: ›
+          - link "Products" [ref=f6e48] [cursor=pointer]:
+            - /url: /dashboard/products/
+          - generic [ref=f6e49]: ›
+          - generic [ref=f6e50]: "Edit Product #6"
+        - 'heading "Edit Product: Elegant Midi Dress" [level=1] [ref=f6e51]'
+        - paragraph [ref=f6e52]: Upload gallery photos, configure variants, and preview your live product page in real time.
+      - generic [ref=f6e53]:
+        - generic [ref=f6e55]:
+          - generic [ref=f6e56]:
+            - generic [ref=f6e57]:
+              - heading "General Information" [level=3] [ref=f6e58]
+              - generic [ref=f6e59]:
+                - generic [ref=f6e60]: Product Title *
+                - textbox "Product Title (e.g. Silk Evening Dress or Wireless Earbuds)" [ref=f6e61]: Elegant Midi Dress
+              - generic [ref=f6e62]:
+                - generic [ref=f6e63]:
+                  - generic [ref=f6e64]: Category *
+                  - combobox [ref=f6e65]:
+                    - option "- Select an option -"
+                    - option "Smartphones & Tablets"
+                    - option "Women" [selected]
+                    - option "Laptops & Workstations"
+                    - option "Men"
+                    - option "Audio & Headphones"
+                    - option "Bags"
+                    - option "Shoes"
+                    - option "Smart Wearables"
+                    - option "Accessories"
+                    - option "Power & Accessories"
+                    - option "Beauty"
+                - generic [ref=f6e66]:
+                  - generic [ref=f6e67]: Brand
+                  - combobox [ref=f6e68]:
+                    - option "- Select an option -"
+                    - option "Apple"
+                    - option "Cube Tech Pro"
+                    - option "Samsung"
+                    - option "Sony"
+                    - option "Sunshine Collection" [selected]
+            - generic [ref=f6e69]:
+              - generic [ref=f6e70]:
+                - heading "Product Photos & Media" [level=3] [ref=f6e71]
+                - generic [ref=f6e72]: PNG, JPG, WEBP up to 5MB
+              - generic [ref=f6e73]:
+                - generic [ref=f6e74]: Primary Cover Image *
+                - generic [ref=f6e76]:
+                  - img "Primary" [ref=f6e78]
+                  - generic [ref=f6e79]:
+                    - button "Choose File" [ref=f6e80] [cursor=pointer]
+                    - generic [ref=f6e81]: This image will appear on catalog cards and the top of the storefront gallery.
+              - generic [ref=f6e82]:
+                - generic [ref=f6e83]: Additional Gallery Photos (Multiple)
+                - generic [ref=f6e84]:
+                  - button "Choose File" [ref=f6e85] [cursor=pointer]
+                  - generic [ref=f6e86]: Upload extra angles, lifestyle shots, or fabric close-ups.
+              - generic [ref=f6e87]:
+                - generic [ref=f6e88]: Existing Gallery Photos (4)
+                - generic [ref=f6e89]:
+                  - generic [ref=f6e90]:
+                    - img "Elegant Midi Dress" [ref=f6e91]
+                    - generic [ref=f6e92]: Cover Photo
+                    - button "✕" [ref=f6e93] [cursor=pointer]
+                  - generic [ref=f6e94]:
+                    - img "Elegant Midi Dress" [ref=f6e95]
+                    - button "Set Primary" [ref=f6e97] [cursor=pointer]
+                    - button "✕" [ref=f6e99] [cursor=pointer]
+                  - generic [ref=f6e100]:
+                    - img "Elegant Midi Dress" [ref=f6e101]
+                    - button "Set Primary" [ref=f6e103] [cursor=pointer]
+                    - button "✕" [ref=f6e105] [cursor=pointer]
+                  - generic [ref=f6e106]:
+                    - img "Elegant Midi Dress" [ref=f6e107]
+                    - button "Set Primary" [ref=f6e109] [cursor=pointer]
+                    - button "✕" [ref=f6e111] [cursor=pointer]
+          - generic [ref=f6e112]:
+            - heading "Pricing & Inventory" [level=3] [ref=f6e113]
+            - generic [ref=f6e114]:
+              - generic [ref=f6e115]:
+                - generic [ref=f6e116]: Base Price (₦) *
+                - spinbutton "28000.00" [ref=f6e117]
+              - generic [ref=f6e118]:
+                - generic [ref=f6e119]: Crossed-out Price (₦)
+                - spinbutton "35000.00" [ref=f6e120]
+              - generic [ref=f6e121]:
+                - generic [ref=f6e122]: Stock Quantity *
+                - spinbutton "50" [ref=f6e123]: "45"
+            - generic [ref=f6e124]:
+              - generic [ref=f6e125]:
+                - generic [ref=f6e126]: SKU Code *
+                - textbox "SF-DRS-001" [ref=f6e127]
+              - generic [ref=f6e128]:
+                - generic [ref=f6e129]: Badge Text (e.g. -20% or Hot Deal)
+                - textbox "e.g. -20% or Hot or Bestseller" [ref=f6e130]: "-20%"
+          - generic [ref=f6e131]:
+            - heading "Product Description" [level=3] [ref=f6e132]
+            - generic [ref=f6e133]:
+              - generic [ref=f6e134]: Full Description *
+              - textbox "Detailed product description, fabric, dimensions, specifications..." [ref=f6e135]: A perfect blend of style and comfort. This elegant midi dress is designed for modern women who love simplicity with class. Made from high-grade stretch-crepe fabric that flatters every silhouette, suitable for formal events, dinners, or classy office wear.
+          - generic [ref=f6e136]:
+            - generic [ref=f6e137] [cursor=pointer]:
+              - checkbox "Is Active" [checked] [ref=f6e138]
+              - generic [ref=f6e139]: Is Active
+            - generic [ref=f6e140] [cursor=pointer]:
+              - checkbox "Flash Sale" [checked] [ref=f6e141]
+              - generic [ref=f6e142]: Flash Sale
+            - generic [ref=f6e143] [cursor=pointer]:
+              - checkbox "Featured" [checked] [ref=f6e144]
+              - generic [ref=f6e145]: Featured
+            - generic [ref=f6e146] [cursor=pointer]:
+              - checkbox "Trending" [checked] [ref=f6e147]
+              - generic [ref=f6e148]: Trending
+          - generic [ref=f6e149]:
+            - link "← Cancel" [ref=f6e150] [cursor=pointer]:
+              - /url: /dashboard/products/
+            - button "Save Product Changes" [ref=f6e151] [cursor=pointer]
+        - generic [ref=f6e152]:
+          - generic [ref=f6e153]:
+            - generic [ref=f6e154]: Storefront Live Preview
+            - generic [ref=f6e157]:
+              - button "💻 Desktop" [ref=f6e158] [cursor=pointer]
+              - button "📱 Mobile" [ref=f6e159] [cursor=pointer]
+              - link "Open ↗" [ref=f6e160] [cursor=pointer]:
+                - /url: /catalog/product/elegant-midi-dress/
+          - generic [ref=f6e161]:
+            - generic [ref=f6e162]:
+              - generic [ref=f6e163]:
+                - img "OHUAMI" [ref=f6e164]
+                - generic [ref=f6e165]: Sunshine Fashion
+              - generic [ref=f6e166]: Storefront Preview
+            - generic [ref=f6e167]:
+              - generic [ref=f6e168]:
+                - generic [ref=f6e169]:
+                  - img "Thumb" [ref=f6e171]
+                  - generic [ref=f6e172]: "2"
+                  - generic [ref=f6e173]: "3"
+                - generic [ref=f6e174]:
+                  - img "Elegant Midi Dress" [ref=f6e175]
+                  - generic [ref=f6e176]: "-20%"
+              - generic [ref=f6e177]:
+                - generic [ref=f6e178]:
+                  - text: Women
+                  - heading "Elegant Midi Dress" [level=2] [ref=f6e179]
+                - generic [ref=f6e180]:
+                  - generic [ref=f6e181]: ★★★★★
+                  - generic [ref=f6e182]: (24 reviews)
+                - generic [ref=f6e183]:
+                  - generic [ref=f6e184]: ₦28,000
+                  - generic [ref=f6e185]: ₦35,000
+                - paragraph [ref=f6e186]: A perfect blend of style and comfort. This elegant midi dress is designed for modern women who love simplicity with class. Made from high-grade stretch-crepe fabric that flatters every silhouette, suitable for formal events, dinners, or classy office wear.
+                - generic [ref=f6e187]:
+                  - text: Color Options
+                  - generic [ref=f6e188]:
+                    - button [ref=f6e189]
+                    - button [ref=f6e190]
+                    - button [ref=f6e191]
+                - generic [ref=f6e192]:
+                  - text: Select Size
+                  - generic [ref=f6e193]:
+                    - generic [ref=f6e194]: S
+                    - generic [ref=f6e195]: M
+                    - generic [ref=f6e196]: L
+                    - generic [ref=f6e197]: XL
+                - generic [ref=f6e198]:
+                  - button "Add to Cart" [ref=f6e199] [cursor=pointer]
+                  - button "Buy Now" [ref=f6e200] [cursor=pointer]
+                - generic [ref=f6e201]:
+                  - generic [ref=f6e202]: 🚚 Fast Delivery
+                  - generic [ref=f6e203]: 🔒 Secure Payments
+                  - generic [ref=f6e204]: 🔄 Easy Returns
+  - contentinfo [ref=f6e205]:
+    - generic [ref=f6e206]:
+      - generic [ref=f6e207]:
+        - link [ref=f6e208] [cursor=pointer]:
+          - /url: /
+          - img "OHUAMI" [ref=f6e209]
+        - paragraph [ref=f6e210]: Your market. Your business. Your growth. Commerce made for your ambition. An African-rooted digital commerce platform empowering merchants and buyers across Nigeria.
+        - generic [ref=f6e211]:
+          - text: "Parent Company:"
+          - strong [ref=f6e212]: Cube Tech Enterprises
+      - generic [ref=f6e213]:
+        - heading "Shop & Discover" [level=4] [ref=f6e214]
+        - list [ref=f6e215]:
+          - listitem [ref=f6e216]:
+            - link "All Products & Gadgets" [ref=f6e217] [cursor=pointer]:
+              - /url: /catalog/
+          - listitem [ref=f6e218]:
+            - link "⚡ Flash Sale Deals" [ref=f6e219] [cursor=pointer]:
+              - /url: /promotions/flash-sale/
+          - listitem [ref=f6e220]:
+            - link "🎟 Active Promo Coupons" [ref=f6e221] [cursor=pointer]:
+              - /url: /promotions/coupons/
+          - listitem [ref=f6e222]:
+            - link "Sunshine Fashion Flagship" [ref=f6e223] [cursor=pointer]:
+              - /url: /catalog/store/
+      - generic [ref=f6e224]:
+        - heading "Customer Care" [level=4] [ref=f6e225]
+        - list [ref=f6e226]:
+          - listitem [ref=f6e227]:
+            - link "Contact Us & Support Tickets" [ref=f6e228] [cursor=pointer]:
+              - /url: /support/contact/
+          - listitem [ref=f6e229]:
+            - link "Order Tracking & Receipts" [ref=f6e230] [cursor=pointer]:
+              - /url: /orders/history/
+          - listitem [ref=f6e231]:
+            - link "My Account & Addresses" [ref=f6e232] [cursor=pointer]:
+              - /url: /accounts/profile/
+          - listitem [ref=f6e233]:
+            - 'link "Tel: +234 800 2823 8324" [ref=f6e234] [cursor=pointer]':
+              - /url: tel:+234 800 2823 8324
+      - generic [ref=f6e235]:
+        - heading "Sell on OHUAMI" [level=4] [ref=f6e236]
+        - list [ref=f6e237]:
+          - listitem [ref=f6e238]:
+            - link "Merchant Dashboard" [ref=f6e239] [cursor=pointer]:
+              - /url: /dashboard/
+          - listitem [ref=f6e240]:
+            - link "Product Management" [ref=f6e241] [cursor=pointer]:
+              - /url: /dashboard/products/
+          - listitem [ref=f6e242]:
+            - link "Order Fulfillment" [ref=f6e243] [cursor=pointer]:
+              - /url: /dashboard/orders/
+          - listitem [ref=f6e244]:
+            - link "Platform Control Center" [ref=f6e245] [cursor=pointer]:
+              - /url: /dashboard/control-panel/
+    - generic [ref=f6e246]:
+      - generic [ref=f6e247]: © 2026 OHUAMI — Cube Tech Enterprises. All rights reserved.
+      - generic [ref=f6e248]:
+        - generic [ref=f6e249]: 🔒 256-bit SSL Secure Checkout
+        - generic [ref=f6e250]: •
+        - generic [ref=f6e251]: Paystack Verified
+        - generic [ref=f6e252]: •
+        - generic [ref=f6e253]: Nationwide Express Logistics
+  - button "Customer Support" [ref=f6e254] [cursor=pointer]
